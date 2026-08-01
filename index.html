@@ -153,7 +153,7 @@
             letter-spacing: 0.5px;
         }
 
-        .input-field {
+        .input-field, .textarea-field, .select-field {
             width: 100%;
             background: rgba(5, 2, 4, 0.8);
             border: 1px solid rgba(229, 9, 20, 0.4);
@@ -167,7 +167,17 @@
             box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
         }
 
-        .input-field:focus {
+        .textarea-field {
+            resize: vertical;
+            min-height: 90px;
+        }
+
+        .select-field option {
+            background: #0a0507;
+            color: #fff;
+        }
+
+        .input-field:focus, .textarea-field:focus, .select-field:focus {
             border-color: #ff4d4d;
             box-shadow: 0 0 12px rgba(229, 9, 20, 0.5), inset 0 2px 4px rgba(0,0,0,0.5);
         }
@@ -209,6 +219,18 @@
         .btn-brat:hover {
             background: linear-gradient(135deg, #9eff03 0%, #689c00 100%);
             box-shadow: 0 0 25px rgba(138, 206, 0, 0.8);
+        }
+
+        .btn-wa {
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+            border-color: #25D366;
+            color: #fff;
+            box-shadow: 0 0 15px rgba(37, 211, 102, 0.4);
+        }
+
+        .btn-wa:hover {
+            background: linear-gradient(135deg, #34e775 0%, #0e6b60 100%);
+            box-shadow: 0 0 25px rgba(37, 211, 102, 0.7);
         }
 
         /* Loading Spinner */
@@ -358,6 +380,7 @@
             display: flex;
             align-items: center;
             gap: 15px;
+            margin-bottom: 25px;
         }
 
         .avatar-img {
@@ -469,7 +492,7 @@
             </div>
         </div>
 
-        <!-- SECTION 2: YouTube Downloader (FAA Endpoint) -->
+        <!-- SECTION 2: YouTube Downloader -->
         <div id="panel-youtube" class="tab-panel glass-card">
             <div class="card-header">
                 <h2>YOUTUBE DOWNLOADER</h2>
@@ -540,6 +563,40 @@
                 <div class="creator-desc">Crafted with Sukuna Shrine Theme • Cyber-Red Glassmorphism UI</div>
             </div>
         </div>
+
+        <!-- SECTION 4: Feedback & Bug Report (Direct WA) -->
+        <div class="glass-card" style="border-color: rgba(37, 211, 102, 0.35);">
+            <div class="card-header" style="border-bottom-color: rgba(37, 211, 102, 0.2);">
+                <h2 style="color: #25D366;">LAPOR BUG / REQUEST FITUR</h2>
+                <p>Ada kendala atau ide menarik? Kirim laporan langsung ke WhatsApp Developer.</p>
+            </div>
+
+            <div class="input-group">
+                <label class="input-label" for="reportType">Kategori Feedback</label>
+                <select id="reportType" class="select-field" style="border-color: rgba(37, 211, 102, 0.4);">
+                    <option value="Lapor Bug / Error">🐛 Lapor Bug / System Error</option>
+                    <option value="Request Fitur Baru">💡 Request Fitur Baru</option>
+                    <option value="Saran & Kritik">💬 Saran & Kritik</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label class="input-label" for="reportName">Nama / Nama Panggilan (Opsional)</label>
+                <input type="text" id="reportName" class="input-field" placeholder="Masukkan nama kamu" autocomplete="off" style="border-color: rgba(37, 211, 102, 0.4);">
+            </div>
+
+            <div class="input-group">
+                <label class="input-label" for="reportMessage">Pesan / Detail Laporan</label>
+                <textarea id="reportMessage" class="textarea-field" placeholder="Jelaskan detail bug yang ditemui atau fitur baru yang ingin kamu minta..." style="border-color: rgba(37, 211, 102, 0.4);"></textarea>
+            </div>
+
+            <button class="btn-submit btn-wa" onclick="sendToWhatsApp()">
+                <span>KIRIM KE WHATSAPP</span>
+            </button>
+
+            <div id="waErrorBox" class="error-box"></div>
+        </div>
+
     </div>
 
     <script>
@@ -674,7 +731,6 @@
             playSound(800, 'sine', 0.1);
 
             try {
-                // Fetch MP4 & MP3 secara paralel via Endpoint FAA
                 const mp4Promise = fetch(`https://api-faa.my.id/faa/ytmp4?url=${encodeURIComponent(urlInput)}`).then(r => r.json());
                 const mp3Promise = fetch(`https://api-faa.my.id/faa/ytmp3?url=${encodeURIComponent(urlInput)}`).then(r => r.json());
 
@@ -703,7 +759,6 @@
                 playSound(1000, 'sine', 0.15);
 
             } catch (err) {
-                // Fallback direct URL jika Fetch di-block CORS
                 document.getElementById('ytVideoTitle').innerText = 'YouTube Media Content';
                 document.getElementById('ytVideoThumb').src = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
 
@@ -760,6 +815,38 @@
             };
 
             img.src = bratUrl;
+        }
+
+        // WhatsApp Redirect Function
+        function sendToWhatsApp() {
+            const type = document.getElementById('reportType').value;
+            const name = document.getElementById('reportName').value.trim() || 'User NexaLink';
+            const message = document.getElementById('reportMessage').value.trim();
+            const errorBox = document.getElementById('waErrorBox');
+
+            errorBox.style.display = 'none';
+
+            if (!message) {
+                showError(errorBox, 'Silakan isi pesan atau detail laporan kamu terlebih dahulu!');
+                playSound(200, 'sawtooth', 0.2);
+                return;
+            }
+
+            playSound(1000, 'sine', 0.15);
+
+            // Target Nomor WhatsApp
+            const targetPhone = '6285722707676';
+
+            // Template Pesan WA
+            const waText = `*NEXALINK PRO - LAPORAN FEEDBACK*\n` +
+                           `📌 *Kategori:* ${type}\n` +
+                           `👤 *Pengirim:* ${name}\n\n` +
+                           `💬 *Pesan/Detail:* \n${message}`;
+
+            const waUrl = `https://wa.me/${targetPhone}?text=${encodeURIComponent(waText)}`;
+
+            // Buka di tab baru
+            window.open(waUrl, '_blank');
         }
 
         function showError(element, msg) {
