@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexaLink Pro - TikTok Downloader</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            user-select: none;
+        }
+
+        body {
+            background-color: #0a0507;
+            color: #f0f0f0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            min-height: 100vh;
+            padding: 20px 15px;
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(229, 9, 20, 0.25), transparent 70%),
+                radial-gradient(circle at 80% 80%, rgba(139, 0, 0, 0.15), transparent 50%);
+            background-attachment: fixed;
+        }
+
+        .container {
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        /* Banner Header */
+        .banner-header {
+            width: 100%;
+            height: 160px;
+            border-radius: 16px;
+            background: linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(10,5,7,0.95) 100%), 
+                        url('https://cdn.phototourl.com/free/2026-08-01-1b63ee0d-49a1-4f98-85ca-c5c6f698880e.jpg') center/cover no-repeat;
+            border: 1px solid rgba(229, 9, 20, 0.4);
+            box-shadow: 0 0 25px rgba(229, 9, 20, 0.3);
+            position: relative;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .header-title-box {
+            position: absolute;
+            bottom: 15px;
+            left: 20px;
+        }
+
+        .header-title-box h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 12px rgba(229, 9, 20, 0.8), 0 0 20px rgba(255, 0, 0, 0.5);
+        }
+
+        .header-title-box p {
+            font-size: 0.8rem;
+            color: #ff8a8a;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        /* Glassmorphism Card */
+        .glass-card {
+            background: rgba(18, 10, 14, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(229, 9, 20, 0.35);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5), inset 0 0 15px rgba(229, 9, 20, 0.1);
+            margin-bottom: 25px;
+        }
+
+        .card-header {
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(229, 9, 20, 0.2);
+            padding-bottom: 12px;
+        }
+
+        .card-header h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            color: #ff4d4d;
+            letter-spacing: 1px;
+        }
+
+        .card-header p {
+            font-size: 0.85rem;
+            color: #aaa;
+            margin-top: 4px;
+        }
+
+        /* Form Controls */
+        .input-group {
+            margin-bottom: 18px;
+        }
+
+        .input-label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #ddd;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .input-field {
+            width: 100%;
+            background: rgba(5, 2, 4, 0.8);
+            border: 1px solid rgba(229, 9, 20, 0.4);
+            border-radius: 10px;
+            padding: 14px 16px;
+            color: #fff;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 0.95rem;
+            outline: none;
+            transition: all 0.3s ease;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .input-field:focus {
+            border-color: #ff4d4d;
+            box-shadow: 0 0 12px rgba(229, 9, 20, 0.5), inset 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .btn-submit {
+            width: 100%;
+            background: linear-gradient(135deg, #e50914 0%, #990000 100%);
+            color: #fff;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            font-size: 0.95rem;
+            padding: 14px;
+            border: 1px solid #ff4d4d;
+            border-radius: 10px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(229, 9, 20, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 25px rgba(229, 9, 20, 0.8);
+            background: linear-gradient(135deg, #ff1e27 0%, #b30000 100%);
+        }
+
+        .btn-submit:active {
+            transform: translateY(0);
+        }
+
+        /* Loading Spinner */
+        .spinner {
+            display: none;
+            width: 18px;
+            height: 18px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Result Box */
+        .result-box {
+            display: none;
+            margin-top: 20px;
+            background: rgba(10, 5, 8, 0.9);
+            border: 1px dashed rgba(229, 9, 20, 0.5);
+            border-radius: 12px;
+            padding: 16px;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .result-content {
+            display: flex;
+            gap: 15px;
+            align-items: flex-start;
+        }
+
+        .result-thumb {
+            width: 110px;
+            height: 145px;
+            border-radius: 8px;
+            object-fit: cover;
+            border: 1px solid rgba(229, 9, 20, 0.4);
+            flex-shrink: 0;
+            background: #150a0f;
+        }
+
+        .result-info {
+            flex-grow: 1;
+        }
+
+        .video-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 8px;
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .author-info {
+            font-size: 0.8rem;
+            color: #ff8a8a;
+            margin-bottom: 15px;
+        }
+
+        .btn-download-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .btn-dl {
+            display: inline-block;
+            text-align: center;
+            background: rgba(229, 9, 20, 0.2);
+            border: 1px solid rgba(229, 9, 20, 0.6);
+            color: #fff;
+            padding: 10px 14px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .btn-dl:hover {
+            background: rgba(229, 9, 20, 0.5);
+            border-color: #ff4d4d;
+            box-shadow: 0 0 10px rgba(229, 9, 20, 0.4);
+        }
+
+        .btn-dl-audio {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.2);
+            color: #ddd;
+        }
+
+        .btn-dl-audio:hover {
+            background: rgba(255, 255, 255, 0.15);
+            color: #fff;
+        }
+
+        /* Error Box */
+        .error-box {
+            display: none;
+            margin-top: 15px;
+            padding: 12px;
+            background: rgba(255, 0, 0, 0.15);
+            border: 1px solid rgba(255, 0, 0, 0.4);
+            border-radius: 8px;
+            color: #ff6b6b;
+            font-size: 0.85rem;
+            text-align: center;
+        }
+
+        /* Credit Section */
+        .credit-card {
+            background: linear-gradient(180deg, rgba(15, 5, 10, 0.85) 0%, rgba(5, 2, 5, 0.95) 100%),
+                        url('https://cdn.phototourl.com/free/2026-08-01-a74c302b-15d4-48e6-af80-e1d72fd5e667.jpg') center/cover no-repeat;
+            border: 1px solid rgba(229, 9, 20, 0.4);
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(229, 9, 20, 0.25);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .avatar-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 2px solid #ff4d4d;
+            box-shadow: 0 0 12px rgba(229, 9, 20, 0.6);
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        .creator-tag {
+            font-size: 0.7rem;
+            font-family: 'Orbitron', sans-serif;
+            color: #ff4d4d;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .creator-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #ffffff;
+            font-family: 'Orbitron', sans-serif;
+            margin-top: 2px;
+        }
+
+        .creator-desc {
+            font-size: 0.8rem;
+            color: #aaa;
+            margin-top: 2px;
+        }
+
+        @media (max-width: 480px) {
+            .result-content {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            .result-thumb {
+                width: 140px;
+                height: 180px;
+            }
+            .btn-download-group {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Main Banner Header -->
+        <div class="banner-header">
+            <div class="header-title-box">
+                <h1>NEXALINK PRO</h1>
+                <p>MALEVOLENT SHRINE • TIKTOK DOWNLOADER</p>
+            </div>
+        </div>
+
+        <!-- Single Feature: TikTok Downloader Section -->
+        <div class="glass-card">
+            <div class="card-header">
+                <h2>TIKTOK NO WATERMARK (TIKWM)</h2>
+                <p>Tempelkan tautan video TikTok di bawah untuk mengunduh video HD tanpa watermark & audio MP3 via TikWM API.</p>
+            </div>
+            
+            <div class="input-group">
+                <label class="input-label" for="tiktokUrl">Tautan Video TikTok</label>
+                <input type="text" id="tiktokUrl" class="input-field" placeholder="https://vt.tiktok.com/... atau https://www.tiktok.com/@..." autocomplete="off">
+            </div>
+
+            <button id="btnFetch" class="btn-submit" onclick="fetchTikTok()">
+                <div class="spinner" id="btnSpinner"></div>
+                <span id="btnText">DAPATKAN VIDEO</span>
+            </button>
+
+            <!-- Error Box -->
+            <div id="errorBox" class="error-box"></div>
+
+            <!-- Result Box -->
+            <div id="resultBox" class="result-box">
+                <div class="result-content">
+                    <img id="videoThumb" class="result-thumb" src="" alt="Thumbnail Video">
+                    <div class="result-info">
+                        <div id="videoTitle" class="video-title">-</div>
+                        <div id="videoAuthor" class="author-info">Kreator: -</div>
+                        
+                        <div class="btn-download-group">
+                            <a id="btnDlMp4" href="#" target="_blank" class="btn-dl">DOWNLOAD MP4 HD</a>
+                            <a id="btnDlMp3" href="#" target="_blank" class="btn-dl btn-dl-audio">DOWNLOAD AUDIO MP3</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Credit Section -->
+        <div class="credit-card">
+            <img src="https://cdn.phototourl.com/free/2026-08-01-a74c302b-15d4-48e6-af80-e1d72fd5e667.jpg" class="avatar-img" alt="Creator Banner">
+            <div>
+                <div class="creator-tag">SYSTEM DEVELOPER</div>
+                <div class="creator-name">NEXALINK CREATOR : SHAKZ</div>
+                <div class="creator-desc">Crafted with Sukuna Shrine Theme • Cyber-Red Glassmorphism UI</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Web Audio API for SFX
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+        function playSound(freq = 440, type = 'sine', duration = 0.1) {
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            
+            osc.type = type;
+            osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+            gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + duration);
+
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+
+            osc.start();
+            osc.stop(audioCtx.currentTime + duration);
+        }
+
+        // SFX Click Listener
+        document.querySelectorAll('button, input, a').forEach(elem => {
+            elem.addEventListener('click', () => playSound(600, 'square', 0.05));
+        });
+
+        // TikTok Fetch Function via TikWM API
+        async function fetchTikTok() {
+            const urlInput = document.getElementById('tiktokUrl').value.trim();
+            const btnSpinner = document.getElementById('btnSpinner');
+            const btnText = document.getElementById('btnText');
+            const resultBox = document.getElementById('resultBox');
+            const errorBox = document.getElementById('errorBox');
+
+            // Reset UI
+            errorBox.style.display = 'none';
+            resultBox.style.display = 'none';
+
+            if (!urlInput) {
+                showError('Silakan masukkan URL TikTok terlebih dahulu!');
+                playSound(200, 'sawtooth', 0.2);
+                return;
+            }
+
+            // Set Loading state
+            btnSpinner.style.display = 'block';
+            btnText.innerText = 'MEMPROSES...';
+            playSound(800, 'sine', 0.1);
+
+            try {
+                // Integrasi Langsung ke Endpoint Resmi TikWM API
+                const endpoint = `https://www.tikwm.com/api/?url=${encodeURIComponent(urlInput)}&hd=1`;
+                const response = await fetch(endpoint);
+                const res = await response.json();
+
+                if (res.code === 0 && res.data) {
+                    const data = res.data;
+                    
+                    document.getElementById('videoTitle').innerText = data.title || 'TikTok Video';
+                    document.getElementById('videoAuthor').innerText = `Kreator: @${data.author?.nickname || data.author?.unique_id || 'User'}`;
+                    
+                    const coverUrl = data.cover.startsWith('http') ? data.cover : `https://www.tikwm.com${data.cover}`;
+                    document.getElementById('videoThumb').src = coverUrl;
+
+                    // Ambil link HD/Play tanpa watermark
+                    let videoLink = data.hdplay || data.play;
+                    if (videoLink && !videoLink.startsWith('http')) {
+                        videoLink = `https://www.tikwm.com${videoLink}`;
+                    }
+
+                    let audioLink = data.music;
+                    if (audioLink && !audioLink.startsWith('http')) {
+                        audioLink = `https://www.tikwm.com${audioLink}`;
+                    }
+
+                    document.getElementById('btnDlMp4').href = videoLink || '#';
+                    document.getElementById('btnDlMp3').href = audioLink || '#';
+
+                    resultBox.style.display = 'block';
+                    playSound(1000, 'sine', 0.15);
+                } else {
+                    showError(res.msg || 'Gagal mengambil data. Pastikan link TikTok publik dan valid!');
+                    playSound(200, 'sawtooth', 0.2);
+                }
+            } catch (err) {
+                console.error(err);
+                showError('Terjadi kesalahan koneksi saat mengakses API TikWM.');
+                playSound(200, 'sawtooth', 0.2);
+            } finally {
+                btnSpinner.style.display = 'none';
+                btnText.innerText = 'DAPATKAN VIDEO';
+            }
+        }
+
+        function showError(msg) {
+            const errorBox = document.getElementById('errorBox');
+            errorBox.innerText = msg;
+            errorBox.style.display = 'block';
+        }
+    </script>
+</body>
+</html>
