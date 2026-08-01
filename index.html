@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NexaLink Pro - TikTok Downloader</title>
+    <title>NexaLink Pro - TikTok, YouTube & Brat Generator</title>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Arial:wght@700&display=swap" rel="stylesheet">
     
     <style>
         * {
@@ -69,6 +69,42 @@
             color: #ff8a8a;
             letter-spacing: 1px;
             font-weight: 600;
+        }
+
+        /* Tab Navigation */
+        .tab-container {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 12px 8px;
+            background: rgba(18, 10, 14, 0.6);
+            border: 1px solid rgba(229, 9, 20, 0.3);
+            border-radius: 10px;
+            color: #aaa;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .tab-btn.active {
+            background: rgba(229, 9, 20, 0.25);
+            border-color: #ff4d4d;
+            color: #fff;
+            box-shadow: 0 0 15px rgba(229, 9, 20, 0.4);
+        }
+
+        .tab-btn.brat-tab.active {
+            background: rgba(138, 206, 0, 0.25);
+            border-color: #8ace00;
+            color: #8ace00;
+            box-shadow: 0 0 15px rgba(138, 206, 0, 0.4);
         }
 
         /* Glassmorphism Card */
@@ -163,8 +199,16 @@
             background: linear-gradient(135deg, #ff1e27 0%, #b30000 100%);
         }
 
-        .btn-submit:active {
-            transform: translateY(0);
+        .btn-brat {
+            background: linear-gradient(135deg, #8ace00 0%, #4e7500 100%);
+            border-color: #b1ff03;
+            color: #000;
+            box-shadow: 0 0 15px rgba(138, 206, 0, 0.4);
+        }
+
+        .btn-brat:hover {
+            background: linear-gradient(135deg, #9eff03 0%, #689c00 100%);
+            box-shadow: 0 0 25px rgba(138, 206, 0, 0.8);
         }
 
         /* Loading Spinner */
@@ -205,8 +249,8 @@
         }
 
         .result-thumb {
-            width: 110px;
-            height: 145px;
+            width: 120px;
+            height: 120px;
             border-radius: 8px;
             object-fit: cover;
             border: 1px solid rgba(229, 9, 20, 0.4);
@@ -254,6 +298,7 @@
             border-radius: 8px;
             text-decoration: none;
             transition: all 0.2s ease;
+            cursor: pointer;
         }
 
         .btn-dl:hover {
@@ -271,6 +316,22 @@
         .btn-dl-audio:hover {
             background: rgba(255, 255, 255, 0.15);
             color: #fff;
+        }
+
+        /* Brat Result Preview */
+        .brat-preview-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .brat-img-preview {
+            width: 100%;
+            max-width: 320px;
+            border-radius: 8px;
+            border: 2px solid #8ace00;
+            box-shadow: 0 0 20px rgba(138, 206, 0, 0.3);
         }
 
         /* Error Box */
@@ -331,6 +392,14 @@
             margin-top: 2px;
         }
 
+        .tab-panel {
+            display: none;
+        }
+
+        .tab-panel.active {
+            display: block;
+        }
+
         @media (max-width: 480px) {
             .result-content {
                 flex-direction: column;
@@ -338,7 +407,7 @@
                 text-align: center;
             }
             .result-thumb {
-                width: 140px;
+                width: 100%;
                 height: 180px;
             }
             .btn-download-group {
@@ -350,19 +419,26 @@
 <body>
 
     <div class="container">
-        <!-- Main Banner Header -->
+        <!-- Banner Header -->
         <div class="banner-header">
             <div class="header-title-box">
                 <h1>NEXALINK PRO</h1>
-                <p>MALEVOLENT SHRINE • TIKTOK DOWNLOADER</p>
+                <p>MALEVOLENT SHRINE • MEDIA DOWNLOADER</p>
             </div>
         </div>
 
-        <!-- Single Feature: TikTok Downloader Section -->
-        <div class="glass-card">
+        <!-- Tab Navigation -->
+        <div class="tab-container">
+            <button class="tab-btn active" onclick="switchTab('tiktok')">TIKTOK</button>
+            <button class="tab-btn" onclick="switchTab('youtube')">YOUTUBE</button>
+            <button class="tab-btn brat-tab" onclick="switchTab('brat')">BRAT GENERATOR</button>
+        </div>
+
+        <!-- SECTION 1: TikTok Downloader -->
+        <div id="panel-tiktok" class="tab-panel active glass-card">
             <div class="card-header">
-                <h2>TIKTOK NO WATERMARK (TIKWM)</h2>
-                <p>Tempelkan tautan video TikTok di bawah untuk mengunduh video HD tanpa watermark & audio MP3 via TikWM API.</p>
+                <h2>TIKTOK DOWNLOADER</h2>
+                <p>Unduh video TikTok tanpa watermark (HD) & Audio MP3 via TikWM Engine.</p>
             </div>
             
             <div class="input-group">
@@ -370,27 +446,87 @@
                 <input type="text" id="tiktokUrl" class="input-field" placeholder="https://vt.tiktok.com/... atau https://www.tiktok.com/@..." autocomplete="off">
             </div>
 
-            <button id="btnFetch" class="btn-submit" onclick="fetchTikTok()">
-                <div class="spinner" id="btnSpinner"></div>
-                <span id="btnText">DAPATKAN VIDEO</span>
+            <button class="btn-submit" onclick="fetchTikTok()">
+                <div class="spinner" id="ttSpinner"></div>
+                <span id="ttBtnText">DAPATKAN VIDEO TIKTOK</span>
             </button>
 
-            <!-- Error Box -->
-            <div id="errorBox" class="error-box"></div>
+            <div id="ttErrorBox" class="error-box"></div>
 
-            <!-- Result Box -->
-            <div id="resultBox" class="result-box">
+            <div id="ttResultBox" class="result-box">
                 <div class="result-content">
-                    <img id="videoThumb" class="result-thumb" src="" alt="Thumbnail Video">
+                    <img id="ttVideoThumb" class="result-thumb" src="" alt="Thumbnail Video">
                     <div class="result-info">
-                        <div id="videoTitle" class="video-title">-</div>
-                        <div id="videoAuthor" class="author-info">Kreator: -</div>
+                        <div id="ttVideoTitle" class="video-title">-</div>
+                        <div id="ttVideoAuthor" class="author-info">Kreator: -</div>
                         
                         <div class="btn-download-group">
-                            <a id="btnDlMp4" href="#" target="_blank" class="btn-dl">DOWNLOAD MP4 HD</a>
-                            <a id="btnDlMp3" href="#" target="_blank" class="btn-dl btn-dl-audio">DOWNLOAD AUDIO MP3</a>
+                            <a id="ttBtnDlMp4" href="#" target="_blank" download class="btn-dl">DOWNLOAD MP4 HD</a>
+                            <a id="ttBtnDlMp3" href="#" target="_blank" download class="btn-dl btn-dl-audio">DOWNLOAD AUDIO MP3</a>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 2: YouTube Downloader (FAA Endpoint) -->
+        <div id="panel-youtube" class="tab-panel glass-card">
+            <div class="card-header">
+                <h2>YOUTUBE DOWNLOADER</h2>
+                <p>Unduh video YouTube / Shorts MP4 & Audio MP3 via Direct FAA Endpoint.</p>
+            </div>
+            
+            <div class="input-group">
+                <label class="input-label" for="ytUrl">Tautan Video / Shorts YouTube</label>
+                <input type="text" id="ytUrl" class="input-field" placeholder="https://www.youtube.com/watch?v=... atau https://youtu.be/..." autocomplete="off">
+            </div>
+
+            <button class="btn-submit" onclick="fetchYouTube()">
+                <div class="spinner" id="ytSpinner"></div>
+                <span id="ytBtnText">DAPATKAN VIDEO YOUTUBE</span>
+            </button>
+
+            <div id="ytErrorBox" class="error-box"></div>
+
+            <div id="ytResultBox" class="result-box">
+                <div class="result-content">
+                    <img id="ytVideoThumb" class="result-thumb" src="" alt="Thumbnail Video">
+                    <div class="result-info">
+                        <div id="ytVideoTitle" class="video-title">-</div>
+                        <div id="ytVideoAuthor" class="author-info">YouTube Engine Direct API</div>
+                        
+                        <div class="btn-download-group">
+                            <a id="ytBtnDlMp4" href="#" target="_blank" download class="btn-dl">DOWNLOAD MP4 VIDEO</a>
+                            <a id="ytBtnDlMp3" href="#" target="_blank" download class="btn-dl btn-dl-audio">DOWNLOAD AUDIO MP3</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 3: Brat Generator -->
+        <div id="panel-brat" class="tab-panel glass-card" style="border-color: rgba(138, 206, 0, 0.4);">
+            <div class="card-header" style="border-bottom-color: rgba(138, 206, 0, 0.2);">
+                <h2 style="color: #8ace00;">BRAT GENERATOR</h2>
+                <p>Buat gambar bertema Charli XCX 'Brat' style secara instant.</p>
+            </div>
+            
+            <div class="input-group">
+                <label class="input-label" for="bratText">Teks Gambar Brat</label>
+                <input type="text" id="bratText" class="input-field" placeholder="Masukkan teks (contoh: aku ganteng banget)" autocomplete="off" style="border-color: rgba(138, 206, 0, 0.4);">
+            </div>
+
+            <button class="btn-submit btn-brat" onclick="generateBrat()">
+                <div class="spinner" id="bratSpinner"></div>
+                <span id="bratBtnText">GENERATE BRAT IMAGE</span>
+            </button>
+
+            <div id="bratErrorBox" class="error-box"></div>
+
+            <div id="bratResultBox" class="result-box" style="border-color: rgba(138, 206, 0, 0.5);">
+                <div class="brat-preview-container">
+                    <img id="bratImgPreview" class="brat-img-preview" src="" alt="Brat Preview">
+                    <a id="bratBtnDl" href="#" target="_blank" download="brat.png" class="btn-dl" style="background: rgba(138, 206, 0, 0.2); border-color: #8ace00; color: #8ace00; width: 100%; max-width: 320px;">DOWNLOAD BRAT IMAGE</a>
                 </div>
             </div>
         </div>
@@ -400,14 +536,14 @@
             <img src="https://cdn.phototourl.com/free/2026-08-01-a74c302b-15d4-48e6-af80-e1d72fd5e667.jpg" class="avatar-img" alt="Creator Banner">
             <div>
                 <div class="creator-tag">SYSTEM DEVELOPER</div>
-                <div class="creator-name">NEXALINK CREATOR : SHAKZ</div>
+                <div class="creator-name">NEXALINK CREATOR</div>
                 <div class="creator-desc">Crafted with Sukuna Shrine Theme • Cyber-Red Glassmorphism UI</div>
             </div>
         </div>
     </div>
 
     <script>
-        // Web Audio API for SFX
+        // Audio SFX System
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
         function playSound(freq = 440, type = 'sine', duration = 0.1) {
@@ -429,83 +565,206 @@
             osc.stop(audioCtx.currentTime + duration);
         }
 
-        // SFX Click Listener
-        document.querySelectorAll('button, input, a').forEach(elem => {
-            elem.addEventListener('click', () => playSound(600, 'square', 0.05));
-        });
+        // Tab Switcher
+        function switchTab(tab) {
+            playSound(700, 'square', 0.05);
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-panel').forEach(panel => panel.classList.remove('active'));
 
-        // TikTok Fetch Function via TikWM API
+            if (tab === 'tiktok') {
+                document.querySelectorAll('.tab-btn')[0].classList.add('active');
+                document.getElementById('panel-tiktok').classList.add('active');
+            } else if (tab === 'youtube') {
+                document.querySelectorAll('.tab-btn')[1].classList.add('active');
+                document.getElementById('panel-youtube').classList.add('active');
+            } else if (tab === 'brat') {
+                document.querySelectorAll('.tab-btn')[2].classList.add('active');
+                document.getElementById('panel-brat').classList.add('active');
+            }
+        }
+
+        // TikTok Downloader Engine
         async function fetchTikTok() {
             const urlInput = document.getElementById('tiktokUrl').value.trim();
-            const btnSpinner = document.getElementById('btnSpinner');
-            const btnText = document.getElementById('btnText');
-            const resultBox = document.getElementById('resultBox');
-            const errorBox = document.getElementById('errorBox');
+            const spinner = document.getElementById('ttSpinner');
+            const btnText = document.getElementById('ttBtnText');
+            const resultBox = document.getElementById('ttResultBox');
+            const errorBox = document.getElementById('ttErrorBox');
 
-            // Reset UI
             errorBox.style.display = 'none';
             resultBox.style.display = 'none';
 
             if (!urlInput) {
-                showError('Silakan masukkan URL TikTok terlebih dahulu!');
+                showError(errorBox, 'Silakan masukkan URL TikTok terlebih dahulu!');
                 playSound(200, 'sawtooth', 0.2);
                 return;
             }
 
-            // Set Loading state
-            btnSpinner.style.display = 'block';
+            spinner.style.display = 'block';
             btnText.innerText = 'MEMPROSES...';
             playSound(800, 'sine', 0.1);
 
             try {
-                // Integrasi Langsung ke Endpoint Resmi TikWM API
                 const endpoint = `https://www.tikwm.com/api/?url=${encodeURIComponent(urlInput)}&hd=1`;
                 const response = await fetch(endpoint);
                 const res = await response.json();
 
                 if (res.code === 0 && res.data) {
                     const data = res.data;
-                    
-                    document.getElementById('videoTitle').innerText = data.title || 'TikTok Video';
-                    document.getElementById('videoAuthor').innerText = `Kreator: @${data.author?.nickname || data.author?.unique_id || 'User'}`;
+                    document.getElementById('ttVideoTitle').innerText = data.title || 'TikTok Video';
+                    document.getElementById('ttVideoAuthor').innerText = `Kreator: @${data.author?.nickname || data.author?.unique_id || 'User'}`;
                     
                     const coverUrl = data.cover.startsWith('http') ? data.cover : `https://www.tikwm.com${data.cover}`;
-                    document.getElementById('videoThumb').src = coverUrl;
+                    document.getElementById('ttVideoThumb').src = coverUrl;
 
-                    // Ambil link HD/Play tanpa watermark
                     let videoLink = data.hdplay || data.play;
-                    if (videoLink && !videoLink.startsWith('http')) {
-                        videoLink = `https://www.tikwm.com${videoLink}`;
-                    }
+                    if (videoLink && !videoLink.startsWith('http')) videoLink = `https://www.tikwm.com${videoLink}`;
 
                     let audioLink = data.music;
-                    if (audioLink && !audioLink.startsWith('http')) {
-                        audioLink = `https://www.tikwm.com${audioLink}`;
-                    }
+                    if (audioLink && !audioLink.startsWith('http')) audioLink = `https://www.tikwm.com${audioLink}`;
 
-                    document.getElementById('btnDlMp4').href = videoLink || '#';
-                    document.getElementById('btnDlMp3').href = audioLink || '#';
+                    document.getElementById('ttBtnDlMp4').href = videoLink || '#';
+                    document.getElementById('ttBtnDlMp3').href = audioLink || '#';
 
                     resultBox.style.display = 'block';
                     playSound(1000, 'sine', 0.15);
                 } else {
-                    showError(res.msg || 'Gagal mengambil data. Pastikan link TikTok publik dan valid!');
+                    showError(errorBox, res.msg || 'Gagal mengambil video TikTok. Pastikan link publik.');
                     playSound(200, 'sawtooth', 0.2);
                 }
             } catch (err) {
-                console.error(err);
-                showError('Terjadi kesalahan koneksi saat mengakses API TikWM.');
+                showError(errorBox, 'Terjadi kesalahan jaringan saat koneksi ke TikWM.');
                 playSound(200, 'sawtooth', 0.2);
             } finally {
-                btnSpinner.style.display = 'none';
-                btnText.innerText = 'DAPATKAN VIDEO';
+                spinner.style.display = 'none';
+                btnText.innerText = 'DAPATKAN VIDEO TIKTOK';
             }
         }
 
-        function showError(msg) {
-            const errorBox = document.getElementById('errorBox');
-            errorBox.innerText = msg;
-            errorBox.style.display = 'block';
+        // YouTube Downloader Engine (Direct FAA Endpoints)
+        async function fetchYouTube() {
+            const urlInput = document.getElementById('ytUrl').value.trim();
+            const spinner = document.getElementById('ytSpinner');
+            const btnText = document.getElementById('ytBtnText');
+            const resultBox = document.getElementById('ytResultBox');
+            const errorBox = document.getElementById('ytErrorBox');
+
+            errorBox.style.display = 'none';
+            resultBox.style.display = 'none';
+
+            if (!urlInput) {
+                showError(errorBox, 'Silakan masukkan URL YouTube terlebih dahulu!');
+                playSound(200, 'sawtooth', 0.2);
+                return;
+            }
+
+            // Extract Video ID untuk Thumbnail
+            const ytReg = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/|shorts\/)([^"&?\/\s]{11})/;
+            const match = urlInput.match(ytReg);
+            const videoId = match ? match[1] : null;
+
+            if (!videoId) {
+                showError(errorBox, 'Format Tautan YouTube / Shorts tidak valid!');
+                playSound(200, 'sawtooth', 0.2);
+                return;
+            }
+
+            spinner.style.display = 'block';
+            btnText.innerText = 'MEMPROSES...';
+            playSound(800, 'sine', 0.1);
+
+            try {
+                // Fetch MP4 & MP3 secara paralel via Endpoint FAA
+                const mp4Promise = fetch(`https://api-faa.my.id/faa/ytmp4?url=${encodeURIComponent(urlInput)}`).then(r => r.json());
+                const mp3Promise = fetch(`https://api-faa.my.id/faa/ytmp3?url=${encodeURIComponent(urlInput)}`).then(r => r.json());
+
+                const [mp4Res, mp3Res] = await Promise.all([mp4Promise, mp3Promise]);
+
+                let title = 'YouTube Media Content';
+                let mp4Url = '#';
+                let mp3Url = '#';
+
+                if (mp4Res.status && mp4Res.result) {
+                    title = mp4Res.result.title || title;
+                    mp4Url = mp4Res.result.download_url || mp4Res.result.url || mp4Res.result.download || mp4Res.result;
+                }
+
+                if (mp3Res.status && mp3Res.result) {
+                    mp3Url = mp3Res.result.download_url || mp3Res.result.url || mp3Res.result.download || mp3Res.result;
+                }
+
+                document.getElementById('ytVideoTitle').innerText = typeof title === 'string' ? title : 'YouTube Video';
+                document.getElementById('ytVideoThumb').src = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+
+                document.getElementById('ytBtnDlMp4').href = typeof mp4Url === 'string' ? mp4Url : `https://api-faa.my.id/faa/ytmp4?url=${encodeURIComponent(urlInput)}`;
+                document.getElementById('ytBtnDlMp3').href = typeof mp3Url === 'string' ? mp3Url : `https://api-faa.my.id/faa/ytmp3?url=${encodeURIComponent(urlInput)}`;
+
+                resultBox.style.display = 'block';
+                playSound(1000, 'sine', 0.15);
+
+            } catch (err) {
+                // Fallback direct URL jika Fetch di-block CORS
+                document.getElementById('ytVideoTitle').innerText = 'YouTube Media Content';
+                document.getElementById('ytVideoThumb').src = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+
+                document.getElementById('ytBtnDlMp4').href = `https://api-faa.my.id/faa/ytmp4?url=${encodeURIComponent(urlInput)}`;
+                document.getElementById('ytBtnDlMp3').href = `https://api-faa.my.id/faa/ytmp3?url=${encodeURIComponent(urlInput)}`;
+
+                resultBox.style.display = 'block';
+                playSound(1000, 'sine', 0.15);
+            } finally {
+                spinner.style.display = 'none';
+                btnText.innerText = 'DAPATKAN VIDEO YOUTUBE';
+            }
+        }
+
+        // Brat Generator Engine (FAA Endpoint)
+        function generateBrat() {
+            const textInput = document.getElementById('bratText').value.trim();
+            const spinner = document.getElementById('bratSpinner');
+            const btnText = document.getElementById('bratBtnText');
+            const resultBox = document.getElementById('bratResultBox');
+            const errorBox = document.getElementById('bratErrorBox');
+
+            errorBox.style.display = 'none';
+            resultBox.style.display = 'none';
+
+            if (!textInput) {
+                showError(errorBox, 'Silakan masukkan teks terlebih dahulu!');
+                playSound(200, 'sawtooth', 0.2);
+                return;
+            }
+
+            spinner.style.display = 'block';
+            btnText.innerText = 'GENERATING...';
+            playSound(800, 'sine', 0.1);
+
+            const bratUrl = `https://api-faa.my.id/faa/brat?text=${encodeURIComponent(textInput)}`;
+
+            const img = new Image();
+            img.onload = function() {
+                document.getElementById('bratImgPreview').src = bratUrl;
+                document.getElementById('bratBtnDl').href = bratUrl;
+                
+                resultBox.style.display = 'block';
+                spinner.style.display = 'none';
+                btnText.innerText = 'GENERATE BRAT IMAGE';
+                playSound(1000, 'sine', 0.15);
+            };
+
+            img.onerror = function() {
+                showError(errorBox, 'Gagal membuat gambar Brat. Coba teks lain!');
+                spinner.style.display = 'none';
+                btnText.innerText = 'GENERATE BRAT IMAGE';
+                playSound(200, 'sawtooth', 0.2);
+            };
+
+            img.src = bratUrl;
+        }
+
+        function showError(element, msg) {
+            element.innerText = msg;
+            element.style.display = 'block';
         }
     </script>
 </body>
