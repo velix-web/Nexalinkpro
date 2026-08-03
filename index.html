@@ -1,858 +1,1476 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NexaLink Pro - TikTok, YouTube & Brat Generator</title>
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Arial:wght@700&display=swap" rel="stylesheet">
-    
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            user-select: none;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>NexaLink Pro v2.00 - VisionOS AAA Cyber OS</title>
 
-        body {
-            background-color: #0a0507;
-            color: #f0f0f0;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            min-height: 100vh;
-            padding: 20px 15px;
-            background-image: 
-                radial-gradient(circle at 50% 0%, rgba(229, 9, 20, 0.25), transparent 70%),
-                radial-gradient(circle at 80% 80%, rgba(139, 0, 0, 0.15), transparent 50%);
-            background-attachment: fixed;
-        }
+  <!-- Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@600;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-        .container {
-            max-width: 650px;
-            margin: 0 auto;
-        }
+  <style>
+    /* ==========================================================================
+       1. CORE DESIGN SYSTEM & VARIABLES
+       ========================================================================== */
+    :root {
+      --bg: #030204;
+      --bg-card: rgba(18, 5, 8, 0.65);
+      --bg-card-hover: rgba(32, 8, 14, 0.85);
+      
+      --accent: #ff003c;
+      --accent-bright: #ff1a4d;
+      --accent-dark: #660019;
+      --accent-glow: rgba(255, 0, 60, 0.45);
 
-        /* Banner Header */
-        .banner-header {
-            width: 100%;
-            height: 160px;
-            border-radius: 16px;
-            background: linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(10,5,7,0.95) 100%), 
-                        url('https://cdn.phototourl.com/free/2026-08-01-1b63ee0d-49a1-4f98-85ca-c5c6f698880e.jpg') center/cover no-repeat;
-            border: 1px solid rgba(229, 9, 20, 0.4);
-            box-shadow: 0 0 25px rgba(229, 9, 20, 0.3);
-            position: relative;
-            margin-bottom: 20px;
-            overflow: hidden;
-        }
+      --border: rgba(255, 0, 60, 0.22);
+      --border-bright: rgba(255, 0, 60, 0.65);
+      --glass-highlight: rgba(255, 255, 255, 0.08);
 
-        .header-title-box {
-            position: absolute;
-            bottom: 15px;
-            left: 20px;
-        }
+      --text-main: #ffffff;
+      --text-sub: #a3959a;
+      --text-dim: #615559;
 
-        .header-title-box h1 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 900;
-            color: #ffffff;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            text-shadow: 0 0 12px rgba(229, 9, 20, 0.8), 0 0 20px rgba(255, 0, 0, 0.5);
-        }
+      --font-title: 'Orbitron', sans-serif;
+      --font-body: 'Space Grotesk', sans-serif;
+      --font-sub: 'Inter', sans-serif;
 
-        .header-title-box p {
-            font-size: 0.8rem;
-            color: #ff8a8a;
-            letter-spacing: 1px;
-            font-weight: 600;
-        }
+      --radius-sm: 10px;
+      --radius-md: 16px;
+      --radius-lg: 22px;
+      --radius-full: 9999px;
+    }
 
-        /* Tab Navigation */
-        .tab-container {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 15px;
-        }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: var(--font-body);
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+    }
 
-        .tab-btn {
-            flex: 1;
-            padding: 12px 8px;
-            background: rgba(18, 10, 14, 0.6);
-            border: 1px solid rgba(229, 9, 20, 0.3);
-            border-radius: 10px;
-            color: #aaa;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.8rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-align: center;
-        }
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      min-height: 100vh;
+      overflow-x: hidden;
+      padding-bottom: 60px;
+      position: relative;
+    }
 
-        .tab-btn.active {
-            background: rgba(229, 9, 20, 0.25);
-            border-color: #ff4d4d;
-            color: #fff;
-            box-shadow: 0 0 15px rgba(229, 9, 20, 0.4);
-        }
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 4px; height: 4px; }
+    ::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.8); }
+    ::-webkit-scrollbar-thumb { background: var(--accent-dark); border-radius: 4px; }
 
-        .tab-btn.brat-tab.active {
-            background: rgba(138, 206, 0, 0.25);
-            border-color: #8ace00;
-            color: #8ace00;
-            box-shadow: 0 0 15px rgba(138, 206, 0, 0.4);
-        }
+    .icon {
+      width: 18px;
+      height: 18px;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      fill: none;
+      display: inline-block;
+      vertical-align: middle;
+    }
 
-        /* Glassmorphism Card */
-        .glass-card {
-            background: rgba(18, 10, 14, 0.75);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(229, 9, 20, 0.35);
-            border-radius: 16px;
-            padding: 24px;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5), inset 0 0 15px rgba(229, 9, 20, 0.1);
-            margin-bottom: 25px;
-        }
+    /* Backgrounds */
+    #bg-canvas {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -2;
+      pointer-events: none;
+    }
 
-        .card-header {
-            margin-bottom: 20px;
-            border-bottom: 1px solid rgba(229, 9, 20, 0.2);
-            padding-bottom: 12px;
-        }
+    .bg-overlay-grid {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      background-image:
+        radial-gradient(circle at 50% -10%, var(--accent-glow) -80%, transparent 70%),
+        linear-gradient(to right, rgba(255, 0, 60, 0.025) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 0, 60, 0.025) 1px, transparent 1px);
+      background-size: 100% 100%, 30px 30px, 30px 30px;
+    }
 
-        .card-header h2 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.1rem;
-            color: #ff4d4d;
-            letter-spacing: 1px;
-        }
+    .vignette {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      box-shadow: inset 0 0 120px rgba(0, 0, 0, 0.95);
+    }
 
-        .card-header p {
-            font-size: 0.85rem;
-            color: #aaa;
-            margin-top: 4px;
-        }
+    /* ==========================================================================
+       2. LOADER
+       ========================================================================== */
+    #loader {
+      position: fixed;
+      inset: 0;
+      background: #020103;
+      z-index: 99999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.6s ease, visibility 0.6s;
+    }
 
-        /* Form Controls */
-        .input-group {
-            margin-bottom: 18px;
-        }
+    .loader-hud {
+      position: relative;
+      width: 120px;
+      height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
 
-        .input-label {
-            display: block;
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: #ddd;
-            margin-bottom: 8px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
+    .loader-ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 2px solid transparent;
+    }
 
-        .input-field, .textarea-field, .select-field {
-            width: 100%;
-            background: rgba(5, 2, 4, 0.8);
-            border: 1px solid rgba(229, 9, 20, 0.4);
-            border-radius: 10px;
-            padding: 14px 16px;
-            color: #fff;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 0.95rem;
-            outline: none;
-            transition: all 0.3s ease;
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
-        }
+    .loader-ring-1 {
+      inset: 0;
+      border-top-color: var(--accent-bright);
+      border-right-color: var(--accent-dark);
+      animation: spin 2s linear infinite;
+    }
 
-        .textarea-field {
-            resize: vertical;
-            min-height: 90px;
-        }
+    .loader-ring-2 {
+      inset: 10px;
+      border-bottom-color: #fff;
+      animation: spin 1.2s linear infinite reverse;
+    }
 
-        .select-field option {
-            background: #0a0507;
-            color: #fff;
-        }
+    .loader-core-icon { font-size: 24px; }
+    @keyframes spin { 100% { transform: rotate(360deg); } }
 
-        .input-field:focus, .textarea-field:focus, .select-field:focus {
-            border-color: #ff4d4d;
-            box-shadow: 0 0 12px rgba(229, 9, 20, 0.5), inset 0 2px 4px rgba(0,0,0,0.5);
-        }
+    .loader-title {
+      font-family: var(--font-title);
+      font-size: 24px;
+      font-weight: 900;
+      letter-spacing: 6px;
+      color: #ffffff;
+      text-shadow: 0 0 15px var(--accent-glow);
+    }
 
-        .btn-submit {
-            width: 100%;
-            background: linear-gradient(135deg, #e50914 0%, #990000 100%);
-            color: #fff;
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 700;
-            font-size: 0.95rem;
-            padding: 14px;
-            border: 1px solid #ff4d4d;
-            border-radius: 10px;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 0 15px rgba(229, 9, 20, 0.5);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-        }
+    .loader-sub {
+      font-family: var(--font-sub);
+      font-size: 11px;
+      letter-spacing: 2px;
+      color: var(--text-sub);
+      margin-top: 4px;
+    }
 
-        .btn-submit:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 0 25px rgba(229, 9, 20, 0.8);
-            background: linear-gradient(135deg, #ff1e27 0%, #b30000 100%);
-        }
+    .loader-bar-track {
+      width: 180px;
+      height: 3px;
+      background: rgba(255, 255, 255, 0.08);
+      margin-top: 18px;
+      border-radius: 3px;
+      overflow: hidden;
+    }
 
-        .btn-brat {
-            background: linear-gradient(135deg, #8ace00 0%, #4e7500 100%);
-            border-color: #b1ff03;
-            color: #000;
-            box-shadow: 0 0 15px rgba(138, 206, 0, 0.4);
-        }
+    .loader-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--accent-bright);
+      box-shadow: 0 0 10px var(--accent-bright);
+      transition: width 0.1s linear;
+    }
 
-        .btn-brat:hover {
-            background: linear-gradient(135deg, #9eff03 0%, #689c00 100%);
-            box-shadow: 0 0 25px rgba(138, 206, 0, 0.8);
-        }
+    .loader-percent {
+      font-family: var(--font-title);
+      font-size: 11px;
+      color: var(--accent-bright);
+      margin-top: 6px;
+    }
 
-        .btn-wa {
-            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
-            border-color: #25D366;
-            color: #fff;
-            box-shadow: 0 0 15px rgba(37, 211, 102, 0.4);
-        }
+    /* ==========================================================================
+       3. RAPIH & COMPACT HEADER (MOBILE OPTIMIZED)
+       ========================================================================== */
+    header {
+      position: fixed;
+      top: 10px;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      padding: 0 12px;
+      transition: transform 0.3s ease;
+    }
 
-        .btn-wa:hover {
-            background: linear-gradient(135deg, #34e775 0%, #0e6b60 100%);
-            box-shadow: 0 0 25px rgba(37, 211, 102, 0.7);
-        }
+    header.nav-hidden { transform: translateY(-120%); }
 
-        /* Loading Spinner */
-        .spinner {
-            display: none;
-            width: 18px;
-            height: 18px;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            border-top-color: #fff;
-            animation: spin 0.8s linear infinite;
-        }
+    .nav-container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: rgba(10, 3, 5, 0.75);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-full);
+      padding: 6px 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+    }
 
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
+    .brand-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+    }
 
-        /* Result Box */
-        .result-box {
-            display: none;
-            margin-top: 20px;
-            background: rgba(10, 5, 8, 0.9);
-            border: 1px dashed rgba(229, 9, 20, 0.5);
-            border-radius: 12px;
-            padding: 16px;
-            animation: fadeIn 0.4s ease-in-out;
-        }
+    .logo-badge {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--accent-bright), var(--accent-dark));
+      font-size: 14px;
+      box-shadow: 0 0 10px var(--accent-glow);
+      flex-shrink: 0;
+    }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+    .brand-title {
+      font-family: var(--font-title);
+      font-weight: 800;
+      font-size: 12px;
+      color: #ffffff;
+      text-align: left;
+      line-height: 1;
+    }
 
-        .result-content {
-            display: flex;
-            gap: 15px;
-            align-items: flex-start;
-        }
+    .brand-sub {
+      font-family: var(--font-sub);
+      font-size: 9px;
+      color: var(--text-sub);
+      text-align: left;
+      margin-top: 2px;
+    }
 
-        .result-thumb {
-            width: 120px;
-            height: 120px;
-            border-radius: 8px;
-            object-fit: cover;
-            border: 1px solid rgba(229, 9, 20, 0.4);
-            flex-shrink: 0;
-            background: #150a0f;
-        }
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
 
-        .result-info {
-            flex-grow: 1;
-        }
+    .music-controls {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      background: rgba(255, 255, 255, 0.03);
+      padding: 3px 6px;
+      border-radius: var(--radius-full);
+      border: 1px solid rgba(255, 0, 60, 0.15);
+    }
 
-        .video-title {
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: #fff;
-            margin-bottom: 8px;
-            line-height: 1.4;
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
+    .icon-btn-circle {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
 
-        .author-info {
-            font-size: 0.8rem;
-            color: #ff8a8a;
-            margin-bottom: 15px;
-        }
+    .icon-btn-circle.accent {
+      background: var(--accent);
+      border-color: var(--accent-bright);
+    }
 
-        .btn-download-group {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
+    /* Equalizer Mini */
+    .equalizer {
+      display: flex;
+      gap: 2px;
+      align-items: flex-end;
+      height: 10px;
+      padding: 0 2px;
+    }
+    .eq-bar { width: 2px; height: 2px; background: var(--accent-bright); border-radius: 1px; }
+    .playing .eq-bar { animation: eqAnim 0.5s infinite alternate ease-in-out; }
+    .playing .eq-bar:nth-child(2) { animation-delay: 0.15s; }
+    .playing .eq-bar:nth-child(3) { animation-delay: 0.3s; }
+    @keyframes eqAnim { 0% { height: 2px; } 100% { height: 10px; } }
 
-        .btn-dl {
-            display: inline-block;
-            text-align: center;
-            background: rgba(229, 9, 20, 0.2);
-            border: 1px solid rgba(229, 9, 20, 0.6);
-            color: #fff;
-            padding: 10px 14px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            border-radius: 8px;
-            text-decoration: none;
-            transition: all 0.2s ease;
-            cursor: pointer;
-        }
+    /* ==========================================================================
+       4. CONTAINER & HERO COMPACT
+       ========================================================================== */
+    .container {
+      max-width: 800px;
+      margin: 62px auto 0;
+      padding: 0 12px;
+    }
 
-        .btn-dl:hover {
-            background: rgba(229, 9, 20, 0.5);
-            border-color: #ff4d4d;
-            box-shadow: 0 0 10px rgba(229, 9, 20, 0.4);
-        }
+    .hero-card {
+      position: relative;
+      height: 140px;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      margin-bottom: 12px;
+      border: 1px solid var(--border-bright);
+      box-shadow: 0 0 20px rgba(255, 0, 60, 0.2);
+    }
 
-        .btn-dl-audio {
-            background: rgba(255, 255, 255, 0.05);
-            border-color: rgba(255, 255, 255, 0.2);
-            color: #ddd;
-        }
+    .hero-img-bg {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 25%;
+    }
 
-        .btn-dl-audio:hover {
-            background: rgba(255, 255, 255, 0.15);
-            color: #fff;
-        }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(0deg, rgba(4, 4, 4, 0.95) 10%, rgba(15, 2, 6, 0.4) 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 12px 14px;
+    }
 
-        /* Brat Result Preview */
-        .brat-preview-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 15px;
-        }
+    .hero-badge-tag {
+      font-family: var(--font-title);
+      font-size: 8px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      color: var(--accent-bright);
+      background: rgba(255, 0, 60, 0.15);
+      border: 1px solid var(--border-bright);
+      padding: 2px 8px;
+      border-radius: var(--radius-full);
+      width: fit-content;
+      margin-bottom: 4px;
+    }
 
-        .brat-img-preview {
-            width: 100%;
-            max-width: 320px;
-            border-radius: 8px;
-            border: 2px solid #8ace00;
-            box-shadow: 0 0 20px rgba(138, 206, 0, 0.3);
-        }
+    .hero-title {
+      font-family: var(--font-title);
+      font-size: 20px;
+      font-weight: 900;
+      color: #ffffff;
+      line-height: 1.1;
+      text-shadow: 0 0 10px var(--accent-glow);
+    }
 
-        /* Error Box */
-        .error-box {
-            display: none;
-            margin-top: 15px;
-            padding: 12px;
-            background: rgba(255, 0, 0, 0.15);
-            border: 1px solid rgba(255, 0, 0, 0.4);
-            border-radius: 8px;
-            color: #ff6b6b;
-            font-size: 0.85rem;
-            text-align: center;
-        }
+    .hero-subtitle {
+      font-family: var(--font-body);
+      font-size: 11px;
+      color: var(--text-sub);
+      margin-top: 2px;
+    }
 
-        /* Credit Section */
-        .credit-card {
-            background: linear-gradient(180deg, rgba(15, 5, 10, 0.85) 0%, rgba(5, 2, 5, 0.95) 100%),
-                        url('https://cdn.phototourl.com/free/2026-08-01-a74c302b-15d4-48e6-af80-e1d72fd5e667.jpg') center/cover no-repeat;
-            border: 1px solid rgba(229, 9, 20, 0.4);
-            border-radius: 16px;
-            padding: 20px;
-            box-shadow: 0 0 20px rgba(229, 9, 20, 0.25);
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 25px;
-        }
+    /* ==========================================================================
+       5. COMPACT STATUS PANEL
+       ========================================================================== */
+    .status-panel-grid {
+      background: var(--bg-card);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 10px;
+      margin-bottom: 14px;
+    }
 
-        .avatar-img {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            border: 2px solid #ff4d4d;
-            box-shadow: 0 0 12px rgba(229, 9, 20, 0.6);
-            object-fit: cover;
-            flex-shrink: 0;
-        }
+    .stats-info-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 6px;
+    }
 
-        .creator-tag {
-            font-size: 0.7rem;
-            font-family: 'Orbitron', sans-serif;
-            color: #ff4d4d;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-        }
+    .stat-widget {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 0, 60, 0.12);
+      border-radius: var(--radius-sm);
+      padding: 6px 10px;
+    }
 
-        .creator-name {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: #ffffff;
-            font-family: 'Orbitron', sans-serif;
-            margin-top: 2px;
-        }
+    .stat-label {
+      font-family: var(--font-sub);
+      font-size: 8px;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      gap: 3px;
+    }
 
-        .creator-desc {
-            font-size: 0.8rem;
-            color: #aaa;
-            margin-top: 2px;
-        }
+    .stat-value {
+      font-family: var(--font-title);
+      font-size: 11px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-top: 1px;
+    }
 
-        .tab-panel {
-            display: none;
-        }
+    .battery-bar-container {
+      grid-column: 1 / -1;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 6px 10px;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(255, 0, 60, 0.12);
+      margin-top: 2px;
+    }
 
-        .tab-panel.active {
-            display: block;
-        }
+    .battery-track {
+      flex: 1;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 2px;
+      overflow: hidden;
+    }
 
-        @media (max-width: 480px) {
-            .result-content {
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
-            }
-            .result-thumb {
-                width: 100%;
-                height: 180px;
-            }
-            .btn-download-group {
-                width: 100%;
-            }
-        }
-    </style>
+    .battery-fill {
+      height: 100%;
+      background: var(--accent-bright);
+      width: 50%;
+      box-shadow: 0 0 8px var(--accent-glow);
+    }
+
+    /* ==========================================================================
+       6. CATEGORIES CHIPS
+       ========================================================================== */
+    .category-bar {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding-bottom: 8px;
+      margin-bottom: 12px;
+      scrollbar-width: none;
+    }
+    .category-bar::-webkit-scrollbar { display: none; }
+
+    .cat-chip {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-sub);
+      cursor: pointer;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .cat-chip.active {
+      background: var(--accent);
+      border-color: var(--accent-bright);
+      color: #ffffff;
+      box-shadow: 0 0 12px var(--accent-glow);
+    }
+
+    /* ==========================================================================
+       7. TOOLS GRID
+       ========================================================================== */
+    .section-head {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-title);
+      font-size: 12px;
+      letter-spacing: 1.5px;
+      color: #ffffff;
+      margin-bottom: 12px;
+    }
+
+    .section-head::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, var(--border-bright), transparent);
+    }
+
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    @media (min-width: 600px) {
+      .tools-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    .tool-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 120px;
+      cursor: pointer;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .tool-card:active { transform: scale(0.97); }
+
+    .tool-icon-wrapper {
+      width: 34px;
+      height: 34px;
+      border-radius: var(--radius-sm);
+      background: rgba(255, 0, 60, 0.12);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-bright);
+      margin-bottom: 8px;
+    }
+
+    .tool-name {
+      font-family: var(--font-title);
+      font-size: 11px;
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 1.2;
+    }
+
+    .tool-desc {
+      font-family: var(--font-sub);
+      font-size: 10px;
+      color: var(--text-sub);
+      margin-top: 2px;
+      line-height: 1.2;
+    }
+
+    .tool-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 10px;
+    }
+
+    .tool-badge {
+      font-family: var(--font-title);
+      font-size: 8px;
+      font-weight: 800;
+      padding: 2px 6px;
+      background: rgba(255, 0, 60, 0.15);
+      border: 1px solid var(--border);
+      color: var(--accent-bright);
+      border-radius: 4px;
+    }
+
+    .tool-arrow {
+      color: var(--accent-bright);
+      font-size: 10px;
+    }
+
+    /* ==========================================================================
+       8. MODALS & FORMS
+       ========================================================================== */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.88);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-box {
+      width: 100%;
+      max-width: 420px;
+      max-height: 85vh;
+      overflow-y: auto;
+      background: rgba(16, 5, 8, 0.95);
+      border: 1px solid var(--border-bright);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.9);
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 14px;
+    }
+
+    .modal-title-text {
+      font-family: var(--font-title);
+      font-size: 15px;
+      font-weight: 800;
+      color: #ffffff;
+    }
+
+    .modal-subtitle-text {
+      font-family: var(--font-sub);
+      font-size: 11px;
+      color: var(--text-sub);
+    }
+
+    .close-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #fff;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .field-label {
+      display: block;
+      font-family: var(--font-title);
+      font-size: 9px;
+      font-weight: 700;
+      color: var(--text-sub);
+      text-transform: uppercase;
+      margin: 10px 0 4px;
+    }
+
+    .custom-input, .custom-select {
+      width: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      border: 1px solid var(--border);
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      color: #ffffff;
+      font-size: 13px;
+      outline: none;
+    }
+
+    .custom-input:focus, .custom-select:focus {
+      border-color: var(--accent-bright);
+    }
+
+    textarea.custom-input {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .btn-submit {
+      width: 100%;
+      background: linear-gradient(135deg, var(--accent-bright), var(--accent-dark));
+      border: 1px solid var(--border-bright);
+      color: #ffffff;
+      padding: 11px;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-title);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      cursor: pointer;
+      margin-top: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .btn-submit:active { transform: scale(0.98); }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .warning-msg {
+      display: none;
+      background: rgba(255, 0, 60, 0.15);
+      border: 1px solid var(--accent-bright);
+      color: #ff99bb;
+      padding: 8px 12px;
+      border-radius: var(--radius-sm);
+      font-size: 11px;
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    .result-container {
+      margin-top: 14px;
+      display: none;
+      background: rgba(0, 0, 0, 0.7);
+      border-radius: var(--radius-sm);
+      padding: 12px;
+      border: 1px dashed var(--border-bright);
+      text-align: center;
+    }
+
+    .preview-img {
+      width: 100%;
+      max-height: 220px;
+      object-fit: contain;
+      border-radius: var(--radius-sm);
+      margin-bottom: 8px;
+    }
+
+    .action-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      width: 100%;
+      padding: 10px;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-title);
+      font-size: 11px;
+      font-weight: 700;
+      text-decoration: none;
+      color: #fff;
+      background: var(--accent);
+      margin-top: 6px;
+    }
+
+    /* Calculator Grid */
+    .calc-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      margin-top: 10px;
+    }
+
+    .calc-btn {
+      padding: 10px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: #fff;
+      font-family: var(--font-title);
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .calc-btn:active { background: var(--accent); }
+
+    /* Menu Modal */
+    .menu-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      padding: 12px;
+      border-radius: var(--radius-md);
+      margin-bottom: 8px;
+      cursor: pointer;
+    }
+
+    .menu-item-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-sm);
+      background: rgba(255, 0, 60, 0.15);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-bright);
+      flex-shrink: 0;
+    }
+
+    .menu-item-text strong {
+      display: block;
+      font-family: var(--font-title);
+      font-size: 11px;
+      color: #ffffff;
+    }
+
+    .menu-item-text span {
+      font-size: 10px;
+      color: var(--text-sub);
+    }
+
+    #toast {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: rgba(20, 5, 8, 0.95);
+      border: 1px solid var(--border-bright);
+      color: #fff;
+      padding: 8px 18px;
+      border-radius: var(--radius-full);
+      font-size: 12px;
+      z-index: 9999;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s ease;
+      max-width: 90vw;
+      text-align: center;
+    }
+
+    #toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+  </style>
 </head>
 <body>
 
-    <div class="container">
-        <!-- Banner Header -->
-        <div class="banner-header">
-            <div class="header-title-box">
-                <h1>NEXALINK PRO</h1>
-                <p>MALEVOLENT SHRINE • MEDIA DOWNLOADER</p>
-            </div>
+  <!-- BACKGROUND CANVAS -->
+  <canvas id="bg-canvas"></canvas>
+  <div class="bg-overlay-grid"></div>
+  <div class="vignette"></div>
+
+  <!-- LOADER -->
+  <div id="loader">
+    <div class="loader-hud">
+      <div class="loader-ring loader-ring-1"></div>
+      <div class="loader-ring loader-ring-2"></div>
+      <div class="loader-core-icon">⚡</div>
+    </div>
+    <div class="loader-title">NEXALINK</div>
+    <div class="loader-sub" id="loader-sub">INITIALIZING CORE...</div>
+    <div class="loader-bar-track">
+      <div class="loader-bar-fill" id="loader-bar"></div>
+    </div>
+    <div class="loader-percent" id="loader-percent">0%</div>
+  </div>
+
+  <audio id="bg-audio" loop preload="none"></audio>
+  <div id="toast"></div>
+
+  <!-- NAVBAR -->
+  <header id="navbar">
+    <div class="nav-container">
+      <button class="brand-btn" onclick="openModal('menu-modal')">
+        <div class="logo-badge">⚡</div>
+        <div>
+          <div class="brand-title">NexaLink Pro</div>
+          <!-- DIPERBARUI: Versi di header disesuaikan jadi v2.00 -->
+          <div class="brand-sub">v2.00 VisionOS</div>
+        </div>
+      </button>
+
+      <div class="nav-actions">
+        <div class="music-controls">
+          <div class="equalizer" id="eq">
+            <div class="eq-bar"></div>
+            <div class="eq-bar"></div>
+            <div class="eq-bar"></div>
+          </div>
+          <button class="icon-btn-circle" id="mute-btn" onclick="toggleMute(event)">
+            <svg class="icon" viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+          </button>
+          <button class="icon-btn-circle accent" id="play-btn" onclick="toggleAudioManual(event)">
+            <svg class="icon" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+          </button>
+          <button class="icon-btn-circle" onclick="skipTrack(event)">
+            <svg class="icon" viewBox="0 0 24 24"><polygon points="5 4 15 12 5 20 5 4"></polygon><line x1="19" y1="5" x2="19" y2="19"></line></svg>
+          </button>
         </div>
 
-        <!-- Tab Navigation -->
-        <div class="tab-container">
-            <button class="tab-btn active" onclick="switchTab('tiktok')">TIKTOK</button>
-            <button class="tab-btn" onclick="switchTab('youtube')">YOUTUBE</button>
-            <button class="tab-btn brat-tab" onclick="switchTab('brat')">BRAT GENERATOR</button>
-        </div>
+        <button class="icon-btn-circle" onclick="openModal('menu-modal')">
+          <svg class="icon" viewBox="0 0 24 24"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+      </div>
+    </div>
+  </header>
 
-        <!-- SECTION 1: TikTok Downloader -->
-        <div id="panel-tiktok" class="tab-panel active glass-card">
-            <div class="card-header">
-                <h2>TIKTOK DOWNLOADER</h2>
-                <p>Unduh video TikTok tanpa watermark (HD) & Audio MP3 via TikWM Engine.</p>
-            </div>
-            
-            <div class="input-group">
-                <label class="input-label" for="tiktokUrl">Tautan Video TikTok</label>
-                <input type="text" id="tiktokUrl" class="input-field" placeholder="https://vt.tiktok.com/... atau https://www.tiktok.com/@..." autocomplete="off">
-            </div>
-
-            <button class="btn-submit" onclick="fetchTikTok()">
-                <div class="spinner" id="ttSpinner"></div>
-                <span id="ttBtnText">DAPATKAN VIDEO TIKTOK</span>
-            </button>
-
-            <div id="ttErrorBox" class="error-box"></div>
-
-            <div id="ttResultBox" class="result-box">
-                <div class="result-content">
-                    <img id="ttVideoThumb" class="result-thumb" src="" alt="Thumbnail Video">
-                    <div class="result-info">
-                        <div id="ttVideoTitle" class="video-title">-</div>
-                        <div id="ttVideoAuthor" class="author-info">Kreator: -</div>
-                        
-                        <div class="btn-download-group">
-                            <a id="ttBtnDlMp4" href="#" target="_blank" download class="btn-dl">DOWNLOAD MP4 HD</a>
-                            <a id="ttBtnDlMp3" href="#" target="_blank" download class="btn-dl btn-dl-audio">DOWNLOAD AUDIO MP3</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- SECTION 2: YouTube Downloader -->
-        <div id="panel-youtube" class="tab-panel glass-card">
-            <div class="card-header">
-                <h2>YOUTUBE DOWNLOADER</h2>
-                <p>Unduh video YouTube / Shorts MP4 & Audio MP3 via Direct FAA Endpoint.</p>
-            </div>
-            
-            <div class="input-group">
-                <label class="input-label" for="ytUrl">Tautan Video / Shorts YouTube</label>
-                <input type="text" id="ytUrl" class="input-field" placeholder="https://www.youtube.com/watch?v=... atau https://youtu.be/..." autocomplete="off">
-            </div>
-
-            <button class="btn-submit" onclick="fetchYouTube()">
-                <div class="spinner" id="ytSpinner"></div>
-                <span id="ytBtnText">DAPATKAN VIDEO YOUTUBE</span>
-            </button>
-
-            <div id="ytErrorBox" class="error-box"></div>
-
-            <div id="ytResultBox" class="result-box">
-                <div class="result-content">
-                    <img id="ytVideoThumb" class="result-thumb" src="" alt="Thumbnail Video">
-                    <div class="result-info">
-                        <div id="ytVideoTitle" class="video-title">-</div>
-                        <div id="ytVideoAuthor" class="author-info">YouTube Engine Direct API</div>
-                        
-                        <div class="btn-download-group">
-                            <a id="ytBtnDlMp4" href="#" target="_blank" download class="btn-dl">DOWNLOAD MP4 VIDEO</a>
-                            <a id="ytBtnDlMp3" href="#" target="_blank" download class="btn-dl btn-dl-audio">DOWNLOAD AUDIO MP3</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- SECTION 3: Brat Generator -->
-        <div id="panel-brat" class="tab-panel glass-card" style="border-color: rgba(138, 206, 0, 0.4);">
-            <div class="card-header" style="border-bottom-color: rgba(138, 206, 0, 0.2);">
-                <h2 style="color: #8ace00;">BRAT GENERATOR</h2>
-                <p>Buat gambar bertema Charli XCX 'Brat' style secara instant.</p>
-            </div>
-            
-            <div class="input-group">
-                <label class="input-label" for="bratText">Teks Gambar Brat</label>
-                <input type="text" id="bratText" class="input-field" placeholder="Masukkan teks (contoh: aku ganteng banget)" autocomplete="off" style="border-color: rgba(138, 206, 0, 0.4);">
-            </div>
-
-            <button class="btn-submit btn-brat" onclick="generateBrat()">
-                <div class="spinner" id="bratSpinner"></div>
-                <span id="bratBtnText">GENERATE BRAT IMAGE</span>
-            </button>
-
-            <div id="bratErrorBox" class="error-box"></div>
-
-            <div id="bratResultBox" class="result-box" style="border-color: rgba(138, 206, 0, 0.5);">
-                <div class="brat-preview-container">
-                    <img id="bratImgPreview" class="brat-img-preview" src="" alt="Brat Preview">
-                    <a id="bratBtnDl" href="#" target="_blank" download="brat.png" class="btn-dl" style="background: rgba(138, 206, 0, 0.2); border-color: #8ace00; color: #8ace00; width: 100%; max-width: 320px;">DOWNLOAD BRAT IMAGE</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- Credit Section -->
-        <div class="credit-card">
-            <img src="https://cdn.phototourl.com/free/2026-08-01-a74c302b-15d4-48e6-af80-e1d72fd5e667.jpg" class="avatar-img" alt="Creator Banner">
-            <div>
-                <div class="creator-tag">SYSTEM DEVELOPER</div>
-                <div class="creator-name">NEXALINK CREATOR:SHAKZ</div>
-                <div class="creator-desc">Crafted with Sukuna Shrine Theme • Cyber-Red Glassmorphism UI</div>
-            </div>
-        </div>
-
-        <!-- SECTION 4: Feedback & Bug Report (Direct WA) -->
-        <div class="glass-card" style="border-color: rgba(37, 211, 102, 0.35);">
-            <div class="card-header" style="border-bottom-color: rgba(37, 211, 102, 0.2);">
-                <h2 style="color: #25D366;">LAPOR BUG / REQUEST FITUR</h2>
-                <p>Ada kendala atau ide menarik? Kirim laporan langsung ke WhatsApp Developer.</p>
-            </div>
-
-            <div class="input-group">
-                <label class="input-label" for="reportType">Kategori Feedback</label>
-                <select id="reportType" class="select-field" style="border-color: rgba(37, 211, 102, 0.4);">
-                    <option value="Lapor Bug / Error">🐛 Lapor Bug / System Error</option>
-                    <option value="Request Fitur Baru">💡 Request Fitur Baru</option>
-                    <option value="Saran & Kritik">💬 Saran & Kritik</option>
-                </select>
-            </div>
-
-            <div class="input-group">
-                <label class="input-label" for="reportName">Nama / Nama Panggilan (Opsional)</label>
-                <input type="text" id="reportName" class="input-field" placeholder="Masukkan nama kamu" autocomplete="off" style="border-color: rgba(37, 211, 102, 0.4);">
-            </div>
-
-            <div class="input-group">
-                <label class="input-label" for="reportMessage">Pesan / Detail Laporan</label>
-                <textarea id="reportMessage" class="textarea-field" placeholder="Jelaskan detail bug yang ditemui atau fitur baru yang ingin kamu minta..." style="border-color: rgba(37, 211, 102, 0.4);"></textarea>
-            </div>
-
-            <button class="btn-submit btn-wa" onclick="sendToWhatsApp()">
-                <span>KIRIM KE WHATSAPP</span>
-            </button>
-
-            <div id="waErrorBox" class="error-box"></div>
-        </div>
-
+  <!-- MAIN CONTAINER -->
+  <div class="container">
+    
+    <!-- HERO COMPACT -->
+    <div class="hero-card">
+      <img id="hero-img" class="hero-img-bg" src="https://cdn.phototourl.com/free/2026-08-01-1b63ee0d-49a1-4f98-85ca-c5c6f698880e.jpg" alt="Shrine">
+      <div class="hero-overlay">
+        <div class="hero-badge-tag">MALEVOLENT SHRINE</div>
+        <!-- DIPERBARUI: Ditambahkan v2.00 -->
+        <div class="hero-title">NexaLink Pro v2.00</div>
+        <div class="hero-subtitle">NextGen Cyber Media Engine & Downloader</div>
+      </div>
     </div>
 
-    <script>
-        // Audio SFX System
-        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    <!-- STATUS PANEL COMPACT -->
+    <div class="status-panel-grid">
+      <div class="stats-info-grid">
+        <div class="stat-widget">
+          <span class="stat-label">
+            <svg class="icon" style="width:9px; height:9px;" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line></svg>
+            NEGARA
+          </span>
+          <span class="stat-value">🇮🇩 Indonesia</span>
+        </div>
+        <div class="stat-widget">
+          <span class="stat-label">
+            <svg class="icon" style="width:9px; height:9px;" viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect></svg>
+            DEVICE
+          </span>
+          <span class="stat-value" id="dev-device">Mobile</span>
+        </div>
+        <div class="stat-widget">
+          <span class="stat-label">
+            <svg class="icon" style="width:9px; height:9px;" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle></svg>
+            BROWSER
+          </span>
+          <span class="stat-value" id="dev-browser">Chrome</span>
+        </div>
+        <div class="stat-widget">
+          <span class="stat-label">
+            <svg class="icon" style="width:9px; height:9px;" viewBox="0 0 24 24"><path d="M5 12.55a11 11 0 0 1 14.08 0"></path><line x1="12" y1="20" x2="12.01" y2="20"></line></svg>
+            STATUS
+          </span>
+          <span class="stat-value" style="color:#4ade80;">ONLINE</span>
+        </div>
 
-        function playSound(freq = 440, type = 'sine', duration = 0.1) {
-            if (audioCtx.state === 'suspended') {
-                audioCtx.resume();
-            }
-            const osc = audioCtx.createOscillator();
-            const gain = audioCtx.createGain();
-            
-            osc.type = type;
-            osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-            gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
-            gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + duration);
+        <div class="battery-bar-container">
+          <svg class="icon" style="width:12px; height:12px; color:var(--accent-bright);" viewBox="0 0 24 24"><rect x="1" y="6" width="18" height="12" rx="2" ry="2"></rect><line x1="23" y1="11" x2="23" y2="13"></line></svg>
+          <div class="battery-track">
+            <div class="battery-fill" id="battery-fill"></div>
+          </div>
+          <span style="font-family:var(--font-title); font-size:10px; color:#fff;" id="battery-percent">--%</span>
+        </div>
+      </div>
+    </div>
 
-            osc.connect(gain);
-            gain.connect(audioCtx.destination);
+    <!-- CATEGORIES -->
+    <div class="category-bar">
+      <button class="cat-chip active" onclick="filterCat('all', this)">
+        <svg class="icon" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+        Semua
+      </button>
+      <button class="cat-chip" onclick="filterCat('local', this)">
+        <svg class="icon" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line></svg>
+        Fitur Lokal
+      </button>
+      <button class="cat-chip" onclick="filterCat('downloader', this)">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline></svg>
+        Downloader
+      </button>
+      <button class="cat-chip" onclick="filterCat('maker', this)">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+        Maker
+      </button>
+      <button class="cat-chip" onclick="filterCat('tools', this)">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+        Utility
+      </button>
+    </div>
 
-            osc.start();
-            osc.stop(audioCtx.currentTime + duration);
+    <!-- DASHBOARD TOOLS -->
+    <div class="section-head">⚡ DASHBOARD TOOLS</div>
+    <div id="tools-grid" class="tools-grid"></div>
+
+  </div>
+
+  <!-- ACTION MODAL -->
+  <div id="action-modal" class="modal-overlay">
+    <div class="modal-box">
+      <div class="modal-header">
+        <div>
+          <div class="modal-title-text" id="modal-title">Tool Name</div>
+          <div class="modal-subtitle-text" id="modal-desc">Description</div>
+        </div>
+        <button class="close-btn" onclick="closeModal('action-modal')">✕</button>
+      </div>
+
+      <div id="form-container"></div>
+      <div id="warning-msg" class="warning-msg"></div>
+
+      <button id="submit-btn" class="btn-submit" onclick="processAction()">
+        <svg class="icon" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+        PROSES SEKARANG
+      </button>
+
+      <div id="result-container" class="result-container">
+        <div id="result-content"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MENU MODAL -->
+  <div id="menu-modal" class="modal-overlay">
+    <div class="modal-box">
+      <div class="modal-header">
+        <div>
+          <div class="modal-title-text">NEXUS MENU</div>
+          <div class="modal-subtitle-text">Informasi & Bantuan</div>
+        </div>
+        <button class="close-btn" onclick="closeModal('menu-modal')">✕</button>
+      </div>
+
+      <div class="menu-item" onclick="closeModal('menu-modal'); openModal('about-modal');">
+        <div class="menu-item-icon">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+        </div>
+        <div class="menu-item-text">
+          <strong>About Developer</strong>
+          <span>Info pembuat & detail sistem</span>
+        </div>
+      </div>
+
+      <div class="menu-item" onclick="closeModal('menu-modal'); openModal('report-modal');">
+        <div class="menu-item-icon">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+        </div>
+        <div class="menu-item-text">
+          <strong>Report Bug / Feature</strong>
+          <span>Kirim pesan langsung ke WhatsApp</span>
+        </div>
+      </div>
+
+      <button class="btn-submit btn-secondary" onclick="closeModal('menu-modal')">TUTUP</button>
+    </div>
+  </div>
+
+  <!-- ABOUT MODAL -->
+  <div id="about-modal" class="modal-overlay">
+    <div class="modal-box" style="text-align:center;">
+      <div style="width:70px; height:70px; border-radius:50%; border:2px solid var(--accent-bright); margin:0 auto 12px; overflow:hidden;">
+        <img src="https://c.termai.cc/i183/EOVV5.jpg" style="width:100%; height:100%; object-fit:cover;">
+      </div>
+      <div style="font-family:var(--font-title); font-size:18px; font-weight:900; color:#fff;">NexaLink Pro v2.00</div>
+      <div style="font-size:11px; color:var(--text-sub); margin-top:4px;">Created by: shakz</div>
+      <div style="font-size:11px; color:var(--text-dim); margin-top:10px;">Sukuna Shrine Crimson Theme • VisionOS Cyber OS UI</div>
+      <button class="btn-submit btn-secondary" onclick="closeModal('about-modal')" style="margin-top:14px;">TUTUP</button>
+    </div>
+  </div>
+
+  <!-- REPORT MODAL -->
+  <div id="report-modal" class="modal-overlay">
+    <div class="modal-box">
+      <div class="modal-header">
+        <div>
+          <div class="modal-title-text">LAPOR BUG / REQUEST</div>
+          <div class="modal-subtitle-text">Kirim via WhatsApp</div>
+        </div>
+        <button class="close-btn" onclick="closeModal('report-modal')">✕</button>
+      </div>
+
+      <label class="field-label">Kategori</label>
+      <select id="report-category" class="custom-select">
+        <option>🐛 Lapor Bug / Error</option>
+        <option>💡 Request Fitur Baru</option>
+        <option>⭐ Saran</option>
+      </select>
+
+      <label class="field-label">Nama (Opsional)</label>
+      <input type="text" id="report-name" class="custom-input" placeholder="Nama kamu...">
+
+      <label class="field-label">Pesan</label>
+      <textarea id="report-message" class="custom-input" placeholder="Jelaskan detail..."></textarea>
+
+      <button class="btn-submit" onclick="sendReportToWhatsapp()">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M22 2L11 13"></path><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+        KIRIM KE WHATSAPP
+      </button>
+    </div>
+  </div>
+
+  <script>
+    const CONFIG = {
+      heroImg: 'https://cdn.phototourl.com/free/2026-08-01-1b63ee0d-49a1-4f98-85ca-c5c6f698880e.jpg',
+      localAudio: '',
+      onlineAudio: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
+      tracks: [
+        'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
+        'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3',
+        'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3'
+      ]
+    };
+
+    const TOOLS = [
+      { id: 'calc', name: 'Calculator', desc: 'Kalkulator digital', tag: 'LOKAL', cat: 'local', iconSVG: '<rect x="4" y="2" width="16" height="20" rx="2"></rect><line x1="8" y1="6" x2="16" y2="6"></line><line x1="16" y1="14" x2="16" y2="18"></line><path d="M16 10h.01M12 10h.01M8 10h.01M12 14h.01M8 14h.01M12 18h.01M8 18h.01"></path>' },
+      { id: 'passgen', name: 'Password Gen', desc: 'Buat kata sandi aman', tag: 'LOKAL', cat: 'local', iconSVG: '<rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path>' },
+      { id: 'morse', name: 'Morse Code', desc: 'Konversi ke Morse', tag: 'LOKAL', cat: 'local', iconSVG: '<path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle>' },
+      { id: 'qr', name: 'QR Generator', desc: 'Buat Kode QR', tag: 'LOKAL', cat: 'local', iconSVG: '<rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect>' },
+
+      { id: 'ig', name: 'Instagram', desc: 'Download video & foto HD', tag: 'HD', cat: 'downloader', iconSVG: '<rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>', paramKey: 'url', ep: 'https://api.nexray.eu.cc/downloader/instagram', type: 'json' },
+      { id: 'tt', name: 'TikTok', desc: 'Video & Audio TikTok', tag: 'NO-WM', cat: 'downloader', iconSVG: '<path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path>', paramKey: 'url', ep: 'https://api.nexray.eu.cc/downloader/tiktok', type: 'json' },
+      { id: 'yt', name: 'YouTube MP4', desc: 'Unduh video 4K', tag: '4K', cat: 'downloader', iconSVG: '<path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>', paramKey: 'url', ep: 'https://api.nexray.eu.cc/downloader/ytmp4?resolusi=2160', type: 'json' },
+      { id: 'bratstatic', name: 'Brat Static', desc: 'Stiker BRAT gambar', tag: 'PNG', cat: 'maker', iconSVG: '<path d="M12 19l7-7 3 3-7 7-3-3z"></path><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path>', paramKey: 'text', ep: 'https://api.nexray.eu.cc/maker/brat', type: 'image' },
+      { id: 'bratvideo', name: 'Brat Video', desc: 'Stiker BRAT animasi', tag: 'MP4', cat: 'maker', iconSVG: '<rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect><line x1="7" y1="2" x2="7" y2="22"></line><line x1="17" y1="2" x2="17" y2="22"></line><line x1="2" y1="12" x2="22" y2="12"></line>', paramKey: 'text', ep: 'https://api.nexray.eu.cc/maker/bratvid', type: 'video' },
+      { id: 'dana', name: 'Fake Dana', desc: 'Generate saldo Dana', tag: 'SALDO', cat: 'maker', iconSVG: '<rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line>', paramKey: 'nominal', ep: 'https://api.nexray.eu.cc/maker/fakedana', type: 'image' },
+      { id: 'rmbg', name: 'Remove BG', desc: 'Hapus background', tag: 'GALERI', cat: 'tools', iconSVG: '<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle>', paramKey: 'url', ep: 'https://api.nexray.eu.cc/tools/removebg', type: 'image', allowUpload: true },
+      { id: 'enh', name: 'Image Enhancer', desc: 'Tingkatkan resolusi', tag: 'GALERI', cat: 'tools', iconSVG: '<circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line>', paramKey: 'url', ep: 'https://api.nexray.eu.cc/tools/v1/enhancer', type: 'image', allowUpload: true }
+    ];
+
+    let currentTool = null;
+    let uploadedFileUrl = '';
+
+    /* Canvas Background Particles */
+    const canvas = document.getElementById('bg-canvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    class Particle {
+      constructor() { this.reset(); }
+      reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 1.5 + 0.5;
+        this.speedX = (Math.random() - 0.5) * 0.3;
+        this.speedY = -Math.random() * 0.5 - 0.1;
+        this.alpha = Math.random() * 0.5 + 0.1;
+      }
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        if (this.y < 0 || this.x < 0 || this.x > canvas.width) {
+          this.reset();
+          this.y = canvas.height;
         }
+      }
+      draw() {
+        ctx.fillStyle = `rgba(255, 0, 60, ${this.alpha})`;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+    for (let i = 0; i < 35; i++) particles.push(new Particle());
 
-        // Tab Switcher
-        function switchTab(tab) {
-            playSound(700, 'square', 0.05);
-            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-            document.querySelectorAll('.tab-panel').forEach(panel => panel.classList.remove('active'));
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => { p.update(); p.draw(); });
+      requestAnimationFrame(animateParticles);
+    }
+    animateParticles();
 
-            if (tab === 'tiktok') {
-                document.querySelectorAll('.tab-btn')[0].classList.add('active');
-                document.getElementById('panel-tiktok').classList.add('active');
-            } else if (tab === 'youtube') {
-                document.querySelectorAll('.tab-btn')[1].classList.add('active');
-                document.getElementById('panel-youtube').classList.add('active');
-            } else if (tab === 'brat') {
-                document.querySelectorAll('.tab-btn')[2].classList.add('active');
-                document.getElementById('panel-brat').classList.add('active');
-            }
+    /* Loader */
+    window.addEventListener('load', () => {
+      const bar = document.getElementById('loader-bar');
+      const pctText = document.getElementById('loader-percent');
+      let pct = 0;
+
+      const tick = setInterval(() => {
+        pct = Math.min(100, pct + Math.floor(Math.random() * 20) + 10);
+        bar.style.width = pct + '%';
+        pctText.innerText = pct + '%';
+
+        if (pct >= 100) {
+          clearInterval(tick);
+          setTimeout(() => {
+            const loader = document.getElementById('loader');
+            loader.style.opacity = '0';
+            loader.style.visibility = 'hidden';
+          }, 300);
         }
+      }, 80);
 
-        // TikTok Downloader Engine
-        async function fetchTikTok() {
-            const urlInput = document.getElementById('tiktokUrl').value.trim();
-            const spinner = document.getElementById('ttSpinner');
-            const btnText = document.getElementById('ttBtnText');
-            const resultBox = document.getElementById('ttResultBox');
-            const errorBox = document.getElementById('ttErrorBox');
+      initDeviceStats();
+      initBattery();
+    });
 
-            errorBox.style.display = 'none';
-            resultBox.style.display = 'none';
+    /* Audio Player */
+    const audio = document.getElementById('bg-audio');
+    let trackIndex = 0;
 
-            if (!urlInput) {
-                showError(errorBox, 'Silakan masukkan URL TikTok terlebih dahulu!');
-                playSound(200, 'sawtooth', 0.2);
-                return;
-            }
+    function toggleAudioManual(e) {
+      if (e) e.stopPropagation();
+      if (audio.paused) {
+        playAudio();
+      } else {
+        audio.pause();
+        setAudioState(false);
+      }
+    }
 
-            spinner.style.display = 'block';
-            btnText.innerText = 'MEMPROSES...';
-            playSound(800, 'sine', 0.1);
+    function playAudio() {
+      const trySrc = CONFIG.localAudio || CONFIG.tracks[trackIndex] || CONFIG.onlineAudio;
+      if (!audio.src || audio.src.indexOf(trySrc) === -1) audio.src = trySrc;
+      audio.load();
+      audio.play().then(() => setAudioState(true)).catch(() => {
+        showToast('⚠️ Audio gagal diputar');
+      });
+    }
 
-            try {
-                const endpoint = `https://www.tikwm.com/api/?url=${encodeURIComponent(urlInput)}&hd=1`;
-                const response = await fetch(endpoint);
-                const res = await response.json();
+    function toggleMute(e) {
+      if (e) e.stopPropagation();
+      audio.muted = !audio.muted;
+    }
 
-                if (res.code === 0 && res.data) {
-                    const data = res.data;
-                    document.getElementById('ttVideoTitle').innerText = data.title || 'TikTok Video';
-                    document.getElementById('ttVideoAuthor').innerText = `Kreator: @${data.author?.nickname || data.author?.unique_id || 'User'}`;
-                    
-                    const coverUrl = data.cover.startsWith('http') ? data.cover : `https://www.tikwm.com${data.cover}`;
-                    document.getElementById('ttVideoThumb').src = coverUrl;
+    function skipTrack(e) {
+      if (e) e.stopPropagation();
+      trackIndex = (trackIndex + 1) % CONFIG.tracks.length;
+      audio.src = CONFIG.tracks[trackIndex];
+      audio.load();
+      audio.play().then(() => setAudioState(true));
+    }
 
-                    let videoLink = data.hdplay || data.play;
-                    if (videoLink && !videoLink.startsWith('http')) videoLink = `https://www.tikwm.com${videoLink}`;
+    function setAudioState(isPlaying) {
+      const eq = document.getElementById('eq');
+      const playBtn = document.getElementById('play-btn');
+      if (isPlaying) {
+        eq.classList.add('playing');
+        playBtn.innerHTML = '<svg class="icon" viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>';
+      } else {
+        eq.classList.remove('playing');
+        playBtn.innerHTML = '<svg class="icon" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>';
+      }
+    }
 
-                    let audioLink = data.music;
-                    if (audioLink && !audioLink.startsWith('http')) audioLink = `https://www.tikwm.com${audioLink}`;
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.innerText = msg;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 3000);
+    }
 
-                    document.getElementById('ttBtnDlMp4').href = videoLink || '#';
-                    document.getElementById('ttBtnDlMp3').href = audioLink || '#';
+    function initDeviceStats() {
+      const ua = navigator.userAgent;
+      document.getElementById('dev-device').innerText = /Android/i.test(ua) ? 'Android' : /iPhone/i.test(ua) ? 'iOS' : 'Desktop';
+      document.getElementById('dev-browser').innerText = /Chrome/i.test(ua) ? 'Chrome' : /Safari/i.test(ua) ? 'Safari' : 'Browser';
+    }
 
-                    resultBox.style.display = 'block';
-                    playSound(1000, 'sine', 0.15);
-                } else {
-                    showError(errorBox, res.msg || 'Gagal mengambil video TikTok. Pastikan link publik.');
-                    playSound(200, 'sawtooth', 0.2);
-                }
-            } catch (err) {
-                showError(errorBox, 'Terjadi kesalahan jaringan saat koneksi ke TikWM.');
-                playSound(200, 'sawtooth', 0.2);
-            } finally {
-                spinner.style.display = 'none';
-                btnText.innerText = 'DAPATKAN VIDEO TIKTOK';
-            }
-        }
+    function initBattery() {
+      if (navigator.getBattery) {
+        navigator.getBattery().then(batt => {
+          updateBattery(batt.level);
+          batt.addEventListener('levelchange', () => updateBattery(batt.level));
+        }).catch(() => updateBattery(1));
+      } else { updateBattery(1); }
+    }
 
-        // YouTube Downloader Engine (Direct FAA Endpoints)
-        async function fetchYouTube() {
-            const urlInput = document.getElementById('ytUrl').value.trim();
-            const spinner = document.getElementById('ytSpinner');
-            const btnText = document.getElementById('ytBtnText');
-            const resultBox = document.getElementById('ytResultBox');
-            const errorBox = document.getElementById('ytErrorBox');
+    function updateBattery(level) {
+      const pct = Math.round(level * 100);
+      document.getElementById('battery-percent').innerText = pct + '%';
+      document.getElementById('battery-fill').style.width = pct + '%';
+    }
 
-            errorBox.style.display = 'none';
-            resultBox.style.display = 'none';
+    function renderTools(cat = 'all') {
+      const grid = document.getElementById('tools-grid');
+      grid.innerHTML = '';
+      const list = cat === 'all' ? TOOLS : TOOLS.filter(t => t.cat === cat);
 
-            if (!urlInput) {
-                showError(errorBox, 'Silakan masukkan URL YouTube terlebih dahulu!');
-                playSound(200, 'sawtooth', 0.2);
-                return;
-            }
+      list.forEach(t => {
+        const card = document.createElement('div');
+        card.className = 'tool-card';
+        card.onclick = () => openActionModal(t);
+        card.innerHTML = `
+          <div>
+            <div class="tool-icon-wrapper">
+              <svg class="icon">${t.iconSVG}</svg>
+            </div>
+            <div class="tool-name">${t.name}</div>
+            <div class="tool-desc">${t.desc}</div>
+          </div>
+          <div class="tool-footer">
+            <span class="tool-badge">${t.tag}</span>
+            <span class="tool-arrow">➔</span>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
 
-            // Extract Video ID untuk Thumbnail
-            const ytReg = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/|shorts\/)([^"&?\/\s]{11})/;
-            const match = urlInput.match(ytReg);
-            const videoId = match ? match[1] : null;
+    function filterCat(cat, btn) {
+      document.querySelectorAll('.cat-chip').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderTools(cat);
+    }
 
-            if (!videoId) {
-                showError(errorBox, 'Format Tautan YouTube / Shorts tidak valid!');
-                playSound(200, 'sawtooth', 0.2);
-                return;
-            }
+    function openActionModal(tool) {
+      currentTool = tool;
+      uploadedFileUrl = '';
+      document.getElementById('modal-title').innerText = tool.name;
+      document.getElementById('modal-desc').innerText = tool.desc;
+      document.getElementById('result-container').style.display = 'none';
+      document.getElementById('warning-msg').style.display = 'none';
+      document.getElementById('submit-btn').style.display = 'flex';
 
-            spinner.style.display = 'block';
-            btnText.innerText = 'MEMPROSES...';
-            playSound(800, 'sine', 0.1);
+      if (tool.allowUpload) {
+        openModal('action-modal');
+        triggerGalleryPicker(tool);
+        return;
+      }
 
-            try {
-                const mp4Promise = fetch(`https://api-faa.my.id/faa/ytmp4?url=${encodeURIComponent(urlInput)}`).then(r => r.json());
-                const mp3Promise = fetch(`https://api-faa.my.id/faa/ytmp3?url=${encodeURIComponent(urlInput)}`).then(r => r.json());
+      buildForm(tool);
+      openModal('action-modal');
+    }
 
-                const [mp4Res, mp3Res] = await Promise.all([mp4Promise, mp3Promise]);
+    function triggerGalleryPicker(tool) {
+      const input = document.createElement('input');
+      input.type = 'file';
+      input.accept = 'image/*';
+      input.onchange = () => {
+        if (input.files && input.files[0]) {
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            uploadedFileUrl = e.target.result;
+            buildUploadForm(tool, input.files[0].name);
+          };
+          reader.readAsDataURL(input.files[0]);
+        } else { buildUploadForm(tool, null); }
+      };
+      input.click();
+    }
 
-                let title = 'YouTube Media Content';
-                let mp4Url = '#';
-                let mp3Url = '#';
+    function buildUploadForm(tool, fileName) {
+      const fc = document.getElementById('form-container');
+      if (uploadedFileUrl) {
+        fc.innerHTML = `
+          <img src="${uploadedFileUrl}" class="preview-img">
+          <div style="font-size:11px; color:var(--text-sub); text-align:center;">✅ ${fileName || 'Gambar dipilih'}</div>
+        `;
+      } else {
+        fc.innerHTML = `<input type="text" id="input-val" class="custom-input" placeholder="Tempel URL gambar..." />`;
+      }
+    }
 
-                if (mp4Res.status && mp4Res.result) {
-                    title = mp4Res.result.title || title;
-                    mp4Url = mp4Res.result.download_url || mp4Res.result.url || mp4Res.result.download || mp4Res.result;
-                }
+    function buildForm(tool) {
+      const fc = document.getElementById('form-container');
+      fc.innerHTML = '';
 
-                if (mp3Res.status && mp3Res.result) {
-                    mp3Url = mp3Res.result.download_url || mp3Res.result.url || mp3Res.result.download || mp3Res.result;
-                }
+      if (tool.id === 'calc') {
+        document.getElementById('submit-btn').style.display = 'none';
+        fc.innerHTML = `
+          <input type="text" id="calc-display" class="custom-input" readonly style="text-align:right; font-size:18px;" value="0">
+          <div class="calc-grid">
+            <button class="calc-btn" onclick="calcInput('C')">C</button>
+            <button class="calc-btn" onclick="calcInput('/')">/</button>
+            <button class="calc-btn" onclick="calcInput('*')">*</button>
+            <button class="calc-btn" onclick="calcInput('-')">-</button>
+            <button class="calc-btn" onclick="calcInput('7')">7</button>
+            <button class="calc-btn" onclick="calcInput('8')">8</button>
+            <button class="calc-btn" onclick="calcInput('9')">9</button>
+            <button class="calc-btn" onclick="calcInput('+')">+</button>
+            <button class="calc-btn" onclick="calcInput('4')">4</button>
+            <button class="calc-btn" onclick="calcInput('5')">5</button>
+            <button class="calc-btn" onclick="calcInput('6')">6</button>
+            <button class="calc-btn" onclick="calcInput('=')" style="grid-row: span 2; background:var(--accent);">=</button>
+            <button class="calc-btn" onclick="calcInput('1')">1</button>
+            <button class="calc-btn" onclick="calcInput('2')">2</button>
+            <button class="calc-btn" onclick="calcInput('3')">3</button>
+            <button class="calc-btn" onclick="calcInput('0')" style="grid-column: span 2;">0</button>
+            <button class="calc-btn" onclick="calcInput('.')">.</button>
+          </div>
+        `;
+      } else if (tool.id === 'passgen') {
+        fc.innerHTML = `<input type="number" id="pass-len" class="custom-input" value="12" placeholder="Panjang kata sandi">`;
+      } else if (tool.paramKey) {
+        fc.innerHTML = `<input type="text" id="input-val" class="custom-input" placeholder="Masukkan ${tool.paramKey}..." />`;
+      }
+    }
 
-                document.getElementById('ytVideoTitle').innerText = typeof title === 'string' ? title : 'YouTube Video';
-                document.getElementById('ytVideoThumb').src = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+    let calcVal = '';
+    function calcInput(v) {
+      const disp = document.getElementById('calc-display');
+      if (v === 'C') calcVal = '';
+      else if (v === '=') {
+        try { calcVal = String(Function('"use strict";return (' + calcVal + ')')()); } catch { calcVal = 'Error'; }
+      } else calcVal += v;
+      disp.value = calcVal || '0';
+    }
 
-                document.getElementById('ytBtnDlMp4').href = typeof mp4Url === 'string' ? mp4Url : `https://api-faa.my.id/faa/ytmp4?url=${encodeURIComponent(urlInput)}`;
-                document.getElementById('ytBtnDlMp3').href = typeof mp3Url === 'string' ? mp3Url : `https://api-faa.my.id/faa/ytmp3?url=${encodeURIComponent(urlInput)}`;
+    async function processAction() {
+      const resContainer = document.getElementById('result-container');
+      const resContent = document.getElementById('result-content');
+      const valInput = document.getElementById('input-val');
+      const val = valInput ? valInput.value.trim() : '';
 
-                resultBox.style.display = 'block';
-                playSound(1000, 'sine', 0.15);
+      if (currentTool.id === 'passgen') {
+        const len = document.getElementById('pass-len').value || 12;
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()';
+        let pass = '';
+        for (let i = 0; i < len; i++) pass += chars.charAt(Math.floor(Math.random() * chars.length));
+        resContainer.style.display = 'block';
+        resContent.innerHTML = `<div style="font-size:14px; font-weight:bold; color:#4ade80;">${pass}</div>`;
+        return;
+      }
 
-            } catch (err) {
-                document.getElementById('ytVideoTitle').innerText = 'YouTube Media Content';
-                document.getElementById('ytVideoThumb').src = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+      if (currentTool.id === 'morse') {
+        if (!val) return;
+        const morseCode = { 'A': '.-', 'B': '-...', 'C': '-.-.', 'D': '-..', 'E': '.', 'F': '..-.', 'G': '--.', 'H': '....', 'I': '..', 'J': '.---', 'K': '-.-', 'L': '.-..', 'M': '--', 'N': '-.', 'O': '---', 'P': '.--.', 'Q': '--.-', 'R': '.-.', 'S': '...', 'T': '-', 'U': '..-', 'V': '...-', 'W': '.--', 'X': '-..-', 'Y': '-.--', 'Z': '--..', ' ': '/' };
+        const converted = val.toUpperCase().split('').map(c => morseCode[c] || c).join(' ');
+        resContainer.style.display = 'block';
+        resContent.innerHTML = `<div style="font-size:12px; color:var(--accent-bright);">${converted}</div>`;
+        return;
+      }
 
-                document.getElementById('ytBtnDlMp4').href = `https://api-faa.my.id/faa/ytmp4?url=${encodeURIComponent(urlInput)}`;
-                document.getElementById('ytBtnDlMp3').href = `https://api-faa.my.id/faa/ytmp3?url=${encodeURIComponent(urlInput)}`;
+      if (currentTool.id === 'qr') {
+        if (!val) return;
+        const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(val)}`;
+        resContainer.style.display = 'block';
+        resContent.innerHTML = `<img src="${qrUrl}" class="preview-img"><a href="${qrUrl}" target="_blank" class="action-btn">Download QR</a>`;
+        return;
+      }
 
-                resultBox.style.display = 'block';
-                playSound(1000, 'sine', 0.15);
-            } finally {
-                spinner.style.display = 'none';
-                btnText.innerText = 'DAPATKAN VIDEO YOUTUBE';
-            }
-        }
+      const finalInput = uploadedFileUrl || val;
+      if (!finalInput) return;
 
-        // Brat Generator Engine (FAA Endpoint)
-        function generateBrat() {
-            const textInput = document.getElementById('bratText').value.trim();
-            const spinner = document.getElementById('bratSpinner');
-            const btnText = document.getElementById('bratBtnText');
-            const resultBox = document.getElementById('bratResultBox');
-            const errorBox = document.getElementById('bratErrorBox');
+      resContainer.style.display = 'block';
+      resContent.innerHTML = `<span style="font-size:12px; color:var(--text-sub);">⌛ Memproses API...</span>`;
 
-            errorBox.style.display = 'none';
-            resultBox.style.display = 'none';
+      const targetUrl = `${currentTool.ep}${currentTool.ep.includes('?') ? '&' : '?'}${currentTool.paramKey}=${encodeURIComponent(finalInput)}`;
 
-            if (!textInput) {
-                showError(errorBox, 'Silakan masukkan teks terlebih dahulu!');
-                playSound(200, 'sawtooth', 0.2);
-                return;
-            }
+      if (currentTool.type === 'image') {
+        const img = new Image();
+        img.className = 'preview-img';
+        img.onload = () => {
+          resContent.innerHTML = '';
+          resContent.appendChild(img);
+          resContent.innerHTML += `<a href="${targetUrl}" target="_blank" class="action-btn">🔗 Buka Gambar Full</a>`;
+        };
+        img.src = targetUrl;
+      } else if (currentTool.type === 'video') {
+        resContent.innerHTML = `<a href="${targetUrl}" target="_blank" class="action-btn">🎬 Buka Video Full</a>`;
+      } else {
+        resContent.innerHTML = `<a href="${targetUrl}" target="_blank" class="action-btn">👉 Download Hasil</a>`;
+      }
+    }
 
-            spinner.style.display = 'block';
-            btnText.innerText = 'GENERATING...';
-            playSound(800, 'sine', 0.1);
+    function openModal(id) { document.getElementById(id).classList.add('active'); }
+    function closeModal(id) { document.getElementById(id).classList.remove('active'); }
 
-            const bratUrl = `https://api-faa.my.id/faa/brat?text=${encodeURIComponent(textInput)}`;
+    function sendReportToWhatsapp() {
+      const category = document.getElementById('report-category').value;
+      const name = document.getElementById('report-name').value.trim();
+      const message = document.getElementById('report-message').value.trim();
 
-            const img = new Image();
-            img.onload = function() {
-                document.getElementById('bratImgPreview').src = bratUrl;
-                document.getElementById('bratBtnDl').href = bratUrl;
-                
-                resultBox.style.display = 'block';
-                spinner.style.display = 'none';
-                btnText.innerText = 'GENERATE BRAT IMAGE';
-                playSound(1000, 'sine', 0.15);
-            };
+      if (!message) { showToast('⚠️ Isi dulu pesannya!'); return; }
+      let text = `*${category}*\n${name ? 'Nama: ' + name + '\n' : ''}Pesan: ${message}`;
+      window.open(`https://wa.me/6285722707676?text=${encodeURIComponent(text)}`, '_blank');
+    }
 
-            img.onerror = function() {
-                showError(errorBox, 'Gagal membuat gambar Brat. Coba teks lain!');
-                spinner.style.display = 'none';
-                btnText.innerText = 'GENERATE BRAT IMAGE';
-                playSound(200, 'sawtooth', 0.2);
-            };
-
-            img.src = bratUrl;
-        }
-
-        // WhatsApp Redirect Function
-        function sendToWhatsApp() {
-            const type = document.getElementById('reportType').value;
-            const name = document.getElementById('reportName').value.trim() || 'User NexaLink';
-            const message = document.getElementById('reportMessage').value.trim();
-            const errorBox = document.getElementById('waErrorBox');
-
-            errorBox.style.display = 'none';
-
-            if (!message) {
-                showError(errorBox, 'Silakan isi pesan atau detail laporan kamu terlebih dahulu!');
-                playSound(200, 'sawtooth', 0.2);
-                return;
-            }
-
-            playSound(1000, 'sine', 0.15);
-
-            // Target Nomor WhatsApp
-            const targetPhone = '6285722707676';
-
-            // Template Pesan WA
-            const waText = `*NEXALINK PRO - LAPORAN FEEDBACK*\n` +
-                           `📌 *Kategori:* ${type}\n` +
-                           `👤 *Pengirim:* ${name}\n\n` +
-                           `💬 *Pesan/Detail:* \n${message}`;
-
-            const waUrl = `https://wa.me/${targetPhone}?text=${encodeURIComponent(waText)}`;
-
-            // Buka di tab baru
-            window.open(waUrl, '_blank');
-        }
-
-        function showError(element, msg) {
-            element.innerText = msg;
-            element.style.display = 'block';
-        }
-    </script>
+    renderTools();
+  </script>
 </body>
 </html>
