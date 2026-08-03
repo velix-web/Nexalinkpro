@@ -664,9 +664,48 @@
       border-color: var(--accent-bright);
     }
 
-    textarea.custom-input {
-      resize: vertical;
-      min-height: 80px;
+    /* Custom File Upload Input */
+    .file-upload-box {
+      border: 2px dashed var(--border-bright);
+      background: rgba(255, 0, 60, 0.05);
+      padding: 20px;
+      border-radius: var(--radius-sm);
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      margin-top: 6px;
+    }
+
+    .file-upload-box:hover {
+      background: rgba(255, 0, 60, 0.12);
+    }
+
+    .file-upload-icon {
+      font-size: 28px;
+      margin-bottom: 6px;
+    }
+
+    .file-upload-text {
+      font-family: var(--font-title);
+      font-size: 11px;
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .file-upload-subtext {
+      font-size: 10px;
+      color: var(--text-sub);
+      margin-top: 2px;
+    }
+
+    .upload-preview {
+      width: 100%;
+      max-height: 180px;
+      object-fit: contain;
+      border-radius: var(--radius-sm);
+      margin-top: 10px;
+      display: none;
+      border: 1px solid var(--border);
     }
 
     .btn-submit {
@@ -940,6 +979,16 @@
 
       <div id="form-container">
         <input type="text" id="input-val" class="custom-input" placeholder="Masukkan Teks / URL di sini..." />
+
+        <div id="file-upload-container" style="display: none;">
+          <input type="file" id="image-file-input" accept="image/*" style="display: none;" onchange="previewSelectedImage(event)">
+          <div class="file-upload-box" onclick="document.getElementById('image-file-input').click()">
+            <div class="file-upload-icon">🖼️</div>
+            <div class="file-upload-text">PILIH GAMBAR DARI GALERI</div>
+            <div class="file-upload-subtext">Klik untuk memilih foto (JPG, PNG, WebP)</div>
+          </div>
+          <img id="file-preview-img" class="upload-preview" alt="Preview Gambar">
+        </div>
       </div>
 
       <button id="submit-btn" class="btn-submit" onclick="processAction()">
@@ -957,7 +1006,7 @@
     <div class="modal-box">
       <div class="modal-header">
         <div>
-          <div class="modal-title-text">NEXUS MENU</div>
+          <div class="modal-title-text">NEXAPRO MENU</div>
           <div class="modal-subtitle-text">Informasi & Bantuan</div>
         </div>
         <button class="close-btn" onclick="closeModal('menu-modal')">✕</button>
@@ -1053,13 +1102,15 @@
       { id: 'qrcode', name: 'QR Code Gen', desc: 'Buat Kode QR instan', tag: 'LOCAL', cat: 'tools', iconSVG: '<rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect>', type: 'local' },
       { id: 'passgen', name: 'Pass Generator', desc: 'Buat password acak kuat', tag: 'LOCAL', cat: 'tools', iconSVG: '<rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path>', type: 'local' },
       { id: 'morse', name: 'Morse Code', desc: 'Konversi Teks ➔ Kode Morse', tag: 'LOCAL', cat: 'tools', iconSVG: '<circle cx="5" cy="12" r="1"></circle><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle>', type: 'local' },
-      { id: 'calc', name: 'Kalkulator', desc: 'Hitung ekspresi matematika', tag: 'LOCAL', cat: 'tools', iconSVG: '<rect x="4" y="2" width="16" height="20" rx="2"></rect><line x1="8" y1="6" x2="16" y2="6"></line><line x1="16" y1="14" x2="16" y2="18"></line><line x1="8" y1="10" x2="8" y2="10.01"></line><line x1="12" y1="10" x2="12" y2="10.01"></line><line x1="16" y1="10" x2="16" y2="10.01"></line><line x1="8" y1="14" x2="8" y2="14.01"></line><line x1="12" y1="14" x2="12" y2="14.01"></line><line x1="8" y1="18" x2="8" y2="18.01"></line><line x1="12" y1="18" x2="12" y2="18.01"></line>', type: 'local' },
+      { id: 'calc', name: 'Kalkulator', desc: 'Hitung ekspresi matematika', tag: 'LOCAL', cat: 'tools', iconSVG: '<rect x="4" y="2" width="16" height="20" rx="2"></rect><line x1="8" y1="6" x2="16" y2="6"></line><line x1="16" y1="14" x2="16" y2="18"></line><line x1="8" y1="10" x2="8" y2="10.01"></line><line x1="12" y1="10" x2="12" y2="10.01"></line><line x1="16" y1="10" x2="16" y2="10.01"></line><line x1="8" y1="14" x2="8" y2="14.01"></line><line x1="12" y1="14" x2="12" y2="14.01"></line><line x1="8" y1="18" x2="8" y2="18.01"></line><line x1="12" y1="18" x2="18.01"></line>', type: 'local' },
       
-      { id: 'rmbg', name: 'Remove BG', desc: 'Hapus background', tag: 'GALERI', cat: 'tools', iconSVG: '<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle>', paramKey: 'url', ep: 'https://api.nexray.eu.cc/tools/removebg', type: 'image' },
-      { id: 'enh', name: 'Image Enhancer', desc: 'Tingkatkan resolusi', tag: 'GALERI', cat: 'tools', iconSVG: '<circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line>', paramKey: 'url', ep: 'https://api.nexray.eu.cc/tools/v1/enhancer', type: 'image' }
+      /* Upload Gambar Langsung dari Galeri */
+      { id: 'rmbg', name: 'Remove BG', desc: 'Hapus background foto', tag: 'GALERI', cat: 'tools', iconSVG: '<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle>', ep: 'https://api.nexray.eu.cc/tools/removebg', type: 'gallery_upload' },
+      { id: 'enh', name: 'Image Enhancer', desc: 'Tingkatkan resolusi foto', tag: 'GALERI', cat: 'tools', iconSVG: '<circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line>', ep: 'https://api.nexray.eu.cc/tools/v1/enhancer', type: 'gallery_upload' }
     ];
 
     let currentTool = null;
+    let selectedImageFile = null;
 
     /* Canvas Background Particles */
     const canvas = document.getElementById('bg-canvas');
@@ -1242,28 +1293,103 @@
 
     function openActionModal(tool) {
       currentTool = tool;
+      selectedImageFile = null;
       document.getElementById('modal-title').innerText = tool.name;
       document.getElementById('modal-desc').innerText = tool.desc;
-      
+
       const inputVal = document.getElementById('input-val');
-      inputVal.value = '';
-      
-      if (tool.id === 'passgen') inputVal.placeholder = 'Panjang password (opsional, contoh: 12)';
-      else if (tool.id === 'calc') inputVal.placeholder = 'Ekspresi MTK (contoh: 25 * 4 + 10)';
-      else inputVal.placeholder = `Masukkan ${tool.paramKey || 'Teks / Input'} di sini...`;
+      const fileContainer = document.getElementById('file-upload-container');
+      const filePreview = document.getElementById('file-preview-img');
+      const fileInput = document.getElementById('image-file-input');
+
+      fileInput.value = '';
+      filePreview.style.display = 'none';
+      filePreview.src = '';
+
+      if (tool.type === 'gallery_upload') {
+        inputVal.style.display = 'none';
+        fileContainer.style.display = 'block';
+      } else {
+        inputVal.style.display = 'block';
+        fileContainer.style.display = 'none';
+
+        if (tool.id === 'passgen') inputVal.placeholder = 'Panjang password (contoh: 12)';
+        else if (tool.id === 'calc') inputVal.placeholder = 'Ekspresi MTK (contoh: 25 * 4)';
+        else inputVal.placeholder = `Masukkan ${tool.paramKey || 'Teks / Input'} di sini...`;
+        
+        inputVal.value = '';
+      }
 
       document.getElementById('result-container').style.display = 'none';
       openModal('action-modal');
-      // Auto-focus telah dihapus agar keyboard tidak terbuka secara otomatis
+    }
+
+    function previewSelectedImage(event) {
+      const file = event.target.files[0];
+      if (file) {
+        selectedImageFile = file;
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const previewImg = document.getElementById('file-preview-img');
+          previewImg.src = e.target.result;
+          previewImg.style.display = 'block';
+        };
+        reader.readAsDataURL(file);
+      }
     }
 
     async function processAction() {
       const resContainer = document.getElementById('result-container');
       const resContent = document.getElementById('result-content');
       const valInput = document.getElementById('input-val');
-      const val = valInput.value.trim();
 
-      // Logika Penanganan Fitur Lokal
+      // 1. Fitur Upload Gambar dari Galeri (Remove BG / Enhancer)
+      if (currentTool.type === 'gallery_upload') {
+        if (!selectedImageFile) {
+          showToast('⚠️ Pilih gambar dari galeri dulu!');
+          return;
+        }
+
+        resContainer.style.display = 'block';
+        resContent.innerHTML = `<span style="font-size:12px; color:var(--text-sub);">⌛ Mengunggah & Memproses Foto...</span>`;
+
+        try {
+          const formData = new FormData();
+          formData.append('file', selectedImageFile);
+
+          const response = await fetch(currentTool.ep, {
+            method: 'POST',
+            body: formData
+          });
+
+          if (response.ok) {
+            const blob = await response.blob();
+            const resultImgUrl = URL.createObjectURL(blob);
+            resContent.innerHTML = `
+              <img src="${resultImgUrl}" class="preview-img">
+              <a href="${resultImgUrl}" download="nexalink_result.png" class="action-btn">💾 Unduh Hasil Foto</a>
+            `;
+          } else {
+            // Fallback jika API mengembalikan URL JSON
+            const data = await response.json().catch(() => null);
+            if (data && (data.result || data.url)) {
+              const resUrl = data.result || data.url;
+              resContent.innerHTML = `
+                <img src="${resUrl}" class="preview-img">
+                <a href="${resUrl}" target="_blank" download class="action-btn">💾 Unduh Hasil Foto</a>
+              `;
+            } else {
+              resContent.innerHTML = `<span style="color:#ef4444;">Gagal memproses gambar. Silakan coba gambar lain.</span>`;
+            }
+          }
+        } catch (err) {
+          resContent.innerHTML = `<span style="color:#ef4444;">Terjadi kesalahan saat mengunggah foto.</span>`;
+        }
+        return;
+      }
+
+      // 2. Fitur Lokal
+      const val = valInput.value.trim();
       if (currentTool.type === 'local') {
         resContainer.style.display = 'block';
         
@@ -1297,7 +1423,7 @@
         return;
       }
 
-      // Logika Penanganan API Eksternal
+      // 3. API Eksternal
       if (!val) { showToast('⚠️ Masukkan input terlebih dahulu!'); return; }
 
       resContainer.style.display = 'block';
@@ -1311,16 +1437,41 @@
         img.onload = () => {
           resContent.innerHTML = '';
           resContent.appendChild(img);
-          resContent.innerHTML += `<a href="${targetUrl}" target="_blank" class="action-btn">🔗 Buka Gambar Full</a>`;
+          resContent.innerHTML += `<a href="${targetUrl}" target="_blank" download class="action-btn">🔗 Unduh Gambar</a>`;
         };
         img.onerror = () => {
           resContent.innerHTML = `<a href="${targetUrl}" target="_blank" class="action-btn">👉 Download Hasil</a>`;
         };
         img.src = targetUrl;
-      } else if (currentTool.type === 'video') {
-        resContent.innerHTML = `<a href="${targetUrl}" target="_blank" class="action-btn">🎬 Buka Video Full</a>`;
-      } else {
-        resContent.innerHTML = `<a href="${targetUrl}" target="_blank" class="action-btn">👉 Download Hasil</a>`;
+      } 
+      else if (currentTool.type === 'video') {
+        resContent.innerHTML = `<video src="${targetUrl}" controls style="width:100%; max-height:220px; border-radius:8px; margin-bottom:8px;"></video>
+                                <a href="${targetUrl}" target="_blank" download class="action-btn">🎬 Unduh Video</a>`;
+      } 
+      else {
+        try {
+          const response = await fetch(targetUrl);
+          const data = await response.json();
+
+          if (data && data.status && data.result) {
+            const videoUrl = data.result.data || data.result.url || (Array.isArray(data.result) ? data.result[0].url : null);
+            const title = data.result.title || 'Hasil Downloader';
+
+            if (videoUrl) {
+              resContent.innerHTML = `
+                <div style="font-size:12px; color:#fff; font-weight:600; margin-bottom:8px; line-height:1.3;">${title}</div>
+                <video src="${videoUrl}" controls style="width:100%; max-height:220px; border-radius:8px; margin-bottom:8px;"></video>
+                <a href="${videoUrl}" target="_blank" download class="action-btn">💾 Unduh Video MP4</a>
+              `;
+            } else {
+              resContent.innerHTML = `<span style="color:#ef4444;">URL media tidak ditemukan dalam respon.</span>`;
+            }
+          } else {
+            resContent.innerHTML = `<span style="color:#ef4444;">Gagal mengambil data dari server API.</span>`;
+          }
+        } catch (err) {
+          resContent.innerHTML = `<span style="color:#ef4444;">Terjadi kesalahan koneksi / CORS ke server API!</span>`;
+        }
       }
     }
 
