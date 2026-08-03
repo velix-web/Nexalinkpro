@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>NexaLink Pro v2.00 - VisionOS AAA Cyber OS</title>
 
-  <!-- Typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@600;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -107,9 +106,7 @@
       box-shadow: inset 0 0 120px rgba(0, 0, 0, 0.95);
     }
 
-    /* ==========================================================================
-       2. LOADER
-       ========================================================================== */
+    /* Loader */
     #loader {
       position: fixed;
       inset: 0;
@@ -195,9 +192,7 @@
       margin-top: 6px;
     }
 
-    /* ==========================================================================
-       3. RAPIH & COMPACT HEADER (MOBILE OPTIMIZED)
-       ========================================================================== */
+    /* Header */
     header {
       position: fixed;
       top: 10px;
@@ -205,10 +200,7 @@
       right: 0;
       z-index: 1000;
       padding: 0 12px;
-      transition: transform 0.3s ease;
     }
-
-    header.nav-hidden { transform: translateY(-120%); }
 
     .nav-container {
       max-width: 800px;
@@ -300,7 +292,6 @@
       border-color: var(--accent-bright);
     }
 
-    /* Equalizer Mini */
     .equalizer {
       display: flex;
       gap: 2px;
@@ -314,9 +305,7 @@
     .playing .eq-bar:nth-child(3) { animation-delay: 0.3s; }
     @keyframes eqAnim { 0% { height: 2px; } 100% { height: 10px; } }
 
-    /* ==========================================================================
-       4. CONTAINER & HERO COMPACT
-       ========================================================================== */
+    /* Layout Container */
     .container {
       max-width: 800px;
       margin: 62px auto 0;
@@ -380,9 +369,7 @@
       margin-top: 2px;
     }
 
-    /* ==========================================================================
-       5. COMPACT STATUS PANEL
-       ========================================================================== */
+    /* Status Panel */
     .status-panel-grid {
       background: var(--bg-card);
       backdrop-filter: blur(20px);
@@ -452,9 +439,7 @@
       box-shadow: 0 0 8px var(--accent-glow);
     }
 
-    /* ==========================================================================
-       6. CATEGORIES CHIPS
-       ========================================================================== */
+    /* Category Filter */
     .category-bar {
       display: flex;
       gap: 6px;
@@ -487,9 +472,7 @@
       box-shadow: 0 0 12px var(--accent-glow);
     }
 
-    /* ==========================================================================
-       7. TOOLS GRID
-       ========================================================================== */
+    /* Tools Grid */
     .section-head {
       display: flex;
       align-items: center;
@@ -587,9 +570,7 @@
       font-size: 10px;
     }
 
-    /* ==========================================================================
-       8. MODALS & FORMS
-       ========================================================================== */
+    /* Modal Styling */
     .modal-overlay {
       position: fixed;
       inset: 0;
@@ -676,6 +657,7 @@
       color: #ffffff;
       font-size: 13px;
       outline: none;
+      user-select: text;
     }
 
     .custom-input:focus, .custom-select:focus {
@@ -713,18 +695,6 @@
       border-color: rgba(255, 255, 255, 0.15);
     }
 
-    .warning-msg {
-      display: none;
-      background: rgba(255, 0, 60, 0.15);
-      border: 1px solid var(--accent-bright);
-      color: #ff99bb;
-      padding: 8px 12px;
-      border-radius: var(--radius-sm);
-      font-size: 11px;
-      margin-top: 10px;
-      text-align: center;
-    }
-
     .result-container {
       margin-top: 14px;
       display: none;
@@ -733,6 +703,7 @@
       padding: 12px;
       border: 1px dashed var(--border-bright);
       text-align: center;
+      user-select: text;
     }
 
     .preview-img {
@@ -760,29 +731,7 @@
       margin-top: 6px;
     }
 
-    /* Calculator Grid */
-    .calc-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 6px;
-      margin-top: 10px;
-    }
-
-    .calc-btn {
-      padding: 10px;
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      color: #fff;
-      font-family: var(--font-title);
-      font-size: 14px;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    .calc-btn:active { background: var(--accent); }
-
-    /* Menu Modal */
+    /* Menu Items Modal */
     .menu-item {
       display: flex;
       align-items: center;
@@ -847,12 +796,10 @@
 </head>
 <body>
 
-  <!-- BACKGROUND CANVAS -->
   <canvas id="bg-canvas"></canvas>
   <div class="bg-overlay-grid"></div>
   <div class="vignette"></div>
 
-  <!-- LOADER -->
   <div id="loader">
     <div class="loader-hud">
       <div class="loader-ring loader-ring-1"></div>
@@ -870,14 +817,12 @@
   <audio id="bg-audio" loop preload="none"></audio>
   <div id="toast"></div>
 
-  <!-- NAVBAR -->
   <header id="navbar">
     <div class="nav-container">
       <button class="brand-btn" onclick="openModal('menu-modal')">
         <div class="logo-badge">⚡</div>
         <div>
           <div class="brand-title">NexaLink Pro</div>
-          <!-- DIPERBARUI: Versi di header disesuaikan jadi v2.00 -->
           <div class="brand-sub">v2.00 VisionOS</div>
         </div>
       </button>
@@ -907,21 +852,17 @@
     </div>
   </header>
 
-  <!-- MAIN CONTAINER -->
   <div class="container">
     
-    <!-- HERO COMPACT -->
     <div class="hero-card">
       <img id="hero-img" class="hero-img-bg" src="https://cdn.phototourl.com/free/2026-08-01-1b63ee0d-49a1-4f98-85ca-c5c6f698880e.jpg" alt="Shrine">
       <div class="hero-overlay">
         <div class="hero-badge-tag">MALEVOLENT SHRINE</div>
-        <!-- DIPERBARUI: Ditambahkan v2.00 -->
         <div class="hero-title">NexaLink Pro v2.00</div>
         <div class="hero-subtitle">NextGen Cyber Media Engine & Downloader</div>
       </div>
     </div>
 
-    <!-- STATUS PANEL COMPACT -->
     <div class="status-panel-grid">
       <div class="stats-info-grid">
         <div class="stat-widget">
@@ -963,15 +904,10 @@
       </div>
     </div>
 
-    <!-- CATEGORIES -->
     <div class="category-bar">
       <button class="cat-chip active" onclick="filterCat('all', this)">
         <svg class="icon" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
         Semua
-      </button>
-      <button class="cat-chip" onclick="filterCat('local', this)">
-        <svg class="icon" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line></svg>
-        Fitur Lokal
       </button>
       <button class="cat-chip" onclick="filterCat('downloader', this)">
         <svg class="icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline></svg>
@@ -987,13 +923,11 @@
       </button>
     </div>
 
-    <!-- DASHBOARD TOOLS -->
     <div class="section-head">⚡ DASHBOARD TOOLS</div>
     <div id="tools-grid" class="tools-grid"></div>
 
   </div>
 
-  <!-- ACTION MODAL -->
   <div id="action-modal" class="modal-overlay">
     <div class="modal-box">
       <div class="modal-header">
@@ -1004,8 +938,9 @@
         <button class="close-btn" onclick="closeModal('action-modal')">✕</button>
       </div>
 
-      <div id="form-container"></div>
-      <div id="warning-msg" class="warning-msg"></div>
+      <div id="form-container">
+        <input type="text" id="input-val" class="custom-input" placeholder="Masukkan Teks / URL di sini..." />
+      </div>
 
       <button id="submit-btn" class="btn-submit" onclick="processAction()">
         <svg class="icon" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
@@ -1018,7 +953,6 @@
     </div>
   </div>
 
-  <!-- MENU MODAL -->
   <div id="menu-modal" class="modal-overlay">
     <div class="modal-box">
       <div class="modal-header">
@@ -1053,7 +987,6 @@
     </div>
   </div>
 
-  <!-- ABOUT MODAL -->
   <div id="about-modal" class="modal-overlay">
     <div class="modal-box" style="text-align:center;">
       <div style="width:70px; height:70px; border-radius:50%; border:2px solid var(--accent-bright); margin:0 auto 12px; overflow:hidden;">
@@ -1066,7 +999,6 @@
     </div>
   </div>
 
-  <!-- REPORT MODAL -->
   <div id="report-modal" class="modal-overlay">
     <div class="modal-box">
       <div class="modal-header">
@@ -1110,23 +1042,24 @@
     };
 
     const TOOLS = [
-      { id: 'calc', name: 'Calculator', desc: 'Kalkulator digital', tag: 'LOKAL', cat: 'local', iconSVG: '<rect x="4" y="2" width="16" height="20" rx="2"></rect><line x1="8" y1="6" x2="16" y2="6"></line><line x1="16" y1="14" x2="16" y2="18"></line><path d="M16 10h.01M12 10h.01M8 10h.01M12 14h.01M8 14h.01M12 18h.01M8 18h.01"></path>' },
-      { id: 'passgen', name: 'Password Gen', desc: 'Buat kata sandi aman', tag: 'LOKAL', cat: 'local', iconSVG: '<rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path>' },
-      { id: 'morse', name: 'Morse Code', desc: 'Konversi ke Morse', tag: 'LOKAL', cat: 'local', iconSVG: '<path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle>' },
-      { id: 'qr', name: 'QR Generator', desc: 'Buat Kode QR', tag: 'LOKAL', cat: 'local', iconSVG: '<rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect>' },
-
       { id: 'ig', name: 'Instagram', desc: 'Download video & foto HD', tag: 'HD', cat: 'downloader', iconSVG: '<rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>', paramKey: 'url', ep: 'https://api.nexray.eu.cc/downloader/instagram', type: 'json' },
       { id: 'tt', name: 'TikTok', desc: 'Video & Audio TikTok', tag: 'NO-WM', cat: 'downloader', iconSVG: '<path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path>', paramKey: 'url', ep: 'https://api.nexray.eu.cc/downloader/tiktok', type: 'json' },
       { id: 'yt', name: 'YouTube MP4', desc: 'Unduh video 4K', tag: '4K', cat: 'downloader', iconSVG: '<path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>', paramKey: 'url', ep: 'https://api.nexray.eu.cc/downloader/ytmp4?resolusi=2160', type: 'json' },
       { id: 'bratstatic', name: 'Brat Static', desc: 'Stiker BRAT gambar', tag: 'PNG', cat: 'maker', iconSVG: '<path d="M12 19l7-7 3 3-7 7-3-3z"></path><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path>', paramKey: 'text', ep: 'https://api.nexray.eu.cc/maker/brat', type: 'image' },
       { id: 'bratvideo', name: 'Brat Video', desc: 'Stiker BRAT animasi', tag: 'MP4', cat: 'maker', iconSVG: '<rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect><line x1="7" y1="2" x2="7" y2="22"></line><line x1="17" y1="2" x2="17" y2="22"></line><line x1="2" y1="12" x2="22" y2="12"></line>', paramKey: 'text', ep: 'https://api.nexray.eu.cc/maker/bratvid', type: 'video' },
       { id: 'dana', name: 'Fake Dana', desc: 'Generate saldo Dana', tag: 'SALDO', cat: 'maker', iconSVG: '<rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line>', paramKey: 'nominal', ep: 'https://api.nexray.eu.cc/maker/fakedana', type: 'image' },
-      { id: 'rmbg', name: 'Remove BG', desc: 'Hapus background', tag: 'GALERI', cat: 'tools', iconSVG: '<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle>', paramKey: 'url', ep: 'https://api.nexray.eu.cc/tools/removebg', type: 'image', allowUpload: true },
-      { id: 'enh', name: 'Image Enhancer', desc: 'Tingkatkan resolusi', tag: 'GALERI', cat: 'tools', iconSVG: '<circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line>', paramKey: 'url', ep: 'https://api.nexray.eu.cc/tools/v1/enhancer', type: 'image', allowUpload: true }
+      
+      /* Fitur Lokal */
+      { id: 'qrcode', name: 'QR Code Gen', desc: 'Buat Kode QR instan', tag: 'LOCAL', cat: 'tools', iconSVG: '<rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect>', type: 'local' },
+      { id: 'passgen', name: 'Pass Generator', desc: 'Buat password acak kuat', tag: 'LOCAL', cat: 'tools', iconSVG: '<rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path>', type: 'local' },
+      { id: 'morse', name: 'Morse Code', desc: 'Konversi Teks ➔ Kode Morse', tag: 'LOCAL', cat: 'tools', iconSVG: '<circle cx="5" cy="12" r="1"></circle><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle>', type: 'local' },
+      { id: 'calc', name: 'Kalkulator', desc: 'Hitung ekspresi matematika', tag: 'LOCAL', cat: 'tools', iconSVG: '<rect x="4" y="2" width="16" height="20" rx="2"></rect><line x1="8" y1="6" x2="16" y2="6"></line><line x1="16" y1="14" x2="16" y2="18"></line><line x1="8" y1="10" x2="8" y2="10.01"></line><line x1="12" y1="10" x2="12" y2="10.01"></line><line x1="16" y1="10" x2="16" y2="10.01"></line><line x1="8" y1="14" x2="8" y2="14.01"></line><line x1="12" y1="14" x2="12" y2="14.01"></line><line x1="8" y1="18" x2="8" y2="18.01"></line><line x1="12" y1="18" x2="12" y2="18.01"></line>', type: 'local' },
+      
+      { id: 'rmbg', name: 'Remove BG', desc: 'Hapus background', tag: 'GALERI', cat: 'tools', iconSVG: '<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle>', paramKey: 'url', ep: 'https://api.nexray.eu.cc/tools/removebg', type: 'image' },
+      { id: 'enh', name: 'Image Enhancer', desc: 'Tingkatkan resolusi', tag: 'GALERI', cat: 'tools', iconSVG: '<circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line>', paramKey: 'url', ep: 'https://api.nexray.eu.cc/tools/v1/enhancer', type: 'image' }
     ];
 
     let currentTool = null;
-    let uploadedFileUrl = '';
 
     /* Canvas Background Particles */
     const canvas = document.getElementById('bg-canvas');
@@ -1309,137 +1242,68 @@
 
     function openActionModal(tool) {
       currentTool = tool;
-      uploadedFileUrl = '';
       document.getElementById('modal-title').innerText = tool.name;
       document.getElementById('modal-desc').innerText = tool.desc;
+      
+      const inputVal = document.getElementById('input-val');
+      inputVal.value = '';
+      
+      if (tool.id === 'passgen') inputVal.placeholder = 'Panjang password (opsional, contoh: 12)';
+      else if (tool.id === 'calc') inputVal.placeholder = 'Ekspresi MTK (contoh: 25 * 4 + 10)';
+      else inputVal.placeholder = `Masukkan ${tool.paramKey || 'Teks / Input'} di sini...`;
+
       document.getElementById('result-container').style.display = 'none';
-      document.getElementById('warning-msg').style.display = 'none';
-      document.getElementById('submit-btn').style.display = 'flex';
-
-      if (tool.allowUpload) {
-        openModal('action-modal');
-        triggerGalleryPicker(tool);
-        return;
-      }
-
-      buildForm(tool);
       openModal('action-modal');
-    }
-
-    function triggerGalleryPicker(tool) {
-      const input = document.createElement('input');
-      input.type = 'file';
-      input.accept = 'image/*';
-      input.onchange = () => {
-        if (input.files && input.files[0]) {
-          const reader = new FileReader();
-          reader.onload = (e) => {
-            uploadedFileUrl = e.target.result;
-            buildUploadForm(tool, input.files[0].name);
-          };
-          reader.readAsDataURL(input.files[0]);
-        } else { buildUploadForm(tool, null); }
-      };
-      input.click();
-    }
-
-    function buildUploadForm(tool, fileName) {
-      const fc = document.getElementById('form-container');
-      if (uploadedFileUrl) {
-        fc.innerHTML = `
-          <img src="${uploadedFileUrl}" class="preview-img">
-          <div style="font-size:11px; color:var(--text-sub); text-align:center;">✅ ${fileName || 'Gambar dipilih'}</div>
-        `;
-      } else {
-        fc.innerHTML = `<input type="text" id="input-val" class="custom-input" placeholder="Tempel URL gambar..." />`;
-      }
-    }
-
-    function buildForm(tool) {
-      const fc = document.getElementById('form-container');
-      fc.innerHTML = '';
-
-      if (tool.id === 'calc') {
-        document.getElementById('submit-btn').style.display = 'none';
-        fc.innerHTML = `
-          <input type="text" id="calc-display" class="custom-input" readonly style="text-align:right; font-size:18px;" value="0">
-          <div class="calc-grid">
-            <button class="calc-btn" onclick="calcInput('C')">C</button>
-            <button class="calc-btn" onclick="calcInput('/')">/</button>
-            <button class="calc-btn" onclick="calcInput('*')">*</button>
-            <button class="calc-btn" onclick="calcInput('-')">-</button>
-            <button class="calc-btn" onclick="calcInput('7')">7</button>
-            <button class="calc-btn" onclick="calcInput('8')">8</button>
-            <button class="calc-btn" onclick="calcInput('9')">9</button>
-            <button class="calc-btn" onclick="calcInput('+')">+</button>
-            <button class="calc-btn" onclick="calcInput('4')">4</button>
-            <button class="calc-btn" onclick="calcInput('5')">5</button>
-            <button class="calc-btn" onclick="calcInput('6')">6</button>
-            <button class="calc-btn" onclick="calcInput('=')" style="grid-row: span 2; background:var(--accent);">=</button>
-            <button class="calc-btn" onclick="calcInput('1')">1</button>
-            <button class="calc-btn" onclick="calcInput('2')">2</button>
-            <button class="calc-btn" onclick="calcInput('3')">3</button>
-            <button class="calc-btn" onclick="calcInput('0')" style="grid-column: span 2;">0</button>
-            <button class="calc-btn" onclick="calcInput('.')">.</button>
-          </div>
-        `;
-      } else if (tool.id === 'passgen') {
-        fc.innerHTML = `<input type="number" id="pass-len" class="custom-input" value="12" placeholder="Panjang kata sandi">`;
-      } else if (tool.paramKey) {
-        fc.innerHTML = `<input type="text" id="input-val" class="custom-input" placeholder="Masukkan ${tool.paramKey}..." />`;
-      }
-    }
-
-    let calcVal = '';
-    function calcInput(v) {
-      const disp = document.getElementById('calc-display');
-      if (v === 'C') calcVal = '';
-      else if (v === '=') {
-        try { calcVal = String(Function('"use strict";return (' + calcVal + ')')()); } catch { calcVal = 'Error'; }
-      } else calcVal += v;
-      disp.value = calcVal || '0';
+      // Auto-focus telah dihapus agar keyboard tidak terbuka secara otomatis
     }
 
     async function processAction() {
       const resContainer = document.getElementById('result-container');
       const resContent = document.getElementById('result-content');
       const valInput = document.getElementById('input-val');
-      const val = valInput ? valInput.value.trim() : '';
+      const val = valInput.value.trim();
 
-      if (currentTool.id === 'passgen') {
-        const len = document.getElementById('pass-len').value || 12;
-        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()';
-        let pass = '';
-        for (let i = 0; i < len; i++) pass += chars.charAt(Math.floor(Math.random() * chars.length));
+      // Logika Penanganan Fitur Lokal
+      if (currentTool.type === 'local') {
         resContainer.style.display = 'block';
-        resContent.innerHTML = `<div style="font-size:14px; font-weight:bold; color:#4ade80;">${pass}</div>`;
+        
+        if (currentTool.id === 'qrcode') {
+          if (!val) { showToast('⚠️ Masukkan teks/URL!'); return; }
+          const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(val)}`;
+          resContent.innerHTML = `<img src="${qrUrl}" class="preview-img"><a href="${qrUrl}" target="_blank" class="action-btn">💾 Unduh QR Code</a>`;
+        }
+        else if (currentTool.id === 'passgen') {
+          const len = parseInt(val) || 12;
+          const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()';
+          let password = '';
+          for (let i = 0; i < len; i++) password += chars.charAt(Math.floor(Math.random() * chars.length));
+          resContent.innerHTML = `<div style="font-size:16px; font-weight:bold; color:var(--accent-bright); margin-bottom:8px; word-break:break-all;">${password}</div><button onclick="navigator.clipboard.writeText('${password}'); showToast('📋 Berhasil disalin!')" class="action-btn">📋 Salin Password</button>`;
+        }
+        else if (currentTool.id === 'morse') {
+          if (!val) { showToast('⚠️ Masukkan teks!'); return; }
+          const morseMap = { 'A': '.-', 'B': '-...', 'C': '-.-.', 'D': '-..', 'E': '.', 'F': '..-.', 'G': '--.', 'H': '....', 'I': '..', 'J': '.---', 'K': '-.-', 'L': '.-..', 'M': '--', 'N': '-.', 'O': '---', 'P': '.--.', 'Q': '--.-', 'R': '.-.', 'S': '...', 'T': '-', 'U': '..-', 'V': '...-', 'W': '.--', 'X': '-..-', 'Y': '-.--', 'Z': '--..', '1': '.----', '2': '..---', '3': '...--', '4': '....-', '5': '.....', '6': '-....', '7': '--...', '8': '---..', '9': '----.', '0': '-----', ' ': '/' };
+          const morse = val.toUpperCase().split('').map(c => morseMap[c] || c).join(' ');
+          resContent.innerHTML = `<div style="font-size:14px; color:#fff; word-break:break-all; margin-bottom:8px;">${morse}</div><button onclick="navigator.clipboard.writeText('${morse}'); showToast('📋 Berhasil disalin!')" class="action-btn">📋 Salin Morse</button>`;
+        }
+        else if (currentTool.id === 'calc') {
+          if (!val) { showToast('⚠️ Masukkan angka/hitungan!'); return; }
+          try {
+            const calculated = eval(val.replace(/[^0-9+\-*/().]/g, ''));
+            resContent.innerHTML = `<div style="font-size:18px; font-weight:bold; color:var(--accent-bright);">Hasil: ${calculated}</div>`;
+          } catch(e) {
+            resContent.innerHTML = `<span style="color:#ef4444;">Format Matematika Salah!</span>`;
+          }
+        }
         return;
       }
 
-      if (currentTool.id === 'morse') {
-        if (!val) return;
-        const morseCode = { 'A': '.-', 'B': '-...', 'C': '-.-.', 'D': '-..', 'E': '.', 'F': '..-.', 'G': '--.', 'H': '....', 'I': '..', 'J': '.---', 'K': '-.-', 'L': '.-..', 'M': '--', 'N': '-.', 'O': '---', 'P': '.--.', 'Q': '--.-', 'R': '.-.', 'S': '...', 'T': '-', 'U': '..-', 'V': '...-', 'W': '.--', 'X': '-..-', 'Y': '-.--', 'Z': '--..', ' ': '/' };
-        const converted = val.toUpperCase().split('').map(c => morseCode[c] || c).join(' ');
-        resContainer.style.display = 'block';
-        resContent.innerHTML = `<div style="font-size:12px; color:var(--accent-bright);">${converted}</div>`;
-        return;
-      }
-
-      if (currentTool.id === 'qr') {
-        if (!val) return;
-        const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(val)}`;
-        resContainer.style.display = 'block';
-        resContent.innerHTML = `<img src="${qrUrl}" class="preview-img"><a href="${qrUrl}" target="_blank" class="action-btn">Download QR</a>`;
-        return;
-      }
-
-      const finalInput = uploadedFileUrl || val;
-      if (!finalInput) return;
+      // Logika Penanganan API Eksternal
+      if (!val) { showToast('⚠️ Masukkan input terlebih dahulu!'); return; }
 
       resContainer.style.display = 'block';
       resContent.innerHTML = `<span style="font-size:12px; color:var(--text-sub);">⌛ Memproses API...</span>`;
 
-      const targetUrl = `${currentTool.ep}${currentTool.ep.includes('?') ? '&' : '?'}${currentTool.paramKey}=${encodeURIComponent(finalInput)}`;
+      const targetUrl = `${currentTool.ep}${currentTool.ep.includes('?') ? '&' : '?'}${currentTool.paramKey}=${encodeURIComponent(val)}`;
 
       if (currentTool.type === 'image') {
         const img = new Image();
@@ -1448,6 +1312,9 @@
           resContent.innerHTML = '';
           resContent.appendChild(img);
           resContent.innerHTML += `<a href="${targetUrl}" target="_blank" class="action-btn">🔗 Buka Gambar Full</a>`;
+        };
+        img.onerror = () => {
+          resContent.innerHTML = `<a href="${targetUrl}" target="_blank" class="action-btn">👉 Download Hasil</a>`;
         };
         img.src = targetUrl;
       } else if (currentTool.type === 'video') {
