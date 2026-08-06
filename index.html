@@ -15,13 +15,14 @@
       --bg: #030204;
       --bg-card: rgba(18, 5, 8, 0.65);
       --bg-card-hover: rgba(32, 8, 14, 0.85);
+      --accent-rgb: 255, 0, 60;
       --accent: #ff003c;
       --accent-bright: #ff1a4d;
       --accent-gold: #ffb020;
       --accent-dark: #660019;
-      --accent-glow: rgba(255, 0, 60, 0.45);
-      --border: rgba(255, 0, 60, 0.22);
-      --border-bright: rgba(255, 0, 60, 0.65);
+      --accent-glow: rgba(var(--accent-rgb), 0.45);
+      --border: rgba(var(--accent-rgb), 0.22);
+      --border-bright: rgba(var(--accent-rgb), 0.65);
       --glass-highlight: rgba(255, 255, 255, 0.08);
       --text-main: #ffffff;
       --text-sub: #a3959a;
@@ -60,6 +61,28 @@
     ::-webkit-scrollbar { width: 4px; height: 4px; }
     ::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.8); }
     ::-webkit-scrollbar-thumb { background: var(--accent-dark); border-radius: 4px; }
+
+    /* Transisi Halus Perubahan Warna & Halaman */
+    body, .tool-hero, .tool-hero-icon, .tool-hero::after, .api-status-card, .tool-form-card,
+    .action-btn, .btn-submit, .format-tab, .quality-row, .quality-row .qcheck,
+    .file-upload-box, .custom-input, .custom-select, .meta-chip, .tool-icon-wrapper,
+    .tool-badge, .tool-arrow, .tool-hero-eyebrow, .back-pill, .tool-topbar-name,
+    .status-dot, .refresh-btn, .logo-badge {
+      transition: background 0.4s ease, background-color 0.4s ease, border-color 0.4s ease,
+                  box-shadow 0.4s ease, color 0.4s ease;
+    }
+
+    .page-view {
+      transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .page-view.hidden-view {
+      opacity: 0;
+      transform: translateY(12px);
+      pointer-events: none;
+      display: none;
+    }
 
     .icon {
       width: 18px; height: 18px;
@@ -122,7 +145,7 @@
     .logo-badge {
       width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
       background: linear-gradient(135deg, var(--accent-bright), var(--accent-dark));
-      font-size: 14px; box-shadow: 0 0 10px var(--accent-glow); flex-shrink: 0;
+      font-size: 14px; box-shadow: 0 0 10px var(--accent-glow); flex-shrink: 0; color: #fff;
     }
     .brand-title { font-family: var(--font-title); font-weight: 800; font-size: 12px; color: #ffffff; text-align: left; line-height: 1; }
     .brand-sub { font-family: var(--font-sub); font-size: 9px; color: var(--text-sub); text-align: left; margin-top: 2px; }
@@ -162,10 +185,6 @@
     .battery-bar-container { grid-column: 1 / -1; display: flex; align-items: center; gap: 8px; background: rgba(0, 0, 0, 0.3); padding: 6px 10px; border-radius: var(--radius-sm); border: 1px solid rgba(255, 0, 60, 0.12); margin-top: 2px; }
     .battery-track { flex: 1; height: 4px; background: rgba(255, 255, 255, 0.08); border-radius: 2px; overflow: hidden; }
     .battery-fill { height: 100%; background: var(--accent-bright); width: 50%; box-shadow: 0 0 8px var(--accent-glow); }
-    .role-vvip-row { grid-column: 1 / -1; display: flex; gap: 6px; }
-    .role-pill { flex: 1; display: flex; align-items: center; gap: 6px; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,0,60,0.12); border-radius: var(--radius-sm); padding: 6px 10px; font-family: var(--font-title); font-size: 10px; color: var(--text-sub); }
-    .role-pill b { color: #fff; font-weight: 700; }
-    .vvip-pill { display: flex; align-items: center; gap: 6px; background: linear-gradient(135deg, rgba(255,176,32,0.18), rgba(255,0,60,0.12)); border: 1px solid rgba(255,176,32,0.4); border-radius: var(--radius-sm); padding: 6px 12px; font-family: var(--font-title); font-size: 10px; font-weight: 800; color: var(--accent-gold); cursor: pointer; }
 
     /* Category Filter */
     .category-bar { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 8px; margin-bottom: 12px; scrollbar-width: none; }
@@ -180,11 +199,11 @@
     @media (min-width: 600px) { .tools-grid { grid-template-columns: repeat(3, 1fr); } }
     .tool-card { background: var(--bg-card); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 12px; display: flex; flex-direction: column; justify-content: space-between; min-height: 120px; cursor: pointer; transition: transform 0.2s, border-color 0.2s; }
     .tool-card:active { transform: scale(0.97); }
-    .tool-icon-wrapper { width: 34px; height: 34px; border-radius: var(--radius-sm); background: rgba(255, 0, 60, 0.12); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--accent-bright); margin-bottom: 8px; }
+    .tool-icon-wrapper { width: 34px; height: 34px; border-radius: var(--radius-sm); background: rgba(var(--accent-rgb), 0.12); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--accent-bright); margin-bottom: 8px; }
     .tool-name { font-family: var(--font-title); font-size: 11px; font-weight: 700; color: #ffffff; line-height: 1.2; }
     .tool-desc { font-family: var(--font-sub); font-size: 10px; color: var(--text-sub); margin-top: 2px; line-height: 1.2; }
     .tool-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; }
-    .tool-badge { font-family: var(--font-title); font-size: 8px; font-weight: 800; padding: 2px 6px; background: rgba(255, 0, 60, 0.15); border: 1px solid var(--border); color: var(--accent-bright); border-radius: 4px; }
+    .tool-badge { font-family: var(--font-title); font-size: 8px; font-weight: 800; padding: 2px 6px; background: rgba(var(--accent-rgb), 0.15); border: 1px solid var(--border); color: var(--accent-bright); border-radius: 4px; }
     .tool-arrow { color: var(--accent-bright); font-size: 10px; }
 
     /* ===================== TOOL PAGE (full page "room" view) ===================== */
@@ -213,7 +232,7 @@
 
     .tool-hero {
       position: relative; overflow: hidden; border: 1px solid var(--border-bright); border-radius: var(--radius-md);
-      background: linear-gradient(135deg, rgba(255,0,60,0.14), rgba(10,3,5,0.6));
+      background: linear-gradient(135deg, rgba(var(--accent-rgb), 0.14), rgba(10,3,5,0.6));
       padding: 18px; margin-bottom: 12px;
     }
     .tool-hero::after {
@@ -224,7 +243,7 @@
     .tool-hero-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
     .tool-hero-title { font-family: var(--font-title); font-size: 22px; font-weight: 900; color: #fff; line-height: 1.15; }
     .tool-hero-desc { font-family: var(--font-sub); font-size: 11px; color: var(--text-sub); margin-top: 6px; line-height: 1.4; max-width: 80%; }
-    .tool-hero-icon { width: 46px; height: 46px; border-radius: var(--radius-sm); background: rgba(255,0,60,0.18); border: 1px solid var(--border-bright); display: flex; align-items: center; justify-content: center; color: var(--accent-bright); flex-shrink: 0; }
+    .tool-hero-icon { width: 46px; height: 46px; border-radius: var(--radius-sm); background: rgba(var(--accent-rgb),0.18); border: 1px solid var(--border-bright); display: flex; align-items: center; justify-content: center; color: var(--accent-bright); flex-shrink: 0; }
 
     .api-status-card {
       display: flex; align-items: center; gap: 10px; background: var(--bg-card); border: 1px solid var(--border);
@@ -258,14 +277,14 @@
 
     .quality-list { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; }
     .quality-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 10px 12px; cursor: pointer; }
-    .quality-row.selected { border-color: var(--accent-bright); background: rgba(255,0,60,0.08); }
+    .quality-row.selected { border-color: var(--accent-bright); background: rgba(var(--accent-rgb),0.08); }
     .quality-row .qname { font-family: var(--font-title); font-size: 11px; font-weight: 700; color: #fff; }
     .quality-row .qsub { font-family: var(--font-sub); font-size: 10px; color: var(--text-sub); }
     .quality-row .qcheck { width: 20px; height: 20px; border-radius: 50%; border: 1px solid var(--border-bright); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
     .quality-row.selected .qcheck { background: var(--accent-bright); }
 
-    .file-upload-box { border: 2px dashed var(--border-bright); background: rgba(255, 0, 60, 0.05); padding: 20px; border-radius: var(--radius-sm); text-align: center; cursor: pointer; transition: all 0.2s ease; margin-top: 6px; }
-    .file-upload-box:hover { background: rgba(255, 0, 60, 0.12); }
+    .file-upload-box { border: 2px dashed var(--border-bright); background: rgba(var(--accent-rgb), 0.05); padding: 20px; border-radius: var(--radius-sm); text-align: center; cursor: pointer; transition: all 0.2s ease; margin-top: 6px; }
+    .file-upload-box:hover { background: rgba(var(--accent-rgb), 0.12); }
     .file-upload-icon { font-size: 28px; margin-bottom: 6px; }
     .file-upload-text { font-family: var(--font-title); font-size: 11px; color: #fff; font-weight: 700; }
     .file-upload-subtext { font-size: 10px; color: var(--text-sub); margin-top: 2px; }
@@ -287,7 +306,7 @@
     .stats-quad .qval { font-family: var(--font-title); font-size: 16px; font-weight: 900; color: #fff; }
     .stats-quad .qlabel { font-family: var(--font-sub); font-size: 9px; color: var(--text-sub); text-transform: uppercase; letter-spacing: 1px; margin-top: 2px; }
     .meta-chips { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px; justify-content: center; }
-    .meta-chip { background: rgba(255,0,60,0.1); border: 1px solid var(--border); color: var(--text-sub); font-size: 10px; padding: 4px 10px; border-radius: var(--radius-full); }
+    .meta-chip { background: rgba(var(--accent-rgb),0.1); border: 1px solid var(--border); color: var(--text-sub); font-size: 10px; padding: 4px 10px; border-radius: var(--radius-full); }
     .caption-box { text-align: left; background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 10px; margin-bottom: 10px; }
     .caption-box .clabel { font-family: var(--font-title); font-size: 9px; color: var(--text-dim); letter-spacing: 1px; margin-bottom: 6px; }
     .caption-box .ctext { font-size: 12px; color: #eee; line-height: 1.4; word-break: break-word; }
@@ -305,7 +324,7 @@
     .close-btn { background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15); color: #fff; width: 30px; height: 30px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 
     .menu-item { display: flex; align-items: center; gap: 10px; background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border); padding: 12px; border-radius: var(--radius-md); margin-bottom: 8px; cursor: pointer; }
-    .menu-item-icon { width: 36px; height: 36px; border-radius: var(--radius-sm); background: rgba(255, 0, 60, 0.15); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--accent-bright); flex-shrink: 0; }
+    .menu-item-icon { width: 36px; height: 36px; border-radius: var(--radius-sm); background: rgba(var(--accent-rgb), 0.15); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--accent-bright); flex-shrink: 0; }
     .menu-item-text strong { display: block; font-family: var(--font-title); font-size: 11px; color: #ffffff; }
     .menu-item-text span { font-size: 10px; color: var(--text-sub); }
 
@@ -318,6 +337,7 @@
   <div class="bg-overlay-grid"></div>
   <div class="vignette"></div>
 
+  <!-- LOADER TANPA LOGO PETIR -->
   <div id="loader">
     <div class="loader-eyebrow">SYSTEM INITIALIZING</div>
     <div class="loader-stage">
@@ -325,7 +345,9 @@
       <div class="loader-ring-outer"></div>
       <div class="loader-ring-mid"></div>
       <div class="loader-ring-inner"></div>
-      <div class="loader-core-icon">⚡</div>
+      <div class="loader-core-icon">
+        <svg class="icon" style="width:28px;height:28px;color:var(--accent-bright);" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 3v18M3 12h18"></path></svg>
+      </div>
       <div class="loader-brand-row"><div class="loader-title">NexaLink Pro</div></div>
       <div class="loader-sub" id="loader-sub">BY SHAKZ</div>
     </div>
@@ -340,7 +362,9 @@
   <header id="navbar">
     <div class="nav-container">
       <button class="brand-btn" onclick="openModal('menu-modal')">
-        <div class="logo-badge">⚡</div>
+        <div class="logo-badge">
+          <svg class="icon" style="width:16px;height:16px;" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v8M8 12h8"></path></svg>
+        </div>
         <div>
           <div class="brand-title">NexaLink Pro</div>
           <div class="brand-sub">v2.00 VisionOS</div>
@@ -381,7 +405,7 @@
   </div>
 
   <!-- ===================== DASHBOARD VIEW ===================== -->
-  <div class="container" id="dashboard-view">
+  <div class="container page-view" id="dashboard-view">
     <div class="hero-card">
       <img id="hero-img" class="hero-img-bg" src="https://cdn.phototourl.com/free/2026-08-01-1b63ee0d-49a1-4f98-85ca-c5c6f698880e.jpg" alt="Shrine">
       <div class="hero-overlay">
@@ -417,10 +441,6 @@
           <div class="battery-track"><div class="battery-fill" id="battery-fill"></div></div>
           <span style="font-family:var(--font-title); font-size:10px; color:#fff;" id="battery-percent">--%</span>
         </div>
-        <div class="role-vvip-row">
-          <div class="role-pill"><svg class="icon" style="width:11px;height:11px;" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>Role : <b>Member</b></div>
-          <div class="vvip-pill" onclick="showToast('👑 Fitur VVIP belum aktif di build ini')"><svg class="icon" style="width:12px;height:12px;" viewBox="0 0 24 24"><path d="M12 2l2.4 6.6L21 9l-5 4.6L17.4 21 12 17.3 6.6 21 8 13.6 3 9l6.6-.4z"></path></svg>VVIP</div>
-        </div>
       </div>
     </div>
 
@@ -431,12 +451,12 @@
       <button class="cat-chip" onclick="filterCat('tools', this)"><svg class="icon" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>Utility</button>
     </div>
 
-    <div class="section-head">⚡ DASHBOARD TOOLS</div>
+    <div class="section-head">DASHBOARD TOOLS</div>
     <div id="tools-grid" class="tools-grid"></div>
   </div>
 
   <!-- ===================== TOOL PAGE VIEW (full page "room") ===================== -->
-  <div class="container" id="tool-view">
+  <div class="container page-view hidden-view" id="tool-view">
     <div class="tool-hero">
       <div class="tool-hero-eyebrow" id="tv-eyebrow">CATEGORY</div>
       <div class="tool-hero-top">
@@ -562,51 +582,60 @@
     const CONFIG = {
       heroImg: 'https://cdn.phototourl.com/free/2026-08-01-1b63ee0d-49a1-4f98-85ca-c5c6f698880e.jpg',
       localAudio: '',
-      onlineAudio: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
+      onlineAudio: 'https://on.soundcloud.com/tJSvo1IjGqiWpW4A4R',
       tracks: [
-        'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
+        'https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3',
         'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3',
         'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3'
       ],
       imgbbApiKey: '79ba9d0c92917237a69749d390ecf0b1'
     };
 
-    /* ==========================================================================
-       TOOLS DATA
-       type values used by processAction():
-       'json_url'   -> generic downloader, GET url?param=, expects json { result: ... }
-       'yt_combo'   -> youtube quality list + mp3
-       'brat_combo' -> static/animated pick, image or video result
-       'lobby_combo'-> two separate endpoints (ff / ml) by name
-       'image_url'  -> GET request that returns an image directly (canvas-style APIs)
-       'fakedev'    -> 3-field custom form -> image result
-       'gallery_upload' -> upload photo to imgbb first, then call API with url
-       'img2link'   -> upload photo to imgbb, show link
-       'tts' / 'base_tool' / 'local' -> unchanged utility tools
-       ========================================================================== */
+    /* Color Theme per Feature */
+    const THEMES = {
+      default: { rgb: '255, 0, 60', hex: '#ff003c', bright: '#ff1a4d', dark: '#660019' },
+      tiktok: { rgb: '255, 0, 80', hex: '#ff0050', bright: '#ff2a6d', dark: '#700022' },
+      instagram: { rgb: '225, 48, 108', hex: '#e1306c', bright: '#f56040', dark: '#833ab4' },
+      spotify: { rgb: '30, 215, 96', hex: '#1ed760', bright: '#1fdf64', dark: '#12602b' },
+      youtube: { rgb: '255, 0, 0', hex: '#ff0000', bright: '#ff3333', dark: '#800000' },
+      terabox: { rgb: '0, 150, 255', hex: '#0096ff', bright: '#33aeff', dark: '#004c80' },
+      brat: { rgb: '138, 206, 0', hex: '#8ace00', bright: '#9de300', dark: '#426300' },
+      iqc: { rgb: '100, 110, 120', hex: '#646e78', bright: '#808c98', dark: '#30353a' },
+      maker: { rgb: '168, 85, 247', hex: '#a855f7', bright: '#c084fc', dark: '#581c87' },
+      utility: { rgb: '14, 165, 233', hex: '#0ea5e9', bright: '#38bdf8', dark: '#0369a1' }
+    };
+
+    function applyTheme(themeKey) {
+      const t = THEMES[themeKey] || THEMES.default;
+      document.documentElement.style.setProperty('--accent-rgb', t.rgb);
+      document.documentElement.style.setProperty('--accent', t.hex);
+      document.documentElement.style.setProperty('--accent-bright', t.bright);
+      document.documentElement.style.setProperty('--accent-dark', t.dark);
+    }
+
     const TOOLS = [
-      { id: 'tt', name: 'TikTok', desc: 'Download video & audio TikTok tanpa watermark', longDesc: 'Tempel link TikTok untuk membuka preview video, caption, statistik, lalu pilih format dan unduh langsung.', tag: 'NO-WM', cat: 'downloader', apiName: 'NexRay API', apiSub: 'Online via NexRay', iconSVG: '<path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path>', paramKey: 'url', ep: 'https://api.nexray.eu.cc/downloader/tiktok', type: 'tiktok' },
-      { id: 'ig', name: 'Instagram', desc: 'Unduh video & foto Instagram HD', longDesc: 'Tempel link postingan, reels, atau story Instagram untuk mendapatkan link unduhan HD.', tag: 'HD', cat: 'downloader', apiName: 'NexRay API', apiSub: 'Online via NexRay', iconSVG: '<rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>', paramKey: 'url', ep: 'https://api.nexray.eu.cc/downloader/instagram', type: 'json_url' },
-      { id: 'spotify', name: 'Spotify', desc: 'Cari & unduh lagu Spotify ke MP3', longDesc: 'Tempel link lagu Spotify, preview audio muncul lalu unduh sebagai MP3.', tag: 'MP3', cat: 'downloader', apiName: 'NexRay API', apiSub: 'Online via NexRay', iconSVG: '<circle cx="12" cy="12" r="10"></circle><path d="M7 10.5c3-1 7-.6 9.5 1M7.5 13.5c2.5-.8 5.8-.5 8 .8M8 16.3c2-.6 4.5-.4 6.2.7"></path>', paramKey: 'url', ep: 'https://api.nexray.eu.cc/downloader/spotify', type: 'json_url' },
-      { id: 'terabox', name: 'Terabox', desc: 'Ambil file dari link share Terabox', longDesc: 'Tempel link share Terabox untuk mengambil link file secara langsung.', tag: 'FILE', cat: 'downloader', apiName: 'NexRay API', apiSub: 'Online via NexRay', iconSVG: '<path d="M21 8V7l-3-4H6L3 7v1"></path><path d="M3 8h18v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8z"></path><line x1="9" y1="12" x2="15" y2="12"></line>', paramKey: 'url', ep: 'https://api.nexray.eu.cc/downloader/terabox', type: 'json_url' },
-      { id: 'yt_engine', name: 'YouTube', desc: 'Unduh Video MP4 (1080p/1440p/2160p) & Audio MP3', longDesc: 'Tempel link video YouTube untuk memilih resolusi video atau mengunduh audio MP3.', tag: 'MP4/MP3', cat: 'downloader', apiName: 'NexRay API', apiSub: 'Online via NexRay', iconSVG: '<path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>', type: 'yt_combo' },
+      { id: 'tt', name: 'TikTok', desc: 'Download video & audio TikTok tanpa watermark', longDesc: 'Tempel link TikTok untuk membuka preview video, caption, statistik, lalu pilih format dan unduh langsung.', tag: 'NO-WM', cat: 'downloader', theme: 'tiktok', apiName: 'NexRay API', apiSub: 'Online via NexRay', iconSVG: '<path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path>', paramKey: 'url', ep: 'https://api.nexray.eu.cc/downloader/tiktok', type: 'tiktok' },
+      { id: 'ig', name: 'Instagram', desc: 'Unduh video & foto Instagram HD', longDesc: 'Tempel link postingan, reels, atau story Instagram untuk mendapatkan link unduhan HD.', tag: 'HD', cat: 'downloader', theme: 'instagram', apiName: 'NexRay API', apiSub: 'Online via NexRay', iconSVG: '<rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>', paramKey: 'url', ep: 'https://api.nexray.eu.cc/downloader/instagram', type: 'json_url' },
+      { id: 'spotify', name: 'Spotify', desc: 'Cari & unduh lagu Spotify ke MP3', longDesc: 'Tempel link lagu Spotify, preview audio muncul lalu unduh sebagai MP3.', tag: 'MP3', cat: 'downloader', theme: 'spotify', apiName: 'NexRay API', apiSub: 'Online via NexRay', iconSVG: '<circle cx="12" cy="12" r="10"></circle><path d="M7 10.5c3-1 7-.6 9.5 1M7.5 13.5c2.5-.8 5.8-.5 8 .8M8 16.3c2-.6 4.5-.4 6.2.7"></path>', paramKey: 'url', ep: 'https://api.nexray.eu.cc/downloader/spotify', type: 'json_url' },
+      { id: 'terabox', name: 'Terabox', desc: 'Ambil file dari link share Terabox', longDesc: 'Tempel link share Terabox untuk mengambil link file secara langsung.', tag: 'FILE', cat: 'downloader', theme: 'terabox', apiName: 'NexRay API', apiSub: 'Online via NexRay', iconSVG: '<path d="M21 8V7l-3-4H6L3 7v1"></path><path d="M3 8h18v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8z"></path><line x1="9" y1="12" x2="15" y2="12"></line>', paramKey: 'url', ep: 'https://api.nexray.eu.cc/downloader/terabox', type: 'json_url' },
+      { id: 'yt_engine', name: 'YouTube', desc: 'Unduh Video MP4 (480p/720p) & Audio MP3', longDesc: 'Tempel link video YouTube untuk memilih resolusi video standar atau mengunduh audio MP3.', tag: 'MP4/MP3', cat: 'downloader', theme: 'youtube', apiName: 'NexRay API', apiSub: 'Online via NexRay', iconSVG: '<path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>', type: 'yt_combo' },
 
-      { id: 'brat_gen', name: 'Brat Generator', desc: 'Buat stiker BRAT gambar & video', longDesc: 'Ketik teks lalu pilih output PNG statis atau MP4 animasi ala cover album Brat.', tag: 'BRAT', cat: 'maker', apiName: 'NexRay API', apiSub: 'Online via NexRay', iconSVG: '<path d="M12 19l7-7 3 3-7 7-3-3z"></path><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path>', paramKey: 'text', type: 'brat_combo', epStatic: 'https://api.nexray.eu.cc/maker/brat', epVideo: 'https://api.nexray.eu.cc/maker/bratvid' },
-      { id: 'iqc', name: 'iPhone Quote Create', desc: 'Buat kartu quote ala iPhone notes', longDesc: 'Masukkan teks untuk membuat kartu quote bergaya catatan iPhone (IQC).', tag: 'IQC', cat: 'maker', apiName: 'NexRay API', apiSub: 'Online via NexRay', iconSVG: '<circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 2-3 4"></path><line x1="12" y1="17" x2="12.01" y2="17"></line>', paramKey: 'text', ep: 'https://api.nexray.eu.cc/maker/iqc', type: 'image_url' },
-      { id: 'sertifikat_tolol', name: 'Sertifikat Tolol', desc: 'Buat sertifikat kocak ala meme', longDesc: 'Masukkan teks/nama untuk menghasilkan kartu sertifikat lucu bergaya canvas.', tag: 'MEME', cat: 'maker', apiName: 'Siputzx API', apiSub: 'Online via Siputzx', iconSVG: '<circle cx="12" cy="8" r="5"></circle><path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12"></path>', paramKey: 'text', ep: 'https://api.siputzx.my.id/api/canvas/sertifikat-tolol', type: 'image_url' },
-      { id: 'lobby_ml', name: 'Fake Lobby ML', desc: 'Buat lobby palsu Mobile Legends', longDesc: 'Isi nickname dan pilih foto avatar (wajib) untuk membuat tangkapan layar lobby Mobile Legends palsu (hiburan).', tag: 'LOBBY', cat: 'maker', apiName: 'NexRay API', apiSub: 'Online via NexRay', iconSVG: '<rect x="2" y="6" width="20" height="12" rx="2"></rect><path d="M6 12h4m-2-2v4m10-2h.01m-3-1h.01"></path>', paramKey: 'nickname', ep: 'https://api.nexray.eu.cc/maker/fakelobyml', type: 'lobbyml_form' },
-      { id: 'lobby_ff', name: 'Fake Lobby FF', desc: 'Buat lobby palsu Free Fire', longDesc: 'Masukkan nickname untuk membuat tangkapan layar lobby Free Fire palsu (hiburan).', tag: 'LOBBY', cat: 'maker', apiName: 'NexRay API', apiSub: 'Online via NexRay', iconSVG: '<rect x="2" y="6" width="20" height="12" rx="2"></rect><circle cx="8" cy="12" r="2"></circle><line x1="14" y1="10" x2="18" y2="10"></line><line x1="14" y1="14" x2="18" y2="14"></line>', paramKey: 'nickname', ep: 'https://api.nexray.eu.cc/maker/fakelobyff', type: 'image_url' },
-      { id: 'fakedev', name: 'FakeDev Profile', desc: 'Generator kartu profil developer', longDesc: 'Isi nama, bio, dan pilih foto profil (ketiganya wajib) untuk membuat kartu profil developer bergaya canvas.', tag: 'PROFILE', cat: 'maker', apiName: 'IkyyXD API', apiSub: 'Online via IkyyXD', iconSVG: '<rect x="2" y="4" width="20" height="16" rx="2"></rect><polyline points="8 10 4 12 8 14"></polyline><polyline points="16 10 20 12 16 14"></polyline>', ep: 'https://api.ikyyxd.my.id/canvas/fakedev', type: 'fakedev' },
+      { id: 'brat_gen', name: 'Brat Generator', desc: 'Buat stiker BRAT gambar & video', longDesc: 'Ketik teks lalu pilih output PNG statis atau MP4 animasi ala cover album Brat.', tag: 'BRAT', cat: 'maker', theme: 'brat', apiName: 'NexRay API', apiSub: 'Online via NexRay', iconSVG: '<path d="M12 19l7-7 3 3-7 7-3-3z"></path><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path>', paramKey: 'text', type: 'brat_combo', epStatic: 'https://api.nexray.eu.cc/maker/brat', epVideo: 'https://api.nexray.eu.cc/maker/bratvid' },
+      { id: 'iqc', name: 'iPhone Quote Create', desc: 'Buat kartu quote ala iPhone notes', longDesc: 'Masukkan teks untuk membuat kartu quote bergaya catatan iPhone (IQC).', tag: 'IQC', cat: 'maker', theme: 'iqc', apiName: 'NexRay API', apiSub: 'Online via NexRay', iconSVG: '<circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 2-3 4"></path><line x1="12" y1="17" x2="12.01" y2="17"></line>', paramKey: 'text', ep: 'https://api.nexray.eu.cc/maker/iqc', type: 'image_url' },
+      { id: 'sertifikat_tolol', name: 'Sertifikat Tolol', desc: 'Buat sertifikat kocak ala meme', longDesc: 'Masukkan teks/nama untuk menghasilkan kartu sertifikat lucu bergaya canvas.', tag: 'MEME', cat: 'maker', theme: 'maker', apiName: 'Siputzx API', apiSub: 'Online via Siputzx', iconSVG: '<circle cx="12" cy="8" r="5"></circle><path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12"></path>', paramKey: 'text', ep: 'https://api.siputzx.my.id/api/canvas/sertifikat-tolol', type: 'image_url' },
+      { id: 'lobby_ml', name: 'Fake Lobby ML', desc: 'Buat lobby palsu Mobile Legends', longDesc: 'Isi nickname dan pilih foto avatar (wajib) untuk membuat tangkapan layar lobby Mobile Legends palsu (hiburan).', tag: 'LOBBY', cat: 'maker', theme: 'maker', apiName: 'NexRay API', apiSub: 'Online via NexRay', iconSVG: '<rect x="2" y="6" width="20" height="12" rx="2"></rect><path d="M6 12h4m-2-2v4m10-2h.01m-3-1h.01"></path>', paramKey: 'nickname', ep: 'https://api.nexray.eu.cc/maker/fakelobyml', type: 'lobbyml_form' },
+      { id: 'lobby_ff', name: 'Fake Lobby FF', desc: 'Buat lobby palsu Free Fire', longDesc: 'Masukkan nickname untuk membuat tangkapan layar lobby Free Fire palsu (hiburan).', tag: 'LOBBY', cat: 'maker', theme: 'maker', apiName: 'NexRay API', apiSub: 'Online via NexRay', iconSVG: '<rect x="2" y="6" width="20" height="12" rx="2"></rect><circle cx="8" cy="12" r="2"></circle><line x1="14" y1="10" x2="18" y2="10"></line><line x1="14" y1="14" x2="18" y2="14"></line>', paramKey: 'nickname', ep: 'https://api.nexray.eu.cc/maker/fakelobyff', type: 'image_url' },
+      { id: 'fakedev', name: 'FakeDev Profile', desc: 'Generator kartu profil developer', longDesc: 'Isi nama, bio, dan pilih foto profil (ketiganya wajib) untuk membuat kartu profil developer bergaya canvas.', tag: 'PROFILE', cat: 'maker', theme: 'maker', apiName: 'IkyyXD API', apiSub: 'Online via IkyyXD', iconSVG: '<rect x="2" y="4" width="20" height="16" rx="2"></rect><polyline points="8 10 4 12 8 14"></polyline><polyline points="16 10 20 12 16 14"></polyline>', ep: 'https://api.ikyyxd.my.id/canvas/fakedev', type: 'fakedev' },
 
-      { id: 'img2link', name: 'Foto To Link', desc: 'Upload gambar ke URL CDN global', longDesc: 'Pilih gambar dari galeri untuk diunggah dan dapatkan link CDN yang bisa dibagikan.', tag: 'IMGBB', cat: 'tools', apiName: 'ImgBB CDN', apiSub: 'Online via ImgBB', iconSVG: '<path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>', type: 'img2link' },
-      { id: 'gtts', name: 'Google TTS', desc: 'Ubah teks menjadi suara', longDesc: 'Masukkan teks dan pilih bahasa, lalu dengarkan atau unduh hasil audionya.', tag: 'AUDIO', cat: 'tools', apiName: 'Google Translate TTS', apiSub: 'Layanan publik Google', iconSVG: '<path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line>', type: 'tts' },
-      { id: 'base_tool', name: 'Base Encoder/Decoder', desc: 'Encode & Decode Base64 / Base32', longDesc: 'Konversi teks ke Base64/Base32 atau sebaliknya, seluruhnya diproses lokal di perangkatmu.', tag: 'CYPHER', cat: 'tools', apiName: 'Local Engine', apiSub: 'Diproses di perangkat', iconSVG: '<polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline>', type: 'base_tool' },
-      { id: 'qrcode', name: 'QR Code Gen', desc: 'Buat kode QR instan', longDesc: 'Masukkan teks atau URL untuk membuat kode QR yang bisa langsung diunduh.', tag: 'LOCAL', cat: 'tools', apiName: 'QRServer API', apiSub: 'Online', iconSVG: '<rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect>', type: 'local' },
-      { id: 'passgen', name: 'Pass Generator', desc: 'Buat password acak kuat', longDesc: 'Tentukan panjang password untuk menghasilkan kombinasi karakter acak yang aman.', tag: 'LOCAL', cat: 'tools', apiName: 'Local Engine', apiSub: 'Diproses di perangkat', iconSVG: '<rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path>', type: 'local' },
-      { id: 'morse', name: 'Morse Code', desc: 'Konversi teks ke kode Morse', longDesc: 'Masukkan teks untuk dikonversi menjadi kode Morse secara instan.', tag: 'LOCAL', cat: 'tools', apiName: 'Local Engine', apiSub: 'Diproses di perangkat', iconSVG: '<circle cx="5" cy="12" r="1"></circle><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle>', type: 'local' },
-      { id: 'calc', name: 'Kalkulator', desc: 'Hitung ekspresi matematika', longDesc: 'Masukkan ekspresi matematika sederhana untuk mendapatkan hasilnya secara instan.', tag: 'LOCAL', cat: 'tools', apiName: 'Local Engine', apiSub: 'Diproses di perangkat', iconSVG: '<rect x="4" y="2" width="16" height="20" rx="2"></rect><line x1="8" y1="6" x2="16" y2="6"></line><line x1="16" y1="14" x2="16" y2="18"></line><line x1="8" y1="10" x2="8" y2="10.01"></line><line x1="12" y1="10" x2="12" y2="10.01"></line><line x1="16" y1="10" x2="16" y2="10.01"></line><line x1="8" y1="14" x2="8" y2="14.01"></line><line x1="12" y1="14" x2="12" y2="14.01"></line><line x1="8" y1="18" x2="8" y2="18.01"></line>', type: 'local' },
-      { id: 'rmbg', name: 'Remove BG', desc: 'Hapus background foto otomatis', longDesc: 'Pilih foto dari galeri, background akan dihapus otomatis menggunakan AI.', tag: 'GALERI', cat: 'tools', apiName: 'NexRay API', apiSub: 'Online via NexRay', iconSVG: '<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle>', ep: 'https://api.nexray.eu.cc/tools/removebg', type: 'gallery_upload' },
-      { id: 'enh', name: 'Image Enhancer', desc: 'Tingkatkan resolusi foto', longDesc: 'Pilih foto dari galeri untuk ditingkatkan kualitas dan resolusinya secara otomatis.', tag: 'GALERI', cat: 'tools', apiName: 'NexRay API', apiSub: 'Online via NexRay', iconSVG: '<circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line>', ep: 'https://api.nexray.eu.cc/tools/v1/enhancer', type: 'gallery_upload' }
+      { id: 'img2link', name: 'Foto To Link', desc: 'Upload gambar ke URL CDN global', longDesc: 'Pilih gambar dari galeri untuk diunggah dan dapatkan link CDN yang bisa dibagikan.', tag: 'IMGBB', cat: 'tools', theme: 'utility', apiName: 'ImgBB CDN', apiSub: 'Online via ImgBB', iconSVG: '<path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>', type: 'img2link' },
+      { id: 'gtts', name: 'Google TTS', desc: 'Ubah teks menjadi suara', longDesc: 'Masukkan teks dan pilih bahasa, lalu dengarkan atau unduh hasil audionya.', tag: 'AUDIO', cat: 'tools', theme: 'utility', apiName: 'Google Translate TTS', apiSub: 'Layanan publik Google', iconSVG: '<path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line>', type: 'tts' },
+      { id: 'base_tool', name: 'Base Encoder/Decoder', desc: 'Encode & Decode Base64 / Base32', longDesc: 'Konversi teks ke Base64/Base32 atau sebaliknya, seluruhnya diproses lokal di perangkatmu.', tag: 'CYPHER', cat: 'tools', theme: 'utility', apiName: 'Local Engine', apiSub: 'Diproses di perangkat', iconSVG: '<polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline>', type: 'base_tool' },
+      { id: 'qrcode', name: 'QR Code Gen', desc: 'Buat kode QR instan', longDesc: 'Masukkan teks atau URL untuk membuat kode QR yang bisa langsung diunduh.', tag: 'LOCAL', cat: 'tools', theme: 'utility', apiName: 'QRServer API', apiSub: 'Online', iconSVG: '<rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect>', type: 'local' },
+      { id: 'passgen', name: 'Pass Generator', desc: 'Buat password acak kuat', longDesc: 'Tentukan panjang password untuk menghasilkan kombinasi karakter acak yang aman.', tag: 'LOCAL', cat: 'tools', theme: 'utility', apiName: 'Local Engine', apiSub: 'Diproses di perangkat', iconSVG: '<rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path>', type: 'local' },
+      { id: 'morse', name: 'Morse Code', desc: 'Konversi teks ke kode Morse', longDesc: 'Masukkan teks untuk dikonversi menjadi kode Morse secara instan.', tag: 'LOCAL', cat: 'tools', theme: 'utility', apiName: 'Local Engine', apiSub: 'Diproses di perangkat', iconSVG: '<circle cx="5" cy="12" r="1"></circle><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle>', type: 'local' },
+      { id: 'calc', name: 'Kalkulator', desc: 'Hitung ekspresi matematika', longDesc: 'Masukkan ekspresi matematika sederhana untuk mendapatkan hasilnya secara instan.', tag: 'LOCAL', cat: 'tools', theme: 'utility', apiName: 'Local Engine', apiSub: 'Diproses di perangkat', iconSVG: '<rect x="4" y="2" width="16" height="20" rx="2"></rect><line x1="8" y1="6" x2="16" y2="6"></line><line x1="16" y1="14" x2="16" y2="18"></line><line x1="8" y1="10" x2="8" y2="10.01"></line><line x1="12" y1="10" x2="12" y2="10.01"></line><line x1="16" y1="10" x2="16" y2="10.01"></line><line x1="8" y1="14" x2="8" y2="14.01"></line><line x1="12" y1="14" x2="12" y2="14.01"></line><line x1="8" y1="18" x2="8" y2="18.01"></line>', type: 'local' },
+      { id: 'rmbg', name: 'Remove BG', desc: 'Hapus background foto otomatis', longDesc: 'Pilih foto dari galeri, background akan dihapus otomatis menggunakan AI.', tag: 'GALERI', cat: 'tools', theme: 'utility', apiName: 'NexRay API', apiSub: 'Online via NexRay', iconSVG: '<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle>', ep: 'https://api.nexray.eu.cc/tools/removebg', type: 'gallery_upload' },
+      { id: 'enh', name: 'Image Enhancer', desc: 'Tingkatkan resolusi foto', longDesc: 'Pilih foto dari galeri untuk ditingkatkan kualitas dan resolusinya secara otomatis.', tag: 'GALERI', cat: 'tools', theme: 'utility', apiName: 'NexRay API', apiSub: 'Online via NexRay', iconSVG: '<circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line>', ep: 'https://api.nexray.eu.cc/tools/v1/enhancer', type: 'gallery_upload' }
     ];
 
     let currentTool = null;
@@ -625,7 +654,7 @@
       constructor() { this.reset(); }
       reset() { this.x = Math.random() * canvas.width; this.y = Math.random() * canvas.height; this.size = Math.random() * 1.5 + 0.5; this.speedX = (Math.random() - 0.5) * 0.3; this.speedY = -Math.random() * 0.5 - 0.1; this.alpha = Math.random() * 0.5 + 0.1; }
       update() { this.x += this.speedX; this.y += this.speedY; if (this.y < 0 || this.x < 0 || this.x > canvas.width) { this.reset(); this.y = canvas.height; } }
-      draw() { ctx.fillStyle = `rgba(255, 0, 60, ${this.alpha})`; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); }
+      draw() { ctx.fillStyle = `rgba(var(--accent-rgb), ${this.alpha})`; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); }
     }
     for (let i = 0; i < 35; i++) particles.push(new Particle());
     function animateParticles() { ctx.clearRect(0, 0, canvas.width, canvas.height); particles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animateParticles); }
@@ -671,6 +700,19 @@
 
     function showToast(msg) { const t = document.getElementById('toast'); t.innerText = msg; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 3000); }
 
+    function openModal(id) { document.getElementById(id).classList.add('active'); }
+    function closeModal(id) { document.getElementById(id).classList.remove('active'); }
+
+    function sendReportToWhatsapp() {
+      const cat = document.getElementById('report-category').value;
+      const name = document.getElementById('report-name').value.trim() || 'Anonim';
+      const msg = document.getElementById('report-message').value.trim();
+      if (!msg) { showToast('⚠️ Pesan wajib diisi!'); return; }
+      const text = `*NexaLink Pro Report*\n\n📌 *Kategori:* ${cat}\n👤 *Nama:* ${name}\n💬 *Pesan:* ${msg}`;
+      window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
+      closeModal('report-modal');
+    }
+
     function initDeviceStats() {
       const ua = navigator.userAgent;
       document.getElementById('dev-device').innerText = /Android/i.test(ua) ? 'Android' : /iPhone/i.test(ua) ? 'iOS' : 'Desktop';
@@ -703,13 +745,24 @@
     function openTool(tool) {
       currentTool = tool;
       selectedImageFile = null;
-      selectedQuality = tool.type === 'yt_combo' ? '1080' : null;
+      selectedQuality = tool.type === 'yt_combo' ? '720' : null;
       selectedFormatTab = 'video';
 
-      document.getElementById('dashboard-view').style.display = 'none';
-      document.getElementById('navbar').style.display = 'none';
-      document.getElementById('tool-view').style.display = 'block';
-      document.getElementById('tool-topbar').style.display = 'flex';
+      /* Apply dynamic theme color */
+      applyTheme(tool.theme || 'default');
+
+      const dashView = document.getElementById('dashboard-view');
+      const toolView = document.getElementById('tool-view');
+
+      dashView.classList.add('hidden-view');
+      setTimeout(() => {
+        dashView.style.display = 'none';
+        document.getElementById('navbar').style.display = 'none';
+        
+        toolView.style.display = 'block';
+        document.getElementById('tool-topbar').style.display = 'flex';
+        setTimeout(() => toolView.classList.remove('hidden-view'), 30);
+      }, 200);
 
       document.getElementById('tt-name').innerText = tool.name.toUpperCase();
       document.getElementById('tv-eyebrow').innerText = CAT_LABEL[tool.cat] || 'TOOL';
@@ -721,7 +774,6 @@
 
       setApiStatus(true);
 
-      // reset all input blocks
       const inputVal = document.getElementById('input-val');
       const inputLabel = document.getElementById('input-label');
       const fileContainer = document.getElementById('file-upload-container');
@@ -798,10 +850,20 @@
     }
 
     function closeTool() {
-      document.getElementById('tool-view').style.display = 'none';
-      document.getElementById('tool-topbar').style.display = 'none';
-      document.getElementById('dashboard-view').style.display = 'block';
-      document.getElementById('navbar').style.display = 'block';
+      applyTheme('default');
+      const dashView = document.getElementById('dashboard-view');
+      const toolView = document.getElementById('tool-view');
+
+      toolView.classList.add('hidden-view');
+      setTimeout(() => {
+        toolView.style.display = 'none';
+        document.getElementById('tool-topbar').style.display = 'none';
+
+        dashView.style.display = 'block';
+        document.getElementById('navbar').style.display = 'block';
+        setTimeout(() => dashView.classList.remove('hidden-view'), 30);
+      }, 200);
+
       currentTool = null;
       window.scrollTo(0, 0);
     }
@@ -833,10 +895,11 @@
       document.getElementById('quality-list-container').style.display = tab === 'video' ? 'block' : 'none';
     }
 
+    /* Kualitas YouTube Disesuaikan (1080/1440/2160 Dihapus) */
     const YT_QUALITIES = [
-      { value: '1080', name: '1080p Full HD', sub: 'MP4 • Resolusi terbaik' },
-      { value: '1440', name: '1440p 2K', sub: 'MP4 • Kualitas sangat tinggi' },
-      { value: '2160', name: '2160p 4K', sub: 'MP4 • Kualitas maksimal' }
+      { value: '360', name: '360p Standard', sub: 'MP4 • Hemat Kuota' },
+      { value: '480', name: '480p Medium', sub: 'MP4 • Kualitas Sedang' },
+      { value: '720', name: '720p HD', sub: 'MP4 • Kualitas Jernih' }
     ];
     function renderQualityList() {
       const wrap = document.getElementById('quality-list');
@@ -894,7 +957,6 @@
       const valInput = document.getElementById('input-val');
       const extraSelect = document.getElementById('extra-select');
 
-      /* ---------- FakeDev (nama + bio + wajib upload foto) ---------- */
       if (currentTool.type === 'fakedev') {
         const nama = document.getElementById('fd-name').value.trim();
         const bio = document.getElementById('fd-bio').value.trim();
@@ -915,7 +977,6 @@
         return;
       }
 
-      /* ---------- Fake Lobby ML (nickname + wajib upload avatar) ---------- */
       if (currentTool.type === 'lobbyml_form') {
         const nickname = valInput.value.trim();
         if (!nickname) { showToast('⚠️ Masukkan nickname!'); return; }
@@ -935,7 +996,6 @@
         return;
       }
 
-      /* ---------- Foto to Link ---------- */
       if (currentTool.type === 'img2link') {
         if (!selectedImageFile) { showToast('⚠️ Pilih foto dari galeri terlebih dahulu!'); return; }
         resContainer.style.display = 'block';
@@ -947,7 +1007,6 @@
         return;
       }
 
-      /* ---------- Remove BG / Enhancer (upload then process) ---------- */
       if (currentTool.type === 'gallery_upload') {
         if (!selectedImageFile) { showToast('⚠️ Pilih gambar dari galeri dulu!'); return; }
         resContainer.style.display = 'block';
@@ -976,7 +1035,6 @@
 
       const val = valInput.value.trim();
 
-      /* ---------- Base64/32 ---------- */
       if (currentTool.type === 'base_tool') {
         if (!val) { showToast('⚠️ Masukkan teks terlebih dahulu!'); return; }
         resContainer.style.display = 'block';
@@ -992,7 +1050,6 @@
         return;
       }
 
-      /* ---------- TTS ---------- */
       if (currentTool.type === 'tts') {
         if (!val) { showToast('⚠️ Masukkan teks!'); return; }
         resContainer.style.display = 'block';
@@ -1002,7 +1059,6 @@
         return;
       }
 
-      /* ---------- Local utilities ---------- */
       if (currentTool.type === 'local') {
         resContainer.style.display = 'block';
         if (currentTool.id === 'qrcode') {
@@ -1028,7 +1084,6 @@
         return;
       }
 
-      /* ---------- YouTube combo ---------- */
       if (currentTool.type === 'yt_combo') {
         if (!val) { showToast('⚠️ Masukkan link YouTube!'); return; }
         resContainer.style.display = 'block';
@@ -1036,7 +1091,7 @@
         const isAudio = selectedFormatTab === 'audio';
         const targetUrl = isAudio
           ? `https://api.nexray.eu.cc/downloader/ytmp3?url=${encodeURIComponent(val)}`
-          : `https://api.nexray.eu.cc/downloader/ytmp4?url=${encodeURIComponent(val)}&resolusi=${selectedQuality || '1080'}`;
+          : `https://api.nexray.eu.cc/downloader/ytmp4?url=${encodeURIComponent(val)}&resolusi=${selectedQuality || '720'}`;
         try {
           const response = await fetch(targetUrl);
           const data = await response.json();
@@ -1054,7 +1109,6 @@
       resContainer.style.display = 'block';
       resContent.innerHTML = `<span style="font-size:12px; color:var(--text-sub);">⌛ Memproses API...</span>`;
 
-      /* ---------- TikTok (rich preview: stats + caption + format list) ---------- */
       if (currentTool.type === 'tiktok') {
         try {
           const response = await fetch(`${currentTool.ep}?url=${encodeURIComponent(val)}`);
@@ -1083,7 +1137,6 @@
         return;
       }
 
-      /* ---------- Brat combo ---------- */
       if (currentTool.type === 'brat_combo') {
         const bratType = extraSelect.value;
         const targetUrl = bratType === 'video' ? `${currentTool.epVideo}?text=${encodeURIComponent(val)}` : `${currentTool.epStatic}?text=${encodeURIComponent(val)}`;
@@ -1099,7 +1152,6 @@
         return;
       }
 
-      /* ---------- Image-returning canvas APIs (iqc, sertifikat, fake lobby) ---------- */
       if (currentTool.type === 'image_url') {
         const targetUrl = `${currentTool.ep}?${currentTool.paramKey}=${encodeURIComponent(val)}`;
         const img = new Image();
@@ -1110,7 +1162,6 @@
         return;
       }
 
-      /* ---------- Generic JSON downloaders (Instagram, Spotify, Terabox) ---------- */
       if (currentTool.type === 'json_url') {
         try {
           const targetUrl = `${currentTool.ep}?${currentTool.paramKey}=${encodeURIComponent(val)}`;
@@ -1124,25 +1175,13 @@
               resContent.innerHTML = `
                 <div style="font-size:12px; color:#fff; font-weight:600; margin-bottom:8px; line-height:1.3;">${title}</div>
                 ${isAudio ? `<audio src="${mediaUrl}" controls style="width:100%; margin-bottom:8px;"></audio>` : `${/\.(mp4|mov|webm)(\?|$)/i.test(mediaUrl) ? `<video src="${mediaUrl}" controls style="width:100%; max-height:220px; border-radius:8px; margin-bottom:8px;"></video>` : `<img src="${mediaUrl}" class="preview-img">`}`}
-                <a href="${mediaUrl}" target="_blank" download class="action-btn">💾 Unduh Berkas Media</a>
+                <a href="${mediaUrl}" target="_blank" download class="action-btn">💾 Unduh Media</a>
               `;
-            } else { resContent.innerHTML = `<span style="color:#ef4444;">URL media tidak ditemukan dalam respon.</span>`; }
-          } else { resContent.innerHTML = `<span style="color:#ef4444;">Gagal mengambil data dari server API.</span>`; }
+            } else { resContent.innerHTML = `<span style="color:#ef4444;">URL media tidak ditemukan.</span>`; }
+          } else { resContent.innerHTML = `<span style="color:#ef4444;">Gagal mengambil data dari server.</span>`; }
         } catch (err) { resContent.innerHTML = `<span style="color:#ef4444;">Terjadi kesalahan koneksi / CORS ke server API!</span>`; }
         return;
       }
-    }
-
-    function openModal(id) { document.getElementById(id).classList.add('active'); }
-    function closeModal(id) { document.getElementById(id).classList.remove('active'); }
-
-    function sendReportToWhatsapp() {
-      const category = document.getElementById('report-category').value;
-      const name = document.getElementById('report-name').value.trim();
-      const message = document.getElementById('report-message').value.trim();
-      if (!message) { showToast('⚠️ Isi dulu pesannya!'); return; }
-      let text = `*${category}*\n${name ? 'Nama: ' + name + '\n' : ''}Pesan: ${message}`;
-      window.open(`https://wa.me/6285722707676?text=${encodeURIComponent(text)}`, '_blank');
     }
   </script>
 </body>
