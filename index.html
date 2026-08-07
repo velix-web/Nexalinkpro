@@ -62,7 +62,6 @@
     ::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.8); }
     ::-webkit-scrollbar-thumb { background: var(--accent-dark); border-radius: 4px; }
 
-    /* Transisi Halus Perubahan Warna & Halaman */
     body, .tool-hero, .tool-hero-icon, .tool-hero::after, .api-status-card, .tool-form-card,
     .action-btn, .btn-submit, .format-tab, .quality-row, .quality-row .qcheck,
     .file-upload-box, .custom-input, .custom-select, .meta-chip, .tool-icon-wrapper,
@@ -213,7 +212,7 @@
     .tool-badge { font-family: var(--font-title); font-size: 8px; font-weight: 800; padding: 2px 6px; background: rgba(var(--accent-rgb), 0.15); border: 1px solid var(--border); color: var(--accent-bright); border-radius: 4px; }
     .tool-arrow { color: var(--accent-bright); font-size: 10px; }
 
-    /* ===================== TOOL PAGE (full page "room" view) ===================== */
+    /* Tool Page */
     #tool-view { display: none; }
     .tool-topbar {
       position: fixed; top: 10px; left: 0; right: 0; z-index: 1000; padding: 0 12px;
@@ -308,20 +307,9 @@
     .result-container { margin-top: 4px; display: none; background: rgba(0, 0, 0, 0.7); border-radius: var(--radius-md); padding: 14px; border: 1px dashed var(--border-bright); text-align: center; user-select: text; }
     .preview-img { width: 100%; max-height: 220px; object-fit: contain; border-radius: var(--radius-sm); margin-bottom: 8px; }
 
-    .stats-quad { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-bottom: 10px; }
-    .stats-quad .qwidget { background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 10px; text-align: center; }
-    .stats-quad .qval { font-family: var(--font-title); font-size: 16px; font-weight: 900; color: #fff; }
-    .stats-quad .qlabel { font-family: var(--font-sub); font-size: 9px; color: var(--text-sub); text-transform: uppercase; letter-spacing: 1px; margin-top: 2px; }
-    .meta-chips { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px; justify-content: center; }
-    .meta-chip { background: rgba(var(--accent-rgb),0.1); border: 1px solid var(--border); color: var(--text-sub); font-size: 10px; padding: 4px 10px; border-radius: var(--radius-full); }
-    .caption-box { text-align: left; background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 10px; margin-bottom: 10px; }
-    .caption-box .clabel { font-family: var(--font-title); font-size: 9px; color: var(--text-dim); letter-spacing: 1px; margin-bottom: 6px; }
-    .caption-box .ctext { font-size: 12px; color: #eee; line-height: 1.4; word-break: break-word; }
-    .caption-box .ccopy { margin-top: 8px; font-size: 10px; padding: 6px 10px; }
-
     .action-btn { display: flex; align-items: center; justify-content: center; gap: 6px; width: 100%; padding: 11px; border-radius: var(--radius-sm); font-family: var(--font-title); font-size: 11px; font-weight: 700; text-decoration: none; color: #fff; background: var(--accent); margin-top: 6px; cursor: pointer; border: none; }
 
-    /* Modal Styling (menu / about / report) */
+    /* Modal Styling */
     .modal-overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.88); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); z-index: 2000; display: flex; align-items: center; justify-content: center; padding: 16px; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
     .modal-overlay.active { opacity: 1; pointer-events: auto; }
     .modal-box { width: 100%; max-width: 420px; max-height: 85vh; overflow-y: auto; background: rgba(16, 5, 8, 0.95); border: 1px solid var(--border-bright); border-radius: var(--radius-lg); padding: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.9); }
@@ -344,7 +332,7 @@
   <div class="bg-overlay-grid"></div>
   <div class="vignette"></div>
 
-  <!-- LOADER TANPA LOGO PETIR -->
+  <!-- LOADER -->
   <div id="loader">
     <div class="loader-eyebrow">SYSTEM INITIALIZING</div>
     <div class="loader-stage">
@@ -365,7 +353,7 @@
   <audio id="bg-audio" loop preload="none"></audio>
   <div id="toast"></div>
 
-  <!-- ===================== DASHBOARD HEADER ===================== -->
+  <!-- HEADER -->
   <header id="navbar">
     <div class="nav-container">
       <button class="brand-btn" onclick="openModal('menu-modal')">
@@ -400,7 +388,7 @@
     </div>
   </header>
 
-  <!-- ===================== TOOL PAGE TOPBAR (hidden until a tool opens) ===================== -->
+  <!-- TOOL PAGE TOPBAR -->
   <div class="tool-topbar" id="tool-topbar" style="display:none;">
     <div class="tool-topbar-inner">
       <div class="back-pill" onclick="closeTool()">
@@ -414,7 +402,7 @@
     </div>
   </div>
 
-  <!-- ===================== DASHBOARD VIEW ===================== -->
+  <!-- DASHBOARD VIEW -->
   <div class="container page-view" id="dashboard-view">
     <div class="hero-card">
       <img id="hero-img" class="hero-img-bg" src="https://i.ibb.co/pB66XBwy/5004.jpg" alt="Banner">
@@ -465,7 +453,7 @@
     <div id="tools-grid" class="tools-grid"></div>
   </div>
 
-  <!-- ===================== TOOL PAGE VIEW (full page "room") ===================== -->
+  <!-- TOOL PAGE VIEW -->
   <div class="container page-view hidden-view" id="tool-view">
     <div class="tool-hero">
       <div class="tool-hero-eyebrow" id="tv-eyebrow">CATEGORY</div>
@@ -534,7 +522,7 @@
     </div>
   </div>
 
-  <!-- ===================== MENU / ABOUT / REPORT MODALS ===================== -->
+  <!-- MODALS -->
   <div id="menu-modal" class="modal-overlay">
     <div class="modal-box">
       <div class="modal-header">
@@ -599,10 +587,10 @@
         'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3',
         'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3'
       ],
-      imgbbApiKey: '79ba9d0c92917237a69749d390ecf0b1'
+      imgbbApiKey: '79ba9d0c92917237a69749d390ecf0b1',
+      tikwmApiKey: '3acc22debb9b7eb7464bb8ae6e718338'
     };
 
-    /* Color Theme per Feature */
     const THEMES = {
       default: { rgb: '255, 0, 60', hex: '#ff003c', bright: '#ff1a4d', dark: '#660019' },
       tiktok: { rgb: '255, 0, 80', hex: '#ff0050', bright: '#ff2a6d', dark: '#700022' },
@@ -625,13 +613,11 @@
       document.documentElement.style.setProperty('--accent-dark', t.dark);
     }
 
-    /* Global site theme override: 'default' (crimson/sukuna) atau 'gojo' (ungu) */
     let siteThemeOverride = 'default';
 
     function toggleSiteTheme(e) {
       if (e) e.stopPropagation();
       siteThemeOverride = siteThemeOverride === 'gojo' ? 'default' : 'gojo';
-      
       const heroImg = document.getElementById('hero-img');
       const heroBadge = document.getElementById('hero-badge');
 
@@ -649,33 +635,27 @@
     }
 
     const TOOLS = [
-      { id: 'tt', name: 'TikTok', desc: 'Download video & audio TikTok tanpa watermark', longDesc: 'Tempel link TikTok untuk membuka preview video, caption, statistik, lalu pilih format dan unduh langsung.', tag: 'NO-WM', cat: 'downloader', theme: 'tiktok', apiName: 'NexRay API', apiSub: 'Online via NexRay', iconSVG: '<path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path>', paramKey: 'url', ep: 'https://api.nexray.eu.cc/downloader/tiktok', type: 'tiktok' },
-      { id: 'ig', name: 'Instagram', desc: 'Unduh video & foto Instagram HD', longDesc: 'Tempel link postingan, reels, atau story Instagram untuk mendapatkan link unduhan HD.', tag: 'HD', cat: 'downloader', theme: 'instagram', apiName: 'NexRay API', apiSub: 'Online via NexRay', iconSVG: '<rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>', paramKey: 'url', ep: 'https://api.nexray.eu.cc/downloader/instagram', type: 'json_url' },
-      { id: 'spotify', name: 'Spotify', desc: 'Cari & unduh lagu Spotify ke MP3', longDesc: 'Tempel link lagu Spotify, preview audio muncul lalu unduh sebagai MP3.', tag: 'MP3', cat: 'downloader', theme: 'spotify', apiName: 'NexRay API', apiSub: 'Online via NexRay', iconSVG: '<circle cx="12" cy="12" r="10"></circle><path d="M7 10.5c3-1 7-.6 9.5 1M7.5 13.5c2.5-.8 5.8-.5 8 .8M8 16.3c2-.6 4.5-.4 6.2.7"></path>', paramKey: 'url', ep: 'https://api.nexray.eu.cc/downloader/spotify', type: 'json_url' },
-      { id: 'terabox', name: 'Terabox', desc: 'Ambil file dari link share Terabox', longDesc: 'Tempel link share Terabox untuk mengambil link file secara langsung.', tag: 'FILE', cat: 'downloader', theme: 'terabox', apiName: 'NexRay API', apiSub: 'Online via NexRay', iconSVG: '<path d="M21 8V7l-3-4H6L3 7v1"></path><path d="M3 8h18v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8z"></path><line x1="9" y1="12" x2="15" y2="12"></line>', paramKey: 'url', ep: 'https://api.nexray.eu.cc/downloader/terabox', type: 'json_url' },
-      { id: 'yt_engine', name: 'YouTube', desc: 'Unduh Video MP4 (480p/720p) & Audio MP3', longDesc: 'Tempel link video YouTube untuk memilih resolusi video standar atau mengunduh audio MP3.', tag: 'MP4/MP3', cat: 'downloader', theme: 'youtube', apiName: 'NexRay API', apiSub: 'Online via NexRay', iconSVG: '<path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>', type: 'yt_combo' },
+      { id: 'tt', name: 'TikTok', desc: 'Download video TikTok tanpa watermark', longDesc: 'Gunakan TikWM API key bawaan untuk mengunduh media dari TikTok.', tag: 'NO-WM', cat: 'downloader', theme: 'tiktok', apiName: 'TikWM API', apiSub: 'Online via TikWM', iconSVG: '<path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path>', paramKey: 'url', type: 'tiktok' },
+      { id: 'ig', name: 'Instagram', desc: 'Unduh video & foto Instagram HD', longDesc: 'Tempel link postingan/Reels Instagram untuk mengambil media.', tag: 'HD', cat: 'downloader', theme: 'instagram', apiName: 'NexRay API', apiSub: 'Online via NexRay', iconSVG: '<rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>', paramKey: 'url', ep: 'https://api.nexray.eu.cc/downloader/instagram', type: 'json_url' },
+      { id: 'spotify', name: 'Spotify', desc: 'Unduh musik Spotify ke MP3', longDesc: 'Tempel URL Spotify untuk mengunduh file audio.', tag: 'MP3', cat: 'downloader', theme: 'spotify', apiName: 'NexRay API', apiSub: 'Online via NexRay', iconSVG: '<circle cx="12" cy="12" r="10"></circle><path d="M7 10.5c3-1 7-.6 9.5 1M7.5 13.5c2.5-.8 5.8-.5 8 .8M8 16.3c2-.6 4.5-.4 6.2.7"></path>', paramKey: 'url', ep: 'https://api.nexray.eu.cc/downloader/spotify', type: 'json_url' },
+      { id: 'terabox', name: 'Terabox', desc: 'Ambil file dari share Terabox', longDesc: 'Ambil link unduhan file yang tersimpan di Terabox.', tag: 'FILE', cat: 'downloader', theme: 'terabox', apiName: 'NexRay API', apiSub: 'Online via NexRay', iconSVG: '<path d="M21 8V7l-3-4H6L3 7v1"></path><path d="M3 8h18v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8z"></path><line x1="9" y1="12" x2="15" y2="12"></line>', paramKey: 'url', ep: 'https://api.nexray.eu.cc/downloader/terabox', type: 'json_url' },
+      { id: 'yt_engine', name: 'YouTube', desc: 'Unduh MP4 (1080p-2160p) & MP3', longDesc: 'Pilih resolusi video hingga 4K atau unduh audionya saja.', tag: 'MP4/MP3', cat: 'downloader', theme: 'youtube', apiName: 'NexRay API', apiSub: 'Online via NexRay', iconSVG: '<path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>', type: 'yt_combo' },
 
-      { id: 'brat_gen', name: 'Brat Generator', desc: 'Buat stiker BRAT gambar & video', longDesc: 'Ketik teks lalu pilih output PNG statis atau MP4 animasi ala cover album Brat.', tag: 'BRAT', cat: 'maker', theme: 'brat', apiName: 'NexRay API', apiSub: 'Online via NexRay', iconSVG: '<path d="M12 19l7-7 3 3-7 7-3-3z"></path><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path>', paramKey: 'text', type: 'brat_combo', epStatic: 'https://api.nexray.eu.cc/maker/brat', epVideo: 'https://api.nexray.eu.cc/maker/bratvid' },
-      { id: 'iqc', name: 'iPhone Quote Create', desc: 'Buat kartu quote ala iPhone notes', longDesc: 'Masukkan teks untuk membuat kartu quote bergaya catatan iPhone (IQC).', tag: 'IQC', cat: 'maker', theme: 'iqc', apiName: 'NexRay API', apiSub: 'Online via NexRay', iconSVG: '<circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 2-3 4"></path><line x1="12" y1="17" x2="12.01" y2="17"></line>', paramKey: 'text', ep: 'https://api.nexray.eu.cc/maker/iqc', type: 'image_url' },
-      { id: 'sertifikat_tolol', name: 'Sertifikat Tolol', desc: 'Buat sertifikat kocak ala meme', longDesc: 'Masukkan teks/nama untuk menghasilkan kartu sertifikat lucu bergaya canvas.', tag: 'MEME', cat: 'maker', theme: 'maker', apiName: 'Siputzx API', apiSub: 'Online via Siputzx', iconSVG: '<circle cx="12" cy="8" r="5"></circle><path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12"></path>', paramKey: 'text', ep: 'https://api.siputzx.my.id/api/canvas/sertifikat-tolol', type: 'image_url' },
-      { id: 'lobby_ml', name: 'Fake Lobby ML', desc: 'Buat lobby palsu Mobile Legends', longDesc: 'Isi nickname dan pilih foto avatar (wajib) untuk membuat tangkapan layar lobby Mobile Legends palsu (hiburan).', tag: 'LOBBY', cat: 'maker', theme: 'maker', apiName: 'NexRay API', apiSub: 'Online via NexRay', iconSVG: '<rect x="2" y="6" width="20" height="12" rx="2"></rect><path d="M6 12h4m-2-2v4m10-2h.01m-3-1h.01"></path>', paramKey: 'nickname', ep: 'https://api.nexray.eu.cc/maker/fakelobyml', type: 'lobbyml_form' },
-      { id: 'lobby_ff', name: 'Fake Lobby FF', desc: 'Buat lobby palsu Free Fire', longDesc: 'Masukkan nickname untuk membuat tangkapan layar lobby Free Fire palsu (hiburan).', tag: 'LOBBY', cat: 'maker', theme: 'maker', apiName: 'NexRay API', apiSub: 'Online via NexRay', iconSVG: '<rect x="2" y="6" width="20" height="12" rx="2"></rect><circle cx="8" cy="12" r="2"></circle><line x1="14" y1="10" x2="18" y2="10"></line><line x1="14" y1="14" x2="18" y2="14"></line>', paramKey: 'nickname', ep: 'https://api.nexray.eu.cc/maker/fakelobyff', type: 'image_url' },
-      { id: 'fakedev', name: 'FakeDev Profile', desc: 'Generator kartu profil developer', longDesc: 'Isi nama, bio, dan pilih foto profil (ketiganya wajib) untuk membuat kartu profil developer bergaya canvas.', tag: 'PROFILE', cat: 'maker', theme: 'maker', apiName: 'IkyyXD API', apiSub: 'Online via IkyyXD', iconSVG: '<rect x="2" y="4" width="20" height="16" rx="2"></rect><polyline points="8 10 4 12 8 14"></polyline><polyline points="16 10 20 12 16 14"></polyline>', ep: 'https://api.ikyyxd.my.id/canvas/fakedev', type: 'fakedev' },
+      { id: 'brat_gen', name: 'Brat Generator', desc: 'Buat stiker BRAT gambar / video', longDesc: 'Ketik teks lalu hasilkan media statis atau video animasi Brat.', tag: 'BRAT', cat: 'maker', theme: 'brat', apiName: 'NexRay API', apiSub: 'Online via NexRay', iconSVG: '<path d="M12 19l7-7 3 3-7 7-3-3z"></path><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path>', paramKey: 'text', type: 'brat_combo', epStatic: 'https://api.nexray.eu.cc/maker/brat', epVideo: 'https://api.nexray.eu.cc/maker/bratvid' },
+      { id: 'iqc', name: 'iPhone Quote Create', desc: 'Buat kartu quote ala iPhone Notes', longDesc: 'Ubah teks quote menjadi gaya iOS visual.', tag: 'IQC', cat: 'maker', theme: 'iqc', apiName: 'NexRay API', apiSub: 'Online via NexRay', iconSVG: '<circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 2-3 4"></path><line x1="12" y1="17" x2="12.01" y2="17"></line>', paramKey: 'text', ep: 'https://api.nexray.eu.cc/maker/iqc', type: 'image_url' },
+      { id: 'sertifikat_tolol', name: 'Sertifikat Tolol', desc: 'Buat sertifikat meme kocak', longDesc: 'Isi teks nama untuk mencetak gambar sertifikat lucu.', tag: 'MEME', cat: 'maker', theme: 'maker', apiName: 'Siputzx API', apiSub: 'Online via Siputzx', iconSVG: '<circle cx="12" cy="8" r="5"></circle><path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12"></path>', paramKey: 'text', ep: 'https://api.siputzx.my.id/api/canvas/sertifikat-tolol', type: 'image_url' },
+      { id: 'lobby_ml', name: 'Fake Lobby ML', desc: 'Buat SS Lobby Mobile Legends', longDesc: 'Masukkan Nickname & Upload Avatar untuk membuat Fake Lobby ML.', tag: 'LOBBY', cat: 'maker', theme: 'maker', apiName: 'NexRay API', apiSub: 'Online via NexRay', iconSVG: '<rect x="2" y="6" width="20" height="12" rx="2"></rect><path d="M6 12h4m-2-2v4m10-2h.01m-3-1h.01"></path>', ep: 'https://api.nexray.eu.cc/maker/fakelobyml', type: 'lobby_upload' },
+      { id: 'lobby_ff', name: 'Fake Lobby FF', desc: 'Buat SS Lobby Free Fire', longDesc: 'Masukkan Nickname untuk membuat gambar Fake Lobby FF.', tag: 'LOBBY', cat: 'maker', theme: 'maker', apiName: 'NexRay API', apiSub: 'Online via NexRay', iconSVG: '<rect x="2" y="6" width="20" height="12" rx="2"></rect><circle cx="8" cy="12" r="2"></circle><line x1="14" y1="10" x2="18" y2="10"></line><line x1="14" y1="14" x2="18" y2="14"></line>', paramKey: 'nickname', ep: 'https://api.nexray.eu.cc/maker/fakelobyff', type: 'image_url' },
+      { id: 'fakedev', name: 'FakeDev Profile', desc: 'Generator Kartu Profil Dev', longDesc: 'Isi Nama, Bio, dan Upload Avatar untuk membuat Kartu Dev.', tag: 'PROFILE', cat: 'maker', theme: 'maker', apiName: 'IkyyXD API', apiSub: 'Online via IkyyXD', iconSVG: '<rect x="2" y="4" width="20" height="16" rx="2"></rect><polyline points="8 10 4 12 8 14"></polyline><polyline points="16 10 20 12 16 14"></polyline>', ep: 'https://api.ikyyxd.my.id/canvas/fakedev', type: 'fakedev' },
 
-      { id: 'img2link', name: 'Foto To Link', desc: 'Upload gambar ke URL CDN global', longDesc: 'Pilih gambar dari galeri untuk diunggah dan dapatkan link CDN yang bisa dibagikan.', tag: 'IMGBB', cat: 'tools', theme: 'utility', apiName: 'ImgBB CDN', apiSub: 'Online via ImgBB', iconSVG: '<path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>', type: 'img2link' },
-      { id: 'gtts', name: 'Google TTS', desc: 'Ubah teks menjadi suara', longDesc: 'Masukkan teks dan pilih bahasa, lalu dengarkan atau unduh hasil audionya.', tag: 'AUDIO', cat: 'tools', theme: 'utility', apiName: 'Google Translate TTS', apiSub: 'Layanan publik Google', iconSVG: '<path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12.23"></line><line x1="8" y1="23" x2="16" y2="23"></line>', type: 'tts' },
-      { id: 'base_tool', name: 'Base Encoder/Decoder', desc: 'Encode & Decode Base64 / Base32', longDesc: 'Konversi teks ke Base64/Base32 atau sebaliknya, seluruhnya diproses lokal di perangkatmu.', tag: 'CYPHER', cat: 'tools', theme: 'utility', apiName: 'Local Engine', apiSub: 'Diproses di perangkat', iconSVG: '<polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline>', type: 'base_tool' },
-      { id: 'qrcode', name: 'QR Code Gen', desc: 'Buat kode QR instan', longDesc: 'Masukkan teks atau URL untuk membuat kode QR yang bisa langsung diunduh.', tag: 'LOCAL', cat: 'tools', theme: 'utility', apiName: 'QRServer API', apiSub: 'Online', iconSVG: '<rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect>', type: 'local' },
-      { id: 'passgen', name: 'Pass Generator', desc: 'Buat password acak kuat', longDesc: 'Tentukan panjang password untuk menghasilkan kombinasi karakter acak yang aman.', tag: 'LOCAL', cat: 'tools', theme: 'utility', apiName: 'Local Engine', apiSub: 'Diproses di perangkat', iconSVG: '<rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path>', type: 'local' },
-      { id: 'morse', name: 'Morse Code', desc: 'Konversi teks ke kode Morse', longDesc: 'Masukkan teks untuk dikonversi menjadi kode Morse secara instan.', tag: 'LOCAL', cat: 'tools', theme: 'utility', apiName: 'Local Engine', apiSub: 'Diproses di perangkat', iconSVG: '<circle cx="5" cy="12" r="1"></circle><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle>', type: 'local' },
-      { id: 'calc', name: 'Kalkulator', desc: 'Hitung ekspresi matematika', longDesc: 'Masukkan ekspresi matematika sederhana untuk mendapatkan hasilnya secara instan.', tag: 'LOCAL', cat: 'tools', theme: 'utility', apiName: 'Local Engine', apiSub: 'Diproses di perangkat', iconSVG: '<rect x="4" y="2" width="16" height="20" rx="2"></rect><line x1="8" y1="6" x2="16" y2="6"></line><line x1="16" y1="14" x2="16" y2="18"></line><line x1="8" y1="10" x2="8" y2="10.01"></line><line x1="12" y1="10" x2="12" y2="10.01"></line><line x1="16" y1="10" x2="16" y2="10.01"></line><line x1="8" y1="14" x2="8" y2="14.01"></line><line x1="12" y1="14" x2="12" y2="14.01"></line><line x1="8" y1="18" x2="8" y2="18.01"></line>', type: 'local' },
-      { id: 'rmbg', name: 'Remove BG', desc: 'Hapus background foto otomatis', longDesc: 'Pilih foto dari galeri, background akan dihapus otomatis menggunakan AI.', tag: 'GALERI', cat: 'tools', theme: 'utility', apiName: 'NexRay API', apiSub: 'Online via NexRay', iconSVG: '<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle>', ep: 'https://api.nexray.eu.cc/tools/removebg', type: 'gallery_upload' },
-      { id: 'enh', name: 'Image Enhancer', desc: 'Tingkatkan resolusi foto', longDesc: 'Pilih foto dari galeri untuk ditingkatkan kualitas dan resolusinya secara otomatis.', tag: 'GALERI', cat: 'tools', theme: 'utility', apiName: 'NexRay API', apiSub: 'Online via NexRay', iconSVG: '<circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line>', ep: 'https://api.nexray.eu.cc/tools/v1/enhancer', type: 'gallery_upload' }
+      { id: 'img2link', name: 'Foto To Link', desc: 'Upload gambar ke URL ImgBB', longDesc: 'Konversi gambar lokal ke URL publik menggunakan ImgBB API.', tag: 'IMGBB', cat: 'tools', theme: 'utility', apiName: 'ImgBB CDN', apiSub: 'Online via ImgBB', iconSVG: '<path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>', type: 'img2link' },
+      { id: 'rmbg', name: 'Remove BG', desc: 'Hapus Background Foto', longDesc: 'Pilih gambar dari galeri lalu hilangkan latar belakang secara otomatis.', tag: 'GALERI', cat: 'tools', theme: 'utility', apiName: 'NexRay API', apiSub: 'Online via NexRay', iconSVG: '<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle>', ep: 'https://api.nexray.eu.cc/tools/removebg', type: 'gallery_upload' },
+      { id: 'enh', name: 'Image Enhancer', desc: 'Tingkatkan kualitas foto HD', longDesc: 'Pilih gambar dari galeri untuk meningkatkan ketajaman dan resolusi.', tag: 'GALERI', cat: 'tools', theme: 'utility', apiName: 'NexRay API', apiSub: 'Online via NexRay', iconSVG: '<circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line>', ep: 'https://api.nexray.eu.cc/tools/v1/enhancer', type: 'gallery_upload' }
     ];
 
     let currentTool = null;
     let selectedImageFile = null;
-    let selectedQuality = null;
+    let selectedQuality = '1080';
     let selectedFormatTab = 'video';
 
     /* Canvas Background Particles */
@@ -695,7 +675,7 @@
     function animateParticles() { ctx.clearRect(0, 0, canvas.width, canvas.height); particles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animateParticles); }
     animateParticles();
 
-    /* Loader */
+    /* Loader Initialization */
     window.addEventListener('load', () => {
       const bar = document.getElementById('loader-bar');
       const pctText = document.getElementById('loader-percent');
@@ -734,7 +714,6 @@
     }
 
     function showToast(msg) { const t = document.getElementById('toast'); t.innerText = msg; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 3000); }
-
     function openModal(id) { document.getElementById(id).classList.add('active'); }
     function closeModal(id) { document.getElementById(id).classList.remove('active'); }
 
@@ -759,7 +738,6 @@
     }
     function updateBattery(level) { const pct = Math.round(level * 100); document.getElementById('battery-percent').innerText = pct + '%'; document.getElementById('battery-fill').style.width = pct + '%'; }
 
-    /* ================= Dashboard rendering ================= */
     function renderTools(cat = 'all') {
       const grid = document.getElementById('tools-grid');
       grid.innerHTML = '';
@@ -776,14 +754,34 @@
 
     const CAT_LABEL = { downloader: 'DOWNLOADER', maker: 'CREATIVE MAKER', tools: 'UTILITY TOOL' };
 
-    /* ================= Tool page open/close ================= */
+    function setApiStatus(isOk) {
+      const dot = document.getElementById('tv-status-dot');
+      const state = document.getElementById('tv-api-state');
+      const topDot = document.getElementById('tt-dot');
+      if (isOk) {
+        dot.className = 'api-status-dot'; state.className = 'state ok'; state.innerText = 'Aktif';
+        if (topDot) topDot.className = 'status-dot';
+      } else {
+        dot.className = 'api-status-dot warn'; state.className = 'state warn'; state.innerText = 'Gangguan';
+        if (topDot) topDot.className = 'status-dot warn';
+      }
+    }
+
+    function refreshStatus(e) {
+      if (e) e.currentTarget.classList.add('spin');
+      setTimeout(() => {
+        if (e) e.currentTarget.classList.remove('spin');
+        setApiStatus(true);
+        showToast('🔄 Status API berhasil diperbarui');
+      }, 700);
+    }
+
     function openTool(tool) {
       currentTool = tool;
       selectedImageFile = null;
-      selectedQuality = tool.type === 'yt_combo' ? '720' : null;
+      selectedQuality = '1080';
       selectedFormatTab = 'video';
 
-      /* Apply dynamic theme color (site override tetap prioritas) */
       applyTheme(siteThemeOverride === 'gojo' ? 'gojo' : (tool.theme || 'default'));
 
       const dashView = document.getElementById('dashboard-view');
@@ -815,12 +813,11 @@
       const filePreview = document.getElementById('file-preview-img');
       const fileInput = document.getElementById('image-file-input');
       const extraContainer = document.getElementById('extra-options-container');
-      const extraSelect = document.getElementById('extra-select');
-      const extraLabel = document.getElementById('extra-label');
       const formatTabsContainer = document.getElementById('format-tabs-container');
       const qualityContainer = document.getElementById('quality-list-container');
       const fakedevFields = document.getElementById('fakedev-fields');
       const submitText = document.getElementById('submit-btn-text');
+      const resBox = document.getElementById('result-container');
 
       fileInput.value = '';
       filePreview.style.display = 'none';
@@ -832,6 +829,7 @@
       inputVal.style.display = 'block';
       inputLabel.style.display = 'none';
       fileContainer.style.display = 'none';
+      resBox.style.display = 'none';
       submitText.innerText = 'PROSES SEKARANG';
       inputVal.value = '';
 
@@ -842,50 +840,33 @@
         inputVal.style.display = 'none';
         fakedevFields.style.display = 'block';
         fileContainer.style.display = 'block';
-        document.getElementById('fd-name').value = '';
-        document.getElementById('fd-bio').value = '';
-      } else if (tool.type === 'lobbyml_form') {
+      } else if (tool.type === 'lobby_upload') {
         inputLabel.style.display = 'block';
         inputLabel.innerText = 'NICKNAME';
-        inputVal.placeholder = 'Masukkan nickname...';
+        inputVal.placeholder = 'Masukkan Nickname ML...';
         fileContainer.style.display = 'block';
       } else if (tool.type === 'yt_combo') {
         inputLabel.style.display = 'block';
-        document.getElementById('input-label').innerText = 'LINK YOUTUBE';
-        inputVal.placeholder = 'Tempel URL YouTube di sini...';
+        inputLabel.innerText = 'LINK YOUTUBE';
+        inputVal.placeholder = 'Tempel URL YouTube...';
         formatTabsContainer.style.display = 'block';
         renderFormatTabs();
         qualityContainer.style.display = 'block';
         renderQualityList();
       } else if (tool.type === 'brat_combo') {
-        extraContainer.style.display = 'block';
-        extraLabel.innerText = 'TIPE OUTPUT';
-        extraSelect.innerHTML = `<option value="static">🖼️ Gambar PNG</option><option value="video">🎬 Video MP4 Animasi</option>`;
-        inputVal.placeholder = 'Teks Stiker Brat...';
-      } else if (tool.type === 'base_tool') {
-        extraContainer.style.display = 'block';
-        extraLabel.innerText = 'MODE ENKRIPSI';
-        extraSelect.innerHTML = `<option value="b64_enc">Base64 Encode</option><option value="b64_dec">Base64 Decode</option><option value="b32_enc">Base32 Encode</option><option value="b32_dec">Base32 Decode</option>`;
-        inputVal.placeholder = 'Masukkan Teks...';
-      } else if (tool.type === 'tts') {
-        extraContainer.style.display = 'block';
-        extraLabel.innerText = 'BAHASA SUARA';
-        extraSelect.innerHTML = `<option value="id">Indonesia (ID)</option><option value="en">Inggris (EN)</option>`;
-        inputVal.placeholder = 'Teks yang ingin diucapkan...';
-      } else if (tool.id === 'passgen') {
-        inputVal.placeholder = 'Panjang password (contoh: 12)';
-      } else if (tool.id === 'calc') {
-        inputVal.placeholder = 'Ekspresi MTK (contoh: 25 * 4)';
+        inputLabel.style.display = 'block';
+        inputLabel.innerText = 'TEKS BRAT';
+        inputVal.placeholder = 'Masukkan kalimat...';
+        formatTabsContainer.style.display = 'block';
+        renderBratTabs();
       } else {
-        inputVal.placeholder = `Masukkan ${tool.paramKey || 'Teks / Input'} di sini...`;
+        inputLabel.style.display = 'block';
+        inputLabel.innerText = 'INPUT TEXT / URL';
+        inputVal.placeholder = 'Tempel link atau teks di sini...';
       }
-
-      document.getElementById('result-container').style.display = 'none';
-      window.scrollTo(0, 0);
     }
 
     function closeTool() {
-      applyTheme(siteThemeOverride === 'gojo' ? 'gojo' : 'default');
       const dashView = document.getElementById('dashboard-view');
       const toolView = document.getElementById('tool-view');
 
@@ -897,279 +878,218 @@
         dashView.style.display = 'block';
         document.getElementById('navbar').style.display = 'block';
         setTimeout(() => dashView.classList.remove('hidden-view'), 30);
+        applyTheme(siteThemeOverride === 'gojo' ? 'gojo' : 'default');
       }, 200);
-
-      currentTool = null;
-      window.scrollTo(0, 0);
-    }
-
-    function setApiStatus(ok) {
-      const dot1 = document.getElementById('tt-dot');
-      const dot2 = document.getElementById('tv-status-dot');
-      const stateEl = document.getElementById('tv-api-state');
-      dot1.className = ok ? 'status-dot' : 'status-dot warn';
-      dot2.className = ok ? 'api-status-dot' : 'api-status-dot warn';
-      stateEl.className = ok ? 'state ok' : 'state warn';
-      stateEl.innerText = ok ? 'Aktif' : 'Belum diuji';
-    }
-
-    function refreshStatus(e) {
-      if (e) e.stopPropagation();
-      const btn = e.currentTarget;
-      btn.classList.add('spin');
-      setTimeout(() => { btn.classList.remove('spin'); setApiStatus(true); showToast('🔄 Status API diperbarui'); }, 700);
     }
 
     function renderFormatTabs() {
-      const wrap = document.getElementById('format-tabs');
-      wrap.innerHTML = `<div class="format-tab ${selectedFormatTab === 'video' ? 'active' : ''}" onclick="setFormatTab('video')">🎬 Video MP4</div><div class="format-tab ${selectedFormatTab === 'audio' ? 'active' : ''}" onclick="setFormatTab('audio')">🎵 Audio MP3</div>`;
-    }
-    function setFormatTab(tab) {
-      selectedFormatTab = tab;
-      renderFormatTabs();
-      document.getElementById('quality-list-container').style.display = tab === 'video' ? 'block' : 'none';
+      const container = document.getElementById('format-tabs');
+      container.innerHTML = `
+        <div class="format-tab ${selectedFormatTab === 'video' ? 'active' : ''}" onclick="switchFormatTab('video')">VIDEO (MP4)</div>
+        <div class="format-tab ${selectedFormatTab === 'audio' ? 'active' : ''}" onclick="switchFormatTab('audio')">AUDIO (MP3)</div>
+      `;
     }
 
-    /* Kualitas YouTube Disesuaikan */
-    const YT_QUALITIES = [
-      { value: '360', name: '360p Standard', sub: 'MP4 • Hemat Kuota' },
-      { value: '480', name: '480p Medium', sub: 'MP4 • Kualitas Sedang' },
-      { value: '720', name: '720p HD', sub: 'MP4 • Kualitas Jernih' }
-    ];
+    function renderBratTabs() {
+      const container = document.getElementById('format-tabs');
+      container.innerHTML = `
+        <div class="format-tab ${selectedFormatTab === 'static' ? 'active' : ''}" onclick="switchBratTab('static')">GAMBAR (PNG)</div>
+        <div class="format-tab ${selectedFormatTab === 'video' ? 'active' : ''}" onclick="switchBratTab('video')">VIDEO (MP4)</div>
+      `;
+    }
+
+    function switchFormatTab(type) {
+      selectedFormatTab = type;
+      renderFormatTabs();
+      const qBox = document.getElementById('quality-list-container');
+      qBox.style.display = type === 'video' ? 'block' : 'none';
+    }
+
+    function switchBratTab(type) {
+      selectedFormatTab = type;
+      renderBratTabs();
+    }
+
     function renderQualityList() {
-      const wrap = document.getElementById('quality-list');
-      wrap.innerHTML = '';
-      YT_QUALITIES.forEach(q => {
-        const row = document.createElement('div');
-        row.className = 'quality-row' + (selectedQuality === q.value ? ' selected' : '');
-        row.onclick = () => { selectedQuality = q.value; renderQualityList(); };
-        row.innerHTML = `<div><div class="qname">${q.name}</div><div class="qsub">${q.sub}</div></div><div class="qcheck"></div>`;
-        wrap.appendChild(row);
+      const qlist = document.getElementById('quality-list');
+      const options = [
+        { id: '1080', name: 'Full HD (1080p)', sub: 'NexRay Engine' },
+        { id: '1440', name: '2K Quad HD (1440p)', sub: 'NexRay Engine' },
+        { id: '2160', name: '4K Ultra HD (2160p)', sub: 'NexRay Engine' }
+      ];
+      qlist.innerHTML = '';
+      options.forEach(opt => {
+        const isSel = selectedQuality === opt.id;
+        qlist.innerHTML += `
+          <div class="quality-row ${isSel ? 'selected' : ''}" onclick="selectQuality('${opt.id}')">
+            <div><div class="qname">${opt.name}</div><div class="qsub">${opt.sub}</div></div>
+            <div class="qcheck">${isSel ? '✓' : ''}</div>
+          </div>
+        `;
       });
     }
-    function onExtraChange() {}
 
-    function previewSelectedImage(event) {
-      const file = event.target.files[0];
+    function selectQuality(id) {
+      selectedQuality = id;
+      renderQualityList();
+    }
+
+    function previewSelectedImage(e) {
+      const file = e.target.files[0];
       if (file) {
         selectedImageFile = file;
         const reader = new FileReader();
-        reader.onload = function(e) { const previewImg = document.getElementById('file-preview-img'); previewImg.src = e.target.result; previewImg.style.display = 'block'; };
+        reader.onload = (ev) => {
+          const img = document.getElementById('file-preview-img');
+          img.src = ev.target.result;
+          img.style.display = 'block';
+        };
         reader.readAsDataURL(file);
       }
     }
 
     async function uploadToImgBB(file) {
-      const formData = new FormData();
-      formData.append('image', file);
-      const response = await fetch(`https://api.imgbb.com/1/upload?key=${CONFIG.imgbbApiKey}`, { method: 'POST', body: formData });
-      const data = await response.json();
-      if (data && data.success && data.data && data.data.url) return data.data.url;
-      throw new Error('Gagal mengunggah foto ke ImgBB CDN.');
+      const form = new FormData();
+      form.append('image', file);
+      const res = await fetch(`https://api.imgbb.com/1/upload?key=${CONFIG.imgbbApiKey}`, { method: 'POST', body: form });
+      const json = await res.json();
+      if (json.success) return json.data.url;
+      throw new Error('Gagal unggah foto ke ImgBB.');
     }
 
-    const Base32 = {
-      alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567",
-      encode: function(str) {
-        let buf = new TextEncoder().encode(str);
-        let bits = 0, value = 0, output = "";
-        for (let i = 0; i < buf.length; i++) { value = (value << 8) | buf[i]; bits += 8; while (bits >= 5) { output += this.alphabet[(value >>> (bits - 5)) & 31]; bits -= 5; } }
-        if (bits > 0) output += this.alphabet[(value << (5 - bits)) & 31];
-        while (output.length % 8 !== 0) output += "=";
-        return output;
-      },
-      decode: function(str) {
-        str = str.replace(/=+$/, "").toUpperCase();
-        let bits = 0, value = 0, output = [];
-        for (let i = 0; i < str.length; i++) { let idx = this.alphabet.indexOf(str[i]); if (idx === -1) continue; value = (value << 5) | idx; bits += 5; if (bits >= 8) { output.push((value >>> (bits - 8)) & 255); bits -= 8; } }
-        return new TextDecoder().decode(new Uint8Array(output));
-      }
-    };
-
     async function processAction() {
-      const resContainer = document.getElementById('result-container');
+      if (!currentTool) return;
+      const resBox = document.getElementById('result-container');
       const resContent = document.getElementById('result-content');
-      const valInput = document.getElementById('input-val');
-      const extraSelect = document.getElementById('extra-select');
+      const inputVal = document.getElementById('input-val').value.trim();
 
-      if (currentTool.type === 'fakedev') {
-        const nama = document.getElementById('fd-name').value.trim();
-        const bio = document.getElementById('fd-bio').value.trim();
-        if (!nama || !bio) { showToast('⚠️ Nama dan bio wajib diisi!'); return; }
-        if (!selectedImageFile) { showToast('⚠️ Foto profil wajib dipilih!'); return; }
-        resContainer.style.display = 'block';
-        resContent.innerHTML = `<span style="font-size:12px; color:var(--text-sub);">⌛ Step 1/2: Mengunggah foto ke CDN...</span>`;
-        try {
-          const imageUrl = await uploadToImgBB(selectedImageFile);
-          resContent.innerHTML = `<span style="font-size:12px; color:var(--text-sub);">⌛ Step 2/2: Membuat kartu profil...</span>`;
-          const targetUrl = `${currentTool.ep}?image=${encodeURIComponent(imageUrl)}&nama=${encodeURIComponent(nama)}&bio=${encodeURIComponent(bio)}`;
-          const img = new Image();
-          img.className = 'preview-img';
-          img.onload = () => { resContent.innerHTML = ''; resContent.appendChild(img); resContent.innerHTML += `<a href="${targetUrl}" target="_blank" download class="action-btn">💾 Unduh Kartu Profil</a>`; };
-          img.onerror = () => { resContent.innerHTML = `<span style="color:#ef4444;">Gagal membuat kartu profil dari server.</span><a href="${targetUrl}" target="_blank" class="action-btn">👉 Buka Link Langsung</a>`; };
-          img.src = targetUrl;
-        } catch (err) { resContent.innerHTML = `<span style="color:#ef4444;">Gagal mengunggah foto ke ImgBB!</span>`; }
-        return;
-      }
+      resBox.style.display = 'block';
+      resContent.innerHTML = '<div style="color:var(--text-sub); font-size:12px;">⏳ Sedang memproses... Harap tunggu.</div>';
 
-      if (currentTool.type === 'lobbyml_form') {
-        const nickname = valInput.value.trim();
-        if (!nickname) { showToast('⚠️ Masukkan nickname!'); return; }
-        if (!selectedImageFile) { showToast('⚠️ Foto avatar wajib dipilih!'); return; }
-        resContainer.style.display = 'block';
-        resContent.innerHTML = `<span style="font-size:12px; color:var(--text-sub);">⌛ Step 1/2: Mengunggah avatar ke CDN...</span>`;
-        try {
-          const avatarUrl = await uploadToImgBB(selectedImageFile);
-          resContent.innerHTML = `<span style="font-size:12px; color:var(--text-sub);">⌛ Step 2/2: Membuat lobby...</span>`;
-          const targetUrl = `${currentTool.ep}?nickname=${encodeURIComponent(nickname)}&avatar=${encodeURIComponent(avatarUrl)}`;
-          const img = new Image();
-          img.className = 'preview-img';
-          img.onload = () => { resContent.innerHTML = ''; resContent.appendChild(img); resContent.innerHTML += `<a href="${targetUrl}" target="_blank" download class="action-btn">💾 Unduh Gambar</a>`; };
-          img.onerror = () => { resContent.innerHTML = `<a href="${targetUrl}" target="_blank" class="action-btn">👉 Buka Hasil Langsung</a>`; };
-          img.src = targetUrl;
-        } catch (err) { resContent.innerHTML = `<span style="color:#ef4444;">Gagal mengunggah avatar ke ImgBB!</span>`; }
-        return;
-      }
-
-      if (currentTool.type === 'img2link') {
-        if (!selectedImageFile) { showToast('⚠️ Pilih foto dari galeri terlebih dahulu!'); return; }
-        resContainer.style.display = 'block';
-        resContent.innerHTML = `<span style="font-size:12px; color:var(--text-sub);">⌛ Mengunggah Foto ke Cloud ImgBB...</span>`;
-        try {
-          const url = await uploadToImgBB(selectedImageFile);
-          resContent.innerHTML = `<img src="${url}" class="preview-img"><div style="font-size:11px; word-break:break-all; color:var(--accent-bright); margin-bottom:8px;">${url}</div><button onclick="navigator.clipboard.writeText('${url}'); showToast('📋 URL berhasil disalin!')" class="action-btn">📋 Salin Link Gambar</button>`;
-        } catch (err) { resContent.innerHTML = `<span style="color:#ef4444;">Gagal mengunggah foto ke ImgBB!</span>`; }
-        return;
-      }
-
-      if (currentTool.type === 'gallery_upload') {
-        if (!selectedImageFile) { showToast('⚠️ Pilih gambar dari galeri dulu!'); return; }
-        resContainer.style.display = 'block';
-        resContent.innerHTML = `<span style="font-size:12px; color:var(--text-sub);">⌛ Step 1/2: Mengunggah foto ke CDN...</span>`;
-        try {
-          const cdnImageUrl = await uploadToImgBB(selectedImageFile);
-          resContent.innerHTML = `<span style="font-size:12px; color:var(--text-sub);">⌛ Step 2/2: Memproses foto via API AI...</span>`;
-          const targetUrl = `${currentTool.ep}?url=${encodeURIComponent(cdnImageUrl)}`;
-          const response = await fetch(targetUrl);
-          if (response.ok) {
-            const contentType = response.headers.get("content-type");
-            if (contentType && contentType.includes("application/json")) {
-              const data = await response.json();
-              const finalImg = data.result || data.url || data.image;
-              if (finalImg) resContent.innerHTML = `<img src="${finalImg}" class="preview-img"><a href="${finalImg}" target="_blank" download class="action-btn">💾 Unduh Hasil Foto</a>`;
-              else resContent.innerHTML = `<span style="color:#ef4444;">Respons API tidak valid.</span>`;
-            } else {
-              const blob = await response.blob();
-              const resultImgUrl = URL.createObjectURL(blob);
-              resContent.innerHTML = `<img src="${resultImgUrl}" class="preview-img"><a href="${resultImgUrl}" download="nexalink_result.png" class="action-btn">💾 Unduh Hasil Foto</a>`;
-            }
-          } else { resContent.innerHTML = `<span style="color:#ef4444;">Gagal memproses gambar dari server Nexray.</span>`; }
-        } catch (err) { resContent.innerHTML = `<span style="color:#ef4444;">Error: ${err.message || 'Terjadi kesalahan sistem.'}</span>`; }
-        return;
-      }
-
-      const val = valInput.value.trim();
-
-      if (currentTool.type === 'base_tool') {
-        if (!val) { showToast('⚠️ Masukkan teks terlebih dahulu!'); return; }
-        resContainer.style.display = 'block';
-        const mode = extraSelect.value;
-        let outputText = '';
-        try {
-          if (mode === 'b64_enc') outputText = btoa(unescape(encodeURIComponent(val)));
-          else if (mode === 'b64_dec') outputText = decodeURIComponent(escape(atob(val)));
-          else if (mode === 'b32_enc') outputText = Base32.encode(val);
-          else if (mode === 'b32_dec') outputText = Base32.decode(val);
-          resContent.innerHTML = `<div style="font-size:13px; color:#fff; word-break:break-all; margin-bottom:8px; text-align:left; background:rgba(0,0,0,0.5); padding:8px; border-radius:6px; border:1px solid var(--border);">${outputText}</div><button onclick="navigator.clipboard.writeText('${outputText}'); showToast('📋 Berhasil disalin!')" class="action-btn">📋 Salin Hasil</button>`;
-        } catch (e) { resContent.innerHTML = `<span style="color:#ef4444;">Gagal memproses Enkripsi/Dekripsi! Format tidak valid.</span>`; }
-        return;
-      }
-
-      if (currentTool.type === 'tts') {
-        if (!val) { showToast('⚠️ Masukkan teks!'); return; }
-        resContainer.style.display = 'block';
-        const lang = extraSelect.value;
-        const ttsUrl = `https://translate.google.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(val)}&tl=${lang}&client=tw-ob`;
-        resContent.innerHTML = `<audio src="${ttsUrl}" controls style="width:100%; margin-bottom:8px;"></audio><a href="${ttsUrl}" target="_blank" download="google_tts.mp3" class="action-btn">🔊 Unduh Audio TTS</a>`;
-        return;
-      }
-
-      if (currentTool.type === 'local') {
-        resContainer.style.display = 'block';
-        if (currentTool.id === 'qrcode') {
-          if (!val) { showToast('⚠️ Masukkan teks/URL!'); return; }
-          const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(val)}`;
-          resContent.innerHTML = `<img src="${qrUrl}" class="preview-img"><a href="${qrUrl}" target="_blank" class="action-btn">💾 Unduh QR Code</a>`;
-        } else if (currentTool.id === 'passgen') {
-          const len = parseInt(val) || 12;
-          const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()';
-          let password = '';
-          for (let i = 0; i < len; i++) password += chars.charAt(Math.floor(Math.random() * chars.length));
-          resContent.innerHTML = `<div style="font-size:16px; font-weight:bold; color:var(--accent-bright); margin-bottom:8px; word-break:break-all;">${password}</div><button onclick="navigator.clipboard.writeText('${password}'); showToast('📋 Berhasil disalin!')" class="action-btn">📋 Salin Password</button>`;
-        } else if (currentTool.id === 'morse') {
-          if (!val) { showToast('⚠️ Masukkan teks!'); return; }
-          const morseMap = { 'A': '.-', 'B': '-...', 'C': '-.-.', 'D': '-..', 'E': '.', 'F': '..-.', 'G': '--.', 'H': '....', 'I': '..', 'J': '.---', 'K': '-.-', 'L': '.-..', 'M': '--', 'N': '-.', 'O': '---', 'P': '.--.', 'Q': '--.-', 'R': '.-.', 'S': '...', 'T': '-', 'U': '..-', 'V': '...-', 'W': '.--', 'X': '-..-', 'Y': '-.--', 'Z': '--..', '1': '.----', '2': '..---', '3': '...--', '4': '....-', '5': '.....', '6': '-....', '7': '--...', '8': '---..', '9': '----.', '0': '-----', ' ': '/' };
-          const morse = val.toUpperCase().split('').map(c => morseMap[c] || c).join(' ');
-          resContent.innerHTML = `<div style="font-size:14px; color:#fff; word-break:break-all; margin-bottom:8px;">${morse}</div><button onclick="navigator.clipboard.writeText('${morse}'); showToast('📋 Berhasil disalin!')" class="action-btn">📋 Salin Morse</button>`;
-        } else if (currentTool.id === 'calc') {
-          if (!val) { showToast('⚠️ Masukkan angka/hitungan!'); return; }
-          try { const calculated = eval(val.replace(/[^0-9+\-*/().]/g, '')); resContent.innerHTML = `<div style="font-size:18px; font-weight:bold; color:var(--accent-bright);">Hasil: ${calculated}</div>`; }
-          catch (e) { resContent.innerHTML = `<span style="color:#ef4444;">Format Matematika Salah!</span>`; }
+      try {
+        if (currentTool.type === 'tiktok') {
+          if (!inputVal) throw new Error('Link TikTok tidak boleh kosong!');
+          const res = await fetch(`https://www.tikwm.com/api/?url=${encodeURIComponent(inputVal)}`);
+          const json = await res.json();
+          if (json.code === 0) {
+            const data = json.data;
+            resContent.innerHTML = `
+              <img src="${data.cover}" class="preview-img">
+              <div style="font-size:12px; font-weight:700; margin-bottom:8px;">${data.title || 'TikTok Media'}</div>
+              <a href="${data.play}" target="_blank" class="action-btn">UNDUH VIDEO (NO WM)</a>
+              <a href="${data.music}" target="_blank" class="action-btn" style="background:#4ade80; color:#000;">UNDUH AUDIO (MP3)</a>
+            `;
+          } else { throw new Error('Video TikTok tidak ditemukan / link invalid.'); }
         }
-        return;
-      }
+        else if (currentTool.type === 'json_url') {
+          if (!inputVal) throw new Error('URL input wajib diisi!');
+          const targetUrl = `${currentTool.ep}?${currentTool.paramKey}=${encodeURIComponent(inputVal)}`;
+          const res = await fetch(targetUrl);
+          const json = await res.json();
+          const mediaUrl = json.result || json.url || json.link || (json.data && json.data.url);
+          
+          if (mediaUrl) {
+            resContent.innerHTML = `
+              <div style="font-size:12px; margin-bottom:8px;">✅ Berhasil Mengekstrak Link!</div>
+              <a href="${mediaUrl}" target="_blank" class="action-btn">UNDUH MEDIA</a>
+            `;
+          } else {
+            resContent.innerHTML = `<div style="font-size:12px; word-break:break-all;">Hasil JSON:<br><code>${JSON.stringify(json)}</code></div>`;
+          }
+        }
+        else if (currentTool.type === 'yt_combo') {
+          if (!inputVal) throw new Error('Link YouTube wajib diisi!');
+          let ep = 'https://api.nexray.eu.cc/downloader/ytmp3';
+          if (selectedFormatTab === 'video') {
+            ep = `https://api.nexray.eu.cc/downloader/ytmp4?resolusi=${selectedQuality}`;
+          }
+          const res = await fetch(`${ep}&url=${encodeURIComponent(inputVal)}`);
+          const json = await res.json();
+          const downloadUrl = json.result || json.url || json.link;
 
-      if (currentTool.type === 'yt_combo') {
-        if (!val) { showToast('⚠️ Masukkan link YouTube!'); return; }
-        resContainer.style.display = 'block';
-        resContent.innerHTML = `<span style="font-size:12px; color:var(--text-sub);">⌛ Mengambil info video...</span>`;
-        const isAudio = selectedFormatTab === 'audio';
-        const targetUrl = isAudio
-          ? `https://api.nexray.eu.cc/downloader/ytmp3?url=${encodeURIComponent(val)}`
-          : `https://api.nexray.eu.cc/downloader/ytmp4?url=${encodeURIComponent(val)}&resolusi=${selectedQuality || '720'}`;
-        try {
-          const response = await fetch(targetUrl);
-          const data = await response.json();
-          const mediaUrl = data.result?.url || data.result?.download?.url || data.url || data.result;
-          const title = data.result?.title || data.title || 'YouTube Downloader';
-          if (mediaUrl && typeof mediaUrl === 'string') {
-            if (isAudio) resContent.innerHTML = `<div style="font-size:12px; color:#fff; font-weight:600; margin-bottom:8px; line-height:1.3;">${title}</div><audio src="${mediaUrl}" controls style="width:100%; margin-bottom:8px;"></audio><a href="${mediaUrl}" target="_blank" download class="action-btn">🎵 Unduh Audio MP3</a>`;
-            else resContent.innerHTML = `<div style="font-size:12px; color:#fff; font-weight:600; margin-bottom:8px; line-height:1.3;">${title}</div><video src="${mediaUrl}" controls style="width:100%; max-height:220px; border-radius:8px; margin-bottom:8px;"></video><a href="${mediaUrl}" target="_blank" download class="action-btn">🎬 Unduh Video ${selectedQuality}p</a>`;
-          } else { resContent.innerHTML = `<span style="color:#ef4444;">URL media tidak ditemukan. Silakan cek link kembali.</span>`; }
-        } catch (err) { resContent.innerHTML = `<span style="color:#ef4444;">Gagal memproses video/audio dari server Nexray.</span>`; }
-        return;
-      }
+          if (downloadUrl) {
+            resContent.innerHTML = `
+              <div style="font-size:12px; font-weight:700; margin-bottom:8px;">Output YouTube (${selectedFormatTab.toUpperCase()})</div>
+              <a href="${downloadUrl}" target="_blank" class="action-btn">DOWNLOAD SEKARANG</a>
+            `;
+          } else {
+            resContent.innerHTML = `<div style="font-size:12px;">Pesan API: ${JSON.stringify(json)}</div>`;
+          }
+        }
+        else if (currentTool.type === 'brat_combo') {
+          if (!inputVal) throw new Error('Masukkan teks Brat!');
+          const ep = selectedFormatTab === 'static' ? currentTool.epStatic : currentTool.epVideo;
+          const finalUrl = `${ep}?text=${encodeURIComponent(inputVal)}`;
 
-      if (!val) { showToast('⚠️ Masukkan input terlebih dahulu!'); return; }
-      resContainer.style.display = 'block';
-      resContent.innerHTML = `<span style="font-size:12px; color:var(--text-sub);">⌛ Memproses API...</span>`;
-
-      if (currentTool.type === 'tiktok') {
-        try {
-          const response = await fetch(`${currentTool.ep}?url=${encodeURIComponent(val)}`);
-          const data = await response.json();
-          const r = data.result || data;
-          const playUrl = r.hdplay || r.play || r.data?.hdplay || r.data?.play || r.url;
-          const wmUrl = r.wmplay || r.data?.wmplay;
-          const musicUrl = r.music || r.data?.music;
-          const caption = r.title || r.caption || r.data?.title || '';
-          const stats = r.stats || r.data?.stats || {};
+          if (selectedFormatTab === 'static') {
+            resContent.innerHTML = `
+              <img src="${finalUrl}" class="preview-img">
+              <a href="${finalUrl}" target="_blank" class="action-btn">UNDUH GAMBAR BRAT</a>
+            `;
+          } else {
+            resContent.innerHTML = `
+              <video src="${finalUrl}" controls style="width:100%; border-radius:10px; margin-bottom:8px;"></video>
+              <a href="${finalUrl}" target="_blank" class="action-btn">UNDUH VIDEO BRAT</a>
+            `;
+          }
+        }
+        else if (currentTool.type === 'image_url') {
+          if (!inputVal) throw new Error('Input teks wajib diisi!');
+          const finalUrl = `${currentTool.ep}?${currentTool.paramKey}=${encodeURIComponent(inputVal)}`;
           resContent.innerHTML = `
-            <div class="stats-quad">
-              <div class="qwidget"><div class="qval">${stats.playCount ?? '—'}</div><div class="qlabel">Plays</div></div>
-              <div class="qwidget"><div class="qval">${stats.diggCount ?? '—'}</div><div class="qlabel">Likes</div></div>
-              <div class="qwidget"><div class="qval">${stats.commentCount ?? '—'}</div><div class="qlabel">Komen</div></div>
-              <div class="qwidget"><div class="qval">${stats.shareCount ?? '—'}</div><div class="qlabel">Share</div></div>
-            </div>
-            ${caption ? `<div class="caption-box"><div class="clabel">CAPTION</div><div class="ctext">${caption}</div></div>` : ''}
-            ${playUrl ? `<video src="${playUrl}" controls style="width:100%; max-height:220px; border-radius:8px; margin-bottom:8px;"></video>` : ''}
-            ${playUrl ? `<a href="${playUrl}" target="_blank" download class="action-btn">🎬 Unduh MP4 Tanpa Watermark</a>` : ''}
-            ${wmUrl ? `<a href="${wmUrl}" target="_blank" download class="action-btn btn-secondary" style="background:rgba(255,255,255,0.08);">💧 Unduh MP4 Watermark</a>` : ''}
-            ${musicUrl ? `<a href="${musicUrl}" target="_blank" download class="action-btn btn-secondary" style="background:rgba(255,255,255,0.08);">🎵 Unduh Audio Asli</a>` : ''}
-            ${!playUrl && !wmUrl ? `<span style="color:#ef4444;">URL media tidak ditemukan dalam respon.</span>` : ''}
+            <img src="${finalUrl}" class="preview-img">
+            <a href="${finalUrl}" target="_blank" class="action-btn">SIMPAN GAMBAR</a>
           `;
-        } catch (err) { resContent.innerHTML = `<span style="color:#ef4444;">Gagal mengambil data dari TikTok API.</span>`; }
-        return;
+        }
+        else if (currentTool.type === 'img2link') {
+          if (!selectedImageFile) throw new Error('Pilih gambar terlebih dahulu!');
+          const url = await uploadToImgBB(selectedImageFile);
+          resContent.innerHTML = `
+            <img src="${url}" class="preview-img">
+            <input type="text" class="custom-input" value="${url}" readonly style="margin-top:6px; text-align:center;">
+            <button class="action-btn" onclick="navigator.clipboard.writeText('${url}'); showToast('📋 Link tersalin!');">SALIN LINK</button>
+          `;
+        }
+        else if (currentTool.type === 'gallery_upload') {
+          if (!selectedImageFile) throw new Error('Pilih foto terlebih dahulu!');
+          showToast(' Uploading gambar ke CDN...');
+          const uploadedUrl = await uploadToImgBB(selectedImageFile);
+          const finalApiUrl = `${currentTool.ep}?url=${encodeURIComponent(uploadedUrl)}`;
+          
+          resContent.innerHTML = `
+            <img src="${finalApiUrl}" class="preview-img">
+            <a href="${finalApiUrl}" target="_blank" class="action-btn">UNDUH HASIL</a>
+          `;
+        }
+        else if (currentTool.type === 'lobby_upload') {
+          if (!inputVal) throw new Error('Nickname ML wajib diisi!');
+          if (!selectedImageFile) throw new Error('Foto Avatar wajib dipilih!');
+          showToast(' Uploading avatar...');
+          const avatarUrl = await uploadToImgBB(selectedImageFile);
+          const finalUrl = `${currentTool.ep}?nickname=${encodeURIComponent(inputVal)}&avatar=${encodeURIComponent(avatarUrl)}`;
+          
+          resContent.innerHTML = `
+            <img src="${finalUrl}" class="preview-img">
+            <a href="${finalUrl}" target="_blank" class="action-btn">SIMPAN LOBBY ML</a>
+          `;
+        }
+        else if (currentTool.type === 'fakedev') {
+          const name = document.getElementById('fd-name').value.trim();
+          const bio = document.getElementById('fd-bio').value.trim();
+          if (!name || !bio) throw new Error('Nama & Bio wajib diisi!');
+          if (!selectedImageFile) throw new Error('Pilih foto profil dev!');
+
+          showToast(' Uploading foto profil...');
+          const avatarUrl = await uploadToImgBB(selectedImageFile);
+          const finalUrl = `${currentTool.ep}?name=${encodeURIComponent(name)}&bio=${encodeURIComponent(bio)}&avatar=${encodeURIComponent(avatarUrl)}`;
+
+          resContent.innerHTML = `
+            <img src="${finalUrl}" class="preview-img">
+            <a href="${finalUrl}" target="_blank" class="action-btn">UNDUH PROFIL DEV</a>
+          `;
+        }
+      } catch (err) {
+        resContent.innerHTML = `<div style="color:var(--accent-bright); font-size:12px;">⚠️ Error: ${err.message}</div>`;
       }
     }
   </script>
