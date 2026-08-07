@@ -489,6 +489,19 @@
         <label class="field-label" id="input-label" style="display:none;">INPUT</label>
         <input type="text" id="input-val" class="custom-input" placeholder="Masukkan Teks / URL di sini..." />
 
+        <!-- Brat Options -->
+        <div id="brat-options" style="display:none;">
+          <label class="field-label">OPSI ANIMASI</label>
+          <select id="brat-animated-select" class="custom-select" onchange="toggleBratDelayInput()">
+            <option value="false">Gambar Statis (PNG/JPG)</option>
+            <option value="true">Animasi (GIF)</option>
+          </select>
+          <div id="brat-delay-box" style="display:none; margin-top:10px;">
+            <label class="field-label">ANIMATION DELAY (MS)</label>
+            <input type="number" id="brat-delay" class="custom-input" value="500" placeholder="500">
+          </div>
+        </div>
+
         <div id="fakedev-fields" style="display:none;">
           <label class="field-label">NAMA DEVELOPER</label>
           <input type="text" id="fd-name" class="custom-input" placeholder="Developer">
@@ -588,7 +601,8 @@
         'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3'
       ],
       imgbbApiKey: '79ba9d0c92917237a69749d390ecf0b1',
-      tikwmApiKey: '3acc22debb9b7eb7464bb8ae6e718338'
+      tikwmApiKey: '3acc22debb9b7eb7464bb8ae6e718338',
+      removeBgApiKey: 'ibqr1T7oLZWenSxvdfJ8rc4i'
     };
 
     const THEMES = {
@@ -641,7 +655,7 @@
       { id: 'terabox', name: 'Terabox', desc: 'Ambil file dari share Terabox', longDesc: 'Ambil link unduhan file yang tersimpan di Terabox.', tag: 'FILE', cat: 'downloader', theme: 'terabox', apiName: 'NexRay API', apiSub: 'Online via NexRay', iconSVG: '<path d="M21 8V7l-3-4H6L3 7v1"></path><path d="M3 8h18v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8z"></path><line x1="9" y1="12" x2="15" y2="12"></line>', paramKey: 'url', ep: 'https://api.nexray.eu.cc/downloader/terabox', type: 'json_url' },
       { id: 'yt_engine', name: 'YouTube', desc: 'Unduh MP4 (1080p-2160p) & MP3', longDesc: 'Pilih resolusi video hingga 4K atau unduh audionya saja.', tag: 'MP4/MP3', cat: 'downloader', theme: 'youtube', apiName: 'NexRay API', apiSub: 'Online via NexRay', iconSVG: '<path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>', type: 'yt_combo' },
 
-      { id: 'brat_gen', name: 'Brat Generator', desc: 'Buat stiker BRAT gambar / video', longDesc: 'Ketik teks lalu hasilkan media statis atau video animasi Brat.', tag: 'BRAT', cat: 'maker', theme: 'brat', apiName: 'NexRay API', apiSub: 'Online via NexRay', iconSVG: '<path d="M12 19l7-7 3 3-7 7-3-3z"></path><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path>', paramKey: 'text', type: 'brat_combo', epStatic: 'https://api.nexray.eu.cc/maker/brat', epVideo: 'https://api.nexray.eu.cc/maker/bratvid' },
+      { id: 'brat_gen', name: 'Brat Generator', desc: 'Buat stiker BRAT (Static & Animated)', longDesc: 'Ketik teks untuk menghasilkan stiker Brat statis atau animasi GIF.', tag: 'BRAT', cat: 'maker', theme: 'brat', apiName: 'Siputzx API', apiSub: 'Online via Siputzx', iconSVG: '<path d="M12 19l7-7 3 3-7 7-3-3z"></path><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path>', paramKey: 'text', type: 'brat_custom', ep: 'https://api.siputzx.my.id/api/m/brat' },
       { id: 'iqc', name: 'iPhone Quote Create', desc: 'Buat kartu quote ala iPhone Notes', longDesc: 'Ubah teks quote menjadi gaya iOS visual.', tag: 'IQC', cat: 'maker', theme: 'iqc', apiName: 'NexRay API', apiSub: 'Online via NexRay', iconSVG: '<circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 2-3 4"></path><line x1="12" y1="17" x2="12.01" y2="17"></line>', paramKey: 'text', ep: 'https://api.nexray.eu.cc/maker/iqc', type: 'image_url' },
       { id: 'sertifikat_tolol', name: 'Sertifikat Tolol', desc: 'Buat sertifikat meme kocak', longDesc: 'Isi teks nama untuk mencetak gambar sertifikat lucu.', tag: 'MEME', cat: 'maker', theme: 'maker', apiName: 'Siputzx API', apiSub: 'Online via Siputzx', iconSVG: '<circle cx="12" cy="8" r="5"></circle><path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12"></path>', paramKey: 'text', ep: 'https://api.siputzx.my.id/api/canvas/sertifikat-tolol', type: 'image_url' },
       { id: 'lobby_ml', name: 'Fake Lobby ML', desc: 'Buat SS Lobby Mobile Legends', longDesc: 'Masukkan Nickname & Upload Avatar untuk membuat Fake Lobby ML.', tag: 'LOBBY', cat: 'maker', theme: 'maker', apiName: 'NexRay API', apiSub: 'Online via NexRay', iconSVG: '<rect x="2" y="6" width="20" height="12" rx="2"></rect><path d="M6 12h4m-2-2v4m10-2h.01m-3-1h.01"></path>', ep: 'https://api.nexray.eu.cc/maker/fakelobyml', type: 'lobby_upload' },
@@ -649,7 +663,7 @@
       { id: 'fakedev', name: 'FakeDev Profile', desc: 'Generator Kartu Profil Dev', longDesc: 'Isi Nama, Bio, dan Upload Avatar untuk membuat Kartu Dev.', tag: 'PROFILE', cat: 'maker', theme: 'maker', apiName: 'IkyyXD API', apiSub: 'Online via IkyyXD', iconSVG: '<rect x="2" y="4" width="20" height="16" rx="2"></rect><polyline points="8 10 4 12 8 14"></polyline><polyline points="16 10 20 12 16 14"></polyline>', ep: 'https://api.ikyyxd.my.id/canvas/fakedev', type: 'fakedev' },
 
       { id: 'img2link', name: 'Foto To Link', desc: 'Upload gambar ke URL ImgBB', longDesc: 'Konversi gambar lokal ke URL publik menggunakan ImgBB API.', tag: 'IMGBB', cat: 'tools', theme: 'utility', apiName: 'ImgBB CDN', apiSub: 'Online via ImgBB', iconSVG: '<path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>', type: 'img2link' },
-      { id: 'rmbg', name: 'Remove BG', desc: 'Hapus Background Foto', longDesc: 'Pilih gambar dari galeri lalu hilangkan latar belakang secara otomatis.', tag: 'GALERI', cat: 'tools', theme: 'utility', apiName: 'NexRay API', apiSub: 'Online via NexRay', iconSVG: '<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle>', ep: 'https://api.nexray.eu.cc/tools/removebg', type: 'gallery_upload' },
+      { id: 'rmbg', name: 'Remove BG', desc: 'Hapus Background Foto', longDesc: 'Pilih gambar dari galeri lalu hilangkan latar belakang secara otomatis.', tag: 'GALERI', cat: 'tools', theme: 'utility', apiName: 'Remove.bg API', apiSub: 'Online via Remove.bg Direct', iconSVG: '<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle>', type: 'removebg_official' },
       { id: 'enh', name: 'Image Enhancer', desc: 'Tingkatkan kualitas foto HD', longDesc: 'Pilih gambar dari galeri untuk meningkatkan ketajaman dan resolusi.', tag: 'GALERI', cat: 'tools', theme: 'utility', apiName: 'NexRay API', apiSub: 'Online via NexRay', iconSVG: '<circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line>', ep: 'https://api.nexray.eu.cc/tools/v1/enhancer', type: 'gallery_upload' }
     ];
 
@@ -776,6 +790,11 @@
       }, 700);
     }
 
+    function toggleBratDelayInput() {
+      const isAnimated = document.getElementById('brat-animated-select').value === 'true';
+      document.getElementById('brat-delay-box').style.display = isAnimated ? 'block' : 'none';
+    }
+
     function openTool(tool) {
       currentTool = tool;
       selectedImageFile = null;
@@ -809,6 +828,7 @@
 
       const inputVal = document.getElementById('input-val');
       const inputLabel = document.getElementById('input-label');
+      const bratOptions = document.getElementById('brat-options');
       const fileContainer = document.getElementById('file-upload-container');
       const filePreview = document.getElementById('file-preview-img');
       const fileInput = document.getElementById('image-file-input');
@@ -826,6 +846,7 @@
       formatTabsContainer.style.display = 'none';
       qualityContainer.style.display = 'none';
       fakedevFields.style.display = 'none';
+      bratOptions.style.display = 'none';
       inputVal.style.display = 'block';
       inputLabel.style.display = 'none';
       fileContainer.style.display = 'none';
@@ -833,9 +854,16 @@
       submitText.innerText = 'PROSES SEKARANG';
       inputVal.value = '';
 
-      if (tool.type === 'gallery_upload' || tool.type === 'img2link') {
+      if (tool.type === 'gallery_upload' || tool.type === 'img2link' || tool.type === 'removebg_official') {
         inputVal.style.display = 'none';
         fileContainer.style.display = 'block';
+      } else if (tool.type === 'brat_custom') {
+        inputLabel.style.display = 'block';
+        inputLabel.innerText = 'TEKS BRAT';
+        inputVal.placeholder = 'Ketik teks Brat...';
+        bratOptions.style.display = 'block';
+        document.getElementById('brat-animated-select').value = 'false';
+        toggleBratDelayInput();
       } else if (tool.type === 'fakedev') {
         inputVal.style.display = 'none';
         fakedevFields.style.display = 'block';
@@ -853,12 +881,6 @@
         renderFormatTabs();
         qualityContainer.style.display = 'block';
         renderQualityList();
-      } else if (tool.type === 'brat_combo') {
-        inputLabel.style.display = 'block';
-        inputLabel.innerText = 'TEKS BRAT';
-        inputVal.placeholder = 'Masukkan kalimat...';
-        formatTabsContainer.style.display = 'block';
-        renderBratTabs();
       } else {
         inputLabel.style.display = 'block';
         inputLabel.innerText = 'INPUT TEXT / URL';
@@ -890,24 +912,11 @@
       `;
     }
 
-    function renderBratTabs() {
-      const container = document.getElementById('format-tabs');
-      container.innerHTML = `
-        <div class="format-tab ${selectedFormatTab === 'static' ? 'active' : ''}" onclick="switchBratTab('static')">GAMBAR (PNG)</div>
-        <div class="format-tab ${selectedFormatTab === 'video' ? 'active' : ''}" onclick="switchBratTab('video')">VIDEO (MP4)</div>
-      `;
-    }
-
     function switchFormatTab(type) {
       selectedFormatTab = type;
       renderFormatTabs();
       const qBox = document.getElementById('quality-list-container');
       qBox.style.display = type === 'video' ? 'block' : 'none';
-    }
-
-    function switchBratTab(type) {
-      selectedFormatTab = type;
-      renderBratTabs();
     }
 
     function renderQualityList() {
@@ -981,6 +990,51 @@
             `;
           } else { throw new Error('Video TikTok tidak ditemukan / link invalid.'); }
         }
+        else if (currentTool.type === 'brat_custom') {
+          if (!inputVal) throw new Error('Masukkan teks untuk Brat!');
+          const isAnimated = document.getElementById('brat-animated-select').value === 'true';
+          const delay = document.getElementById('brat-delay').value || '500';
+          
+          let finalUrl = `${currentTool.ep}?text=${encodeURIComponent(inputVal)}`;
+          if (isAnimated) {
+            finalUrl += `&isAnimated=true&delay=${encodeURIComponent(delay)}`;
+          }
+
+          resContent.innerHTML = `
+            <img src="${finalUrl}" class="preview-img" alt="Brat Result">
+            <a href="${finalUrl}" target="_blank" class="action-btn" download>UNDUH ${isAnimated ? 'GIF' : 'GAMBAR'}</a>
+          `;
+        }
+        else if (currentTool.type === 'removebg_official') {
+          if (!selectedImageFile) throw new Error('Pilih gambar dari galeri terlebih dahulu!');
+          
+          showToast('⚡ Menghapus background via Remove.bg...');
+          const formData = new FormData();
+          formData.append('image_file', selectedImageFile);
+          formData.append('size', 'auto');
+
+          const response = await fetch('https://api.remove.bg/v1.0/removebg', {
+            method: 'POST',
+            headers: {
+              'X-Api-Key': CONFIG.removeBgApiKey
+            },
+            body: formData
+          });
+
+          if (!response.ok) {
+            const errData = await response.json().catch(() => null);
+            const errDetail = errData && errData.errors ? errData.errors[0].title : 'Terjadi kesalahan pada server API.';
+            throw new Error(errDetail);
+          }
+
+          const blob = await response.blob();
+          const resultImgUrl = URL.createObjectURL(blob);
+
+          resContent.innerHTML = `
+            <img src="${resultImgUrl}" class="preview-img" alt="Result Remove BG">
+            <a href="${resultImgUrl}" download="removebg-result.png" class="action-btn">UNDUH GAMBAR (PNG)</a>
+          `;
+        }
         else if (currentTool.type === 'json_url') {
           if (!inputVal) throw new Error('URL input wajib diisi!');
           const targetUrl = `${currentTool.ep}?${currentTool.paramKey}=${encodeURIComponent(inputVal)}`;
@@ -1014,23 +1068,6 @@
             `;
           } else {
             resContent.innerHTML = `<div style="font-size:12px;">Pesan API: ${JSON.stringify(json)}</div>`;
-          }
-        }
-        else if (currentTool.type === 'brat_combo') {
-          if (!inputVal) throw new Error('Masukkan teks Brat!');
-          const ep = selectedFormatTab === 'static' ? currentTool.epStatic : currentTool.epVideo;
-          const finalUrl = `${ep}?text=${encodeURIComponent(inputVal)}`;
-
-          if (selectedFormatTab === 'static') {
-            resContent.innerHTML = `
-              <img src="${finalUrl}" class="preview-img">
-              <a href="${finalUrl}" target="_blank" class="action-btn">UNDUH GAMBAR BRAT</a>
-            `;
-          } else {
-            resContent.innerHTML = `
-              <video src="${finalUrl}" controls style="width:100%; border-radius:10px; margin-bottom:8px;"></video>
-              <a href="${finalUrl}" target="_blank" class="action-btn">UNDUH VIDEO BRAT</a>
-            `;
           }
         }
         else if (currentTool.type === 'image_url') {
@@ -1081,7 +1118,7 @@
 
           showToast(' Uploading foto profil...');
           const avatarUrl = await uploadToImgBB(selectedImageFile);
-          const finalUrl = `${currentTool.ep}?name=${encodeURIComponent(name)}&bio=${encodeURIComponent(bio)}&avatar=${encodeURIComponent(avatarUrl)}`;
+          const finalUrl = `${currentTool.ep}?nama=${encodeURIComponent(name)}&bio=${encodeURIComponent(bio)}&image=${encodeURIComponent(avatarUrl)}`;
 
           resContent.innerHTML = `
             <img src="${finalUrl}" class="preview-img">
