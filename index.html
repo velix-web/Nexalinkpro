@@ -325,6 +325,45 @@
 
     #toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%) translateY(100px); background: rgba(20, 5, 8, 0.95); border: 1px solid var(--border-bright); color: #fff; padding: 8px 18px; border-radius: var(--radius-full); font-size: 12px; z-index: 9999; opacity: 0; pointer-events: none; transition: all 0.3s ease; max-width: 90vw; text-align: center; }
     #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    /* ==========================================================================
+       DOWNLOADER PREVIEW ENHANCEMENTS
+       ========================================================================== */
+    .preview-media-box { width: 100%; border-radius: var(--radius-sm); overflow: hidden; margin-bottom: 10px; border: 1px solid var(--border); background: #000; }
+    .preview-media-box video, .preview-media-box img { width: 100%; max-height: 320px; object-fit: contain; display: block; background: #000; }
+    .dl-profile-row { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 10px; text-align: left; }
+    .dl-avatar { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; border: 1px solid var(--border-bright); flex-shrink: 0; background: rgba(var(--accent-rgb), 0.15); }
+    .dl-username { font-family: var(--font-title); font-size: 12px; font-weight: 800; color: var(--accent-bright); }
+    .dl-title { font-family: var(--font-sub); font-size: 12px; color: #fff; margin-top: 2px; line-height: 1.4; text-align: left; }
+    .dl-stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-bottom: 10px; }
+    .dl-stat-box { background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 10px; text-align: center; }
+    .dl-stat-num { font-family: var(--font-title); font-size: 16px; font-weight: 800; color: #fff; }
+    .dl-stat-label { font-family: var(--font-sub); font-size: 9px; color: var(--text-sub); letter-spacing: 1px; text-transform: uppercase; margin-top: 2px; }
+    .dl-chip-row { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px; }
+    .dl-chip { display: flex; align-items: center; gap: 4px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: var(--radius-full); padding: 5px 10px; font-family: var(--font-sub); font-size: 10px; color: var(--text-sub); }
+    .dl-caption-box { background: rgba(0,0,0,0.4); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 10px 12px; margin-bottom: 10px; text-align: left; }
+    .dl-caption-label { font-family: var(--font-title); font-size: 9px; font-weight: 700; letter-spacing: 1px; color: var(--text-sub); margin-bottom: 4px; }
+    .dl-caption-text { font-family: var(--font-sub); font-size: 11px; color: #fff; line-height: 1.4; margin-bottom: 8px; word-break: break-word; }
+    .dl-copy-btn { display: inline-flex; align-items: center; gap: 5px; background: rgba(var(--accent-rgb),0.15); border: 1px solid var(--border-bright); color: #fff; font-family: var(--font-title); font-size: 10px; font-weight: 700; padding: 6px 12px; border-radius: var(--radius-full); cursor: pointer; }
+    .dl-format-label { display: flex; justify-content: space-between; align-items: center; font-family: var(--font-title); font-size: 10px; font-weight: 700; color: var(--text-sub); letter-spacing: 1px; margin-bottom: 8px; }
+    .dl-format-row { display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 10px 12px; margin-bottom: 8px; cursor: pointer; text-align: left; }
+    .dl-format-row.selected { border-color: var(--accent-bright); background: rgba(var(--accent-rgb),0.08); }
+    .dl-format-icon { width: 34px; height: 34px; border-radius: var(--radius-sm); background: rgba(var(--accent-rgb),0.15); display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 16px; }
+    .dl-format-info { flex: 1; min-width: 0; }
+    .dl-format-name { font-family: var(--font-title); font-size: 11px; font-weight: 700; color: #fff; }
+    .dl-format-sub { font-family: var(--font-sub); font-size: 10px; color: var(--text-sub); margin-top: 1px; }
+    .dl-format-check { width: 20px; height: 20px; border-radius: 50%; border: 1px solid var(--border-bright); display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 11px; color: #fff; }
+    .dl-format-row.selected .dl-format-check { background: var(--accent-bright); }
+    .dl-quality-btn { width: 100%; text-align: center; padding: 12px; border-radius: var(--radius-sm); font-family: var(--font-title); font-size: 11px; font-weight: 800; letter-spacing: 1px; color: #000; cursor: pointer; border: none; margin-bottom: 10px; }
+    .dl-history-section { margin-top: 14px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 14px; }
+    .dl-history-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+    .dl-history-title { display: flex; align-items: center; gap: 6px; font-family: var(--font-title); font-size: 11px; font-weight: 700; color: #fff; letter-spacing: 1px; }
+    .dl-history-clear { display: flex; align-items: center; gap: 5px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: var(--text-sub); font-family: var(--font-sub); font-size: 10px; padding: 6px 10px; border-radius: var(--radius-full); cursor: pointer; }
+    .dl-history-empty { text-align: center; padding: 18px 10px; color: var(--text-dim); font-family: var(--font-sub); font-size: 11px; background: rgba(255,255,255,0.02); border: 1px dashed var(--border); border-radius: var(--radius-sm); }
+    .dl-history-item { display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 8px 10px; margin-bottom: 6px; text-decoration: none; }
+    .dl-history-item img { width: 36px; height: 36px; border-radius: 6px; object-fit: cover; flex-shrink: 0; }
+    .dl-history-item .h-name { font-family: var(--font-sub); font-size: 11px; color: #fff; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1; text-align: left; }
+    .dl-tabs-row { display: flex; gap: 6px; background: rgba(0,0,0,0.4); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 4px; margin-bottom: 10px; }
   </style>
 </head>
 <body>
@@ -533,6 +572,8 @@
     <div id="result-container" class="result-container">
       <div id="result-content"></div>
     </div>
+
+    <div id="dl-history-container" class="dl-history-section" style="display:none;"></div>
   </div>
 
   <!-- MODALS -->
@@ -649,11 +690,11 @@
     }
 
     const TOOLS = [
-      { id: 'tt', name: 'TikTok', desc: 'Download video TikTok tanpa watermark', longDesc: 'Gunakan TikWM API key bawaan untuk mengunduh media dari TikTok.', tag: 'NO-WM', cat: 'downloader', theme: 'tiktok', apiName: 'TikWM API', apiSub: 'Online via TikWM', iconSVG: '<path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path>', paramKey: 'url', type: 'tiktok' },
-      { id: 'ig', name: 'Instagram', desc: 'Unduh video & foto Instagram HD', longDesc: 'Tempel link postingan/Reels Instagram untuk mengambil media.', tag: 'HD', cat: 'downloader', theme: 'instagram', apiName: 'NexRay API', apiSub: 'Online via NexRay', iconSVG: '<rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>', paramKey: 'url', ep: 'https://api.nexray.eu.cc/downloader/instagram', type: 'json_url' },
-      { id: 'spotify', name: 'Spotify', desc: 'Unduh musik Spotify ke MP3', longDesc: 'Tempel URL Spotify untuk mengunduh file audio.', tag: 'MP3', cat: 'downloader', theme: 'spotify', apiName: 'NexRay API', apiSub: 'Online via NexRay', iconSVG: '<circle cx="12" cy="12" r="10"></circle><path d="M7 10.5c3-1 7-.6 9.5 1M7.5 13.5c2.5-.8 5.8-.5 8 .8M8 16.3c2-.6 4.5-.4 6.2.7"></path>', paramKey: 'url', ep: 'https://api.nexray.eu.cc/downloader/spotify', type: 'json_url' },
-      { id: 'terabox', name: 'Terabox', desc: 'Ambil file dari share Terabox', longDesc: 'Ambil link unduhan file yang tersimpan di Terabox.', tag: 'FILE', cat: 'downloader', theme: 'terabox', apiName: 'NexRay API', apiSub: 'Online via NexRay', iconSVG: '<path d="M21 8V7l-3-4H6L3 7v1"></path><path d="M3 8h18v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8z"></path><line x1="9" y1="12" x2="15" y2="12"></line>', paramKey: 'url', ep: 'https://api.nexray.eu.cc/downloader/terabox', type: 'json_url' },
-      { id: 'yt_engine', name: 'YouTube', desc: 'Unduh MP4 (1080p-2160p) & MP3', longDesc: 'Pilih resolusi video hingga 4K atau unduh audionya saja.', tag: 'MP4/MP3', cat: 'downloader', theme: 'youtube', apiName: 'NexRay API', apiSub: 'Online via NexRay', iconSVG: '<path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>', type: 'yt_combo' },
+      { id: 'tt', name: 'TikTok', desc: 'Download video TikTok tanpa watermark', longDesc: 'Tempel link TikTok untuk membuka preview video, caption, statistik (plays, likes, komen, share), dan pilih format MP4 HD / Standard / Watermark / MP3.', tag: 'NO-WM', cat: 'downloader', theme: 'tiktok', apiName: 'TikWM API', apiSub: 'Online via TikWM', iconSVG: '<path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path>', paramKey: 'url', type: 'tiktok' },
+      { id: 'ig', name: 'Instagram', desc: 'Unduh video & foto Instagram HD', longDesc: 'Tempel link postingan/Reels Instagram untuk melihat preview media sebelum diunduh.', tag: 'HD', cat: 'downloader', theme: 'instagram', apiName: 'NexRay API', apiSub: 'Online via NexRay', iconSVG: '<rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>', paramKey: 'url', ep: 'https://api.nexray.eu.cc/downloader/instagram', type: 'json_url' },
+      { id: 'spotify', name: 'Spotify', desc: 'Unduh musik Spotify ke MP3', longDesc: 'Tempel URL Spotify untuk melihat preview audio dan mengunduh file MP3.', tag: 'MP3', cat: 'downloader', theme: 'spotify', apiName: 'NexRay API', apiSub: 'Online via NexRay', iconSVG: '<circle cx="12" cy="12" r="10"></circle><path d="M7 10.5c3-1 7-.6 9.5 1M7.5 13.5c2.5-.8 5.8-.5 8 .8M8 16.3c2-.6 4.5-.4 6.2.7"></path>', paramKey: 'url', ep: 'https://api.nexray.eu.cc/downloader/spotify', type: 'json_url' },
+      { id: 'terabox', name: 'Terabox', desc: 'Ambil file dari share Terabox', longDesc: 'Ambil link unduhan file yang tersimpan di Terabox lengkap dengan preview jika tersedia.', tag: 'FILE', cat: 'downloader', theme: 'terabox', apiName: 'NexRay API', apiSub: 'Online via NexRay', iconSVG: '<path d="M21 8V7l-3-4H6L3 7v1"></path><path d="M3 8h18v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8z"></path><line x1="9" y1="12" x2="15" y2="12"></line>', paramKey: 'url', ep: 'https://api.nexray.eu.cc/downloader/terabox', type: 'json_url' },
+      { id: 'yt_engine', name: 'YouTube', desc: 'Unduh MP4 (480p-1080p) & MP3', longDesc: 'Ambil info video dulu (thumbnail & judul), lalu pilih resolusi MP4 (360p-1080p) atau unduh sebagai MP3.', tag: 'MP4/MP3', cat: 'downloader', theme: 'youtube', apiName: 'NexRay API', apiSub: 'Online via NexRay', iconSVG: '<path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>', type: 'yt_combo' },
 
       { id: 'brat_gen', name: 'Brat Generator', desc: 'Buat stiker BRAT (Static & Animated)', longDesc: 'Ketik teks untuk menghasilkan stiker Brat statis atau animasi GIF.', tag: 'BRAT', cat: 'maker', theme: 'brat', apiName: 'Siputzx API', apiSub: 'Online via Siputzx', iconSVG: '<path d="M12 19l7-7 3 3-7 7-3-3z"></path><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path>', paramKey: 'text', type: 'brat_custom', ep: 'https://api.siputzx.my.id/api/m/brat' },
       { id: 'iqc', name: 'iPhone Quote Create', desc: 'Buat kartu quote ala iPhone Notes', longDesc: 'Ubah teks quote menjadi gaya iOS visual.', tag: 'IQC', cat: 'maker', theme: 'iqc', apiName: 'NexRay API', apiSub: 'Online via NexRay', iconSVG: '<circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 2-3 4"></path><line x1="12" y1="17" x2="12.01" y2="17"></line>', paramKey: 'text', ep: 'https://api.nexray.eu.cc/maker/iqc', type: 'image_url' },
@@ -669,7 +710,7 @@
 
     let currentTool = null;
     let selectedImageFile = null;
-    let selectedQuality = '1080';
+    let selectedQuality = '480';
     let selectedFormatTab = 'video';
 
     /* Canvas Background Particles */
@@ -798,8 +839,10 @@
     function openTool(tool) {
       currentTool = tool;
       selectedImageFile = null;
-      selectedQuality = '1080';
+      selectedQuality = '480';
       selectedFormatTab = 'video';
+      tiktokData = null;
+      ytInfo = null;
 
       applyTheme(siteThemeOverride === 'gojo' ? 'gojo' : (tool.theme || 'default'));
 
@@ -838,6 +881,7 @@
       const fakedevFields = document.getElementById('fakedev-fields');
       const submitText = document.getElementById('submit-btn-text');
       const resBox = document.getElementById('result-container');
+      const historyBox = document.getElementById('dl-history-container');
 
       fileInput.value = '';
       filePreview.style.display = 'none';
@@ -851,6 +895,7 @@
       inputLabel.style.display = 'none';
       fileContainer.style.display = 'none';
       resBox.style.display = 'none';
+      historyBox.style.display = 'none';
       submitText.innerText = 'PROSES SEKARANG';
       inputVal.value = '';
 
@@ -873,14 +918,22 @@
         inputLabel.innerText = 'NICKNAME';
         inputVal.placeholder = 'Masukkan Nickname ML...';
         fileContainer.style.display = 'block';
+      } else if (tool.type === 'tiktok') {
+        inputLabel.style.display = 'block';
+        inputLabel.innerText = 'LINK TIKTOK';
+        inputVal.placeholder = 'Tempel link TikTok...';
+        submitText.innerText = 'PREVIEW';
+        renderTiktokHistory();
+      } else if (tool.type === 'json_url') {
+        inputLabel.style.display = 'block';
+        inputLabel.innerText = 'LINK / URL';
+        inputVal.placeholder = 'Tempel link atau URL di sini...';
+        submitText.innerText = 'AMBIL MEDIA';
       } else if (tool.type === 'yt_combo') {
         inputLabel.style.display = 'block';
         inputLabel.innerText = 'LINK YOUTUBE';
         inputVal.placeholder = 'Tempel URL YouTube...';
-        formatTabsContainer.style.display = 'block';
-        renderFormatTabs();
-        qualityContainer.style.display = 'block';
-        renderQualityList();
+        submitText.innerText = 'AMBIL INFO';
       } else {
         inputLabel.style.display = 'block';
         inputLabel.innerText = 'INPUT TEXT / URL';
@@ -922,9 +975,9 @@
     function renderQualityList() {
       const qlist = document.getElementById('quality-list');
       const options = [
-        { id: '1080', name: 'Full HD (1080p)', sub: 'NexRay Engine' },
-        { id: '1440', name: '2K Quad HD (1440p)', sub: 'NexRay Engine' },
-        { id: '2160', name: '4K Ultra HD (2160p)', sub: 'NexRay Engine' }
+        { id: '480', name: 'SD (480p)', sub: 'NexRay Engine' },
+        { id: '720', name: 'HD (720p)', sub: 'NexRay Engine' },
+        { id: '1080', name: 'Full HD (1080p)', sub: 'NexRay Engine' }
       ];
       qlist.innerHTML = '';
       options.forEach(opt => {
@@ -966,8 +1019,335 @@
       throw new Error('Gagal unggah foto ke ImgBB.');
     }
 
+    /* ==========================================================================
+       DOWNLOADER HELPERS (format, number, size, duration)
+       ========================================================================== */
+    function fmtNum(n) {
+      n = Number(n) || 0;
+      if (n >= 1000000) return (n / 1000000).toFixed(1) + 'M';
+      if (n >= 1000) return (n / 1000).toFixed(1) + 'K';
+      return String(n);
+    }
+    function fmtSize(bytes) {
+      if (!bytes) return '';
+      const mb = bytes / (1024 * 1024);
+      return mb.toFixed(1) + ' MB';
+    }
+    function fmtDuration(sec) {
+      sec = Number(sec) || 0;
+      const m = Math.floor(sec / 60);
+      const s = Math.floor(sec % 60);
+      return `${m}m ${s}s`;
+    }
+
+    /* ==========================================================================
+       DOWNLOAD HISTORY (in-memory, resets tiap sesi/refresh)
+       ========================================================================== */
+    let dlHistory = { tiktok: [] };
+
+    function addTiktokHistory(item) {
+      dlHistory.tiktok.unshift(item);
+      if (dlHistory.tiktok.length > 8) dlHistory.tiktok.pop();
+      renderTiktokHistory();
+    }
+
+    function clearTiktokHistory() {
+      dlHistory.tiktok = [];
+      renderTiktokHistory();
+      showToast('🗑️ History TikTok dibersihkan');
+    }
+
+    function renderTiktokHistory() {
+      const box = document.getElementById('dl-history-container');
+      if (!box || !currentTool || currentTool.type !== 'tiktok') return;
+      box.style.display = 'block';
+      if (dlHistory.tiktok.length === 0) {
+        box.innerHTML = `
+          <div class="dl-history-head">
+            <div class="dl-history-title">↺ HISTORY DOWNLOAD</div>
+            <div class="dl-history-clear" onclick="clearTiktokHistory()">🗑️ Bersihkan TikTok</div>
+          </div>
+          <div class="dl-history-empty">Belum ada history TikTok. Download pertama akan muncul di sini.</div>
+        `;
+      } else {
+        const rows = dlHistory.tiktok.map(h => `
+          <a href="${h.url}" target="_blank" class="dl-history-item">
+            <img src="${h.cover}" alt="">
+            <div class="h-name">${h.title}</div>
+            <span>⬇️</span>
+          </a>
+        `).join('');
+        box.innerHTML = `
+          <div class="dl-history-head">
+            <div class="dl-history-title">↺ HISTORY DOWNLOAD</div>
+            <div class="dl-history-clear" onclick="clearTiktokHistory()">🗑️ Bersihkan TikTok</div>
+          </div>
+          ${rows}
+        `;
+      }
+    }
+
+    /* ==========================================================================
+       TIKTOK — preview lengkap (video, profil, statistik, caption, format)
+       ========================================================================== */
+    let tiktokData = null;
+    let tiktokSelectedFormat = 'hd';
+
+    async function previewTiktok() {
+      const inputVal = document.getElementById('input-val').value.trim();
+      const resBox = document.getElementById('result-container');
+      const resContent = document.getElementById('result-content');
+      resBox.style.display = 'block';
+      resContent.innerHTML = '<div style="color:var(--text-sub); font-size:12px;">⏳ Mengambil preview... Harap tunggu.</div>';
+      try {
+        if (!inputVal) throw new Error('Link TikTok tidak boleh kosong!');
+        const res = await fetch(`https://www.tikwm.com/api/?url=${encodeURIComponent(inputVal)}`);
+        const json = await res.json();
+        if (json.code !== 0 || !json.data) throw new Error('Video TikTok tidak ditemukan / link invalid.');
+        tiktokData = json.data;
+        tiktokSelectedFormat = tiktokData.hdplay ? 'hd' : (tiktokData.play ? 'sd' : 'wm');
+        renderTiktokResult();
+      } catch (err) {
+        resContent.innerHTML = `<div style="color:var(--accent-bright); font-size:12px;">⚠️ Error: ${err.message}</div>`;
+      }
+    }
+
+    function renderTiktokResult() {
+      const d = tiktokData;
+      const resContent = document.getElementById('result-content');
+
+      const formats = [
+        { id: 'hd', name: 'MP4 HD', sub: `Tanpa watermark, kualitas terbaik${d.hd_size ? ' • ' + fmtSize(d.hd_size) : ''}`, icon: '👑', url: d.hdplay || d.play },
+        { id: 'sd', name: 'MP4 Standar', sub: 'Tanpa watermark, ukuran lebih ringan', icon: '🎬', url: d.play },
+        { id: 'wm', name: 'MP4 Watermark', sub: `Versi asli TikTok${d.wm_size ? ' • ' + fmtSize(d.wm_size) : ''}`, icon: '💧', url: d.wmplay },
+        { id: 'mp3', name: 'MP3 Audio', sub: (d.music_info && d.music_info.title) ? d.music_info.title : 'original sound', icon: '🎵', url: d.music }
+      ].filter(f => f.url);
+
+      if (!formats.find(f => f.id === tiktokSelectedFormat)) tiktokSelectedFormat = formats[0].id;
+      const selected = formats.find(f => f.id === tiktokSelectedFormat);
+
+      const formatRows = formats.map(f => `
+        <div class="dl-format-row ${tiktokSelectedFormat === f.id ? 'selected' : ''}" onclick="selectTiktokFormat('${f.id}')">
+          <div class="dl-format-icon">${f.icon}</div>
+          <div class="dl-format-info"><div class="dl-format-name">${f.name}</div><div class="dl-format-sub">${f.sub}</div></div>
+          <div class="dl-format-check">${tiktokSelectedFormat === f.id ? '✓' : ''}</div>
+        </div>
+      `).join('');
+
+      const authorName = d.author ? (d.author.unique_id || d.author.nickname || 'tiktok') : 'tiktok';
+      const authorAvatar = d.author && d.author.avatar ? d.author.avatar : d.cover;
+
+      resContent.innerHTML = `
+        <div class="preview-media-box"><video src="${d.play}" poster="${d.cover}" controls playsinline></video></div>
+        <div class="dl-profile-row">
+          <img class="dl-avatar" src="${authorAvatar}" alt="">
+          <div>
+            <div class="dl-username">@${authorName}</div>
+            <div class="dl-title">${d.title || '(Tanpa judul)'}</div>
+          </div>
+        </div>
+        <div class="dl-stats-grid">
+          <div class="dl-stat-box"><div class="dl-stat-num">${fmtNum(d.play_count)}</div><div class="dl-stat-label">Plays</div></div>
+          <div class="dl-stat-box"><div class="dl-stat-num">${fmtNum(d.digg_count)}</div><div class="dl-stat-label">Likes</div></div>
+          <div class="dl-stat-box"><div class="dl-stat-num">${fmtNum(d.comment_count)}</div><div class="dl-stat-label">Komen</div></div>
+          <div class="dl-stat-box"><div class="dl-stat-num">${fmtNum(d.share_count)}</div><div class="dl-stat-label">Share</div></div>
+        </div>
+        <div class="dl-chip-row">
+          <div class="dl-chip">⏱️ ${fmtDuration(d.duration)}</div>
+          ${d.hd_size ? `<div class="dl-chip">📄 HD ${fmtSize(d.hd_size)}</div>` : ''}
+          ${d.wm_size ? `<div class="dl-chip">💧 WM ${fmtSize(d.wm_size)}</div>` : ''}
+        </div>
+        <div class="dl-caption-box">
+          <div class="dl-caption-label">CAPTION</div>
+          <div class="dl-caption-text" id="tt-caption-text">${d.title || '(Tanpa caption)'}</div>
+          <button class="dl-copy-btn" onclick="copyTiktokCaption()">📋 Copy Caption</button>
+        </div>
+        <div class="dl-format-label"><span>PILIH FORMAT</span><span>${selected.name}</span></div>
+        <div id="tt-format-list">${formatRows}</div>
+        <button class="btn-submit" style="margin-top:2px;" onclick="downloadSelectedTiktok()">⬇️ Download ${selected.name}</button>
+      `;
+    }
+
+    function selectTiktokFormat(id) {
+      tiktokSelectedFormat = id;
+      renderTiktokResult();
+    }
+
+    function copyTiktokCaption() {
+      const el = document.getElementById('tt-caption-text');
+      if (!el) return;
+      navigator.clipboard.writeText(el.innerText);
+      showToast('📋 Caption tersalin!');
+    }
+
+    function downloadSelectedTiktok() {
+      const d = tiktokData;
+      if (!d) return;
+      const formatMap = { hd: d.hdplay || d.play, sd: d.play, wm: d.wmplay, mp3: d.music };
+      const url = formatMap[tiktokSelectedFormat];
+      if (!url) { showToast('⚠️ Format tidak tersedia'); return; }
+      window.open(url, '_blank');
+      addTiktokHistory({ title: d.title || 'TikTok Video', cover: d.cover, url });
+    }
+
+    /* ==========================================================================
+       YOUTUBE — ambil info dulu, lalu preview + pilih resolusi/format
+       ========================================================================== */
+    let ytInfo = null;
+
+    async function fetchYoutubeInfo() {
+      const inputVal = document.getElementById('input-val').value.trim();
+      const resBox = document.getElementById('result-container');
+      const resContent = document.getElementById('result-content');
+      resBox.style.display = 'block';
+      resContent.innerHTML = '<div style="color:var(--text-sub); font-size:12px;">⏳ Mengambil info video...</div>';
+      try {
+        if (!inputVal) throw new Error('Link YouTube tidak boleh kosong!');
+        const res = await fetch(`https://www.youtube.com/oembed?url=${encodeURIComponent(inputVal)}&format=json`);
+        if (!res.ok) throw new Error('Video tidak ditemukan / link invalid.');
+        const json = await res.json();
+        ytInfo = { title: json.title, thumbnail: json.thumbnail_url, author: json.author_name, url: inputVal };
+        selectedFormatTab = 'video';
+        renderYoutubeResult();
+      } catch (err) {
+        resContent.innerHTML = `<div style="color:var(--accent-bright); font-size:12px;">⚠️ Error: ${err.message}</div>`;
+      }
+    }
+
+    function renderYoutubeResult() {
+      const resContent = document.getElementById('result-content');
+      resContent.innerHTML = `
+        <div class="preview-media-box"><img src="${ytInfo.thumbnail}" alt=""></div>
+        <div class="dl-title" style="font-weight:700; margin-bottom:8px;">${ytInfo.title}</div>
+        <div class="dl-chip-row"><div class="dl-chip">👤 ${ytInfo.author || 'YouTube'}</div></div>
+        <div class="dl-tabs-row">
+          <div class="format-tab ${selectedFormatTab === 'video' ? 'active' : ''}" onclick="switchYtTab('video')">🎬 Video MP4</div>
+          <div class="format-tab ${selectedFormatTab === 'audio' ? 'active' : ''}" onclick="switchYtTab('audio')">🎵 Audio MP3</div>
+        </div>
+        <div id="yt-quality-box"></div>
+      `;
+      renderYtQualityBox();
+    }
+
+    function switchYtTab(tab) {
+      selectedFormatTab = tab;
+      renderYoutubeResult();
+    }
+
+    function renderYtQualityBox() {
+      const box = document.getElementById('yt-quality-box');
+      if (!box) return;
+      if (selectedFormatTab === 'video') {
+        const qualities = [
+          { id: '360', name: '360p Low', sub: 'MP4 • Ukuran kecil', color: '#ffb020' },
+          { id: '480', name: '480p SD', sub: 'MP4 • Ukuran kecil', color: '#ffb020' },
+          { id: '720', name: '720p HD', sub: 'MP4 • Kualitas bagus', color: '#a78bfa' },
+          { id: '1080', name: '1080p Full HD', sub: 'MP4 • Resolusi terbaik', color: '#4ade80' }
+        ];
+        box.innerHTML = qualities.map(q => `
+          <div class="dl-format-row" style="cursor:default;">
+            <div class="dl-format-icon">🎞️</div>
+            <div class="dl-format-info"><div class="dl-format-name">${q.name}</div><div class="dl-format-sub">${q.sub}</div></div>
+          </div>
+          <button class="dl-quality-btn" style="background:${q.color};" onclick="downloadYoutube('video','${q.id}', this)">↓ ${q.id}p</button>
+        `).join('');
+      } else {
+        box.innerHTML = `
+          <div class="dl-format-row" style="cursor:default;">
+            <div class="dl-format-icon">🎵</div>
+            <div class="dl-format-info"><div class="dl-format-name">Audio MP3</div><div class="dl-format-sub">Kualitas tinggi • ${ytInfo.title}</div></div>
+          </div>
+          <button class="dl-quality-btn" style="background:#38bdf8;" onclick="downloadYoutube('audio', null, this)">↓ MP3</button>
+        `;
+      }
+    }
+
+    async function downloadYoutube(type, quality, btnEl) {
+      if (!ytInfo) return;
+      const originalText = btnEl.innerText;
+      btnEl.innerText = '⏳ Memproses...';
+      try {
+        const fetchUrl = type === 'video'
+          ? `https://api.nexray.eu.cc/downloader/ytmp4?resolusi=${quality}&url=${encodeURIComponent(ytInfo.url)}`
+          : `https://api.nexray.eu.cc/downloader/ytmp3?url=${encodeURIComponent(ytInfo.url)}`;
+        const res = await fetch(fetchUrl);
+        const json = await res.json();
+        if (json.status === false || json.error) throw new Error(json.error || 'Gagal mengunduh media.');
+        const downloadUrl = json.result || json.url || json.link || (json.data && json.data.url) || (json.data && json.data.downloadUrl);
+        if (!downloadUrl) throw new Error('Link unduhan tidak ditemukan.');
+        window.open(downloadUrl, '_blank');
+        showToast('✅ Download dimulai!');
+      } catch (err) {
+        showToast('⚠️ ' + err.message);
+      } finally {
+        btnEl.innerText = originalText;
+      }
+    }
+
+    /* ==========================================================================
+       INSTAGRAM / SPOTIFY / TERABOX — preview media generik (json_url)
+       ========================================================================== */
+    async function previewGenericMedia() {
+      const tool = currentTool;
+      const inputVal = document.getElementById('input-val').value.trim();
+      const resBox = document.getElementById('result-container');
+      const resContent = document.getElementById('result-content');
+      resBox.style.display = 'block';
+      resContent.innerHTML = '<div style="color:var(--text-sub); font-size:12px;">⏳ Mengambil media... Harap tunggu.</div>';
+      try {
+        if (!inputVal) throw new Error('URL input wajib diisi!');
+        const targetUrl = `${tool.ep}?${tool.paramKey}=${encodeURIComponent(inputVal)}`;
+        const res = await fetch(targetUrl);
+        const json = await res.json();
+
+        let mediaUrl = null;
+        let title = null;
+        if (Array.isArray(json.result) && json.result.length > 0) {
+          mediaUrl = json.result[0].url || json.result[0].link;
+          title = json.result[0].title || json.result[0].caption;
+        } else if (Array.isArray(json.data) && json.data.length > 0) {
+          mediaUrl = json.data[0].url || json.data[0].link || json.data[0];
+          title = json.data[0].title || json.data[0].caption;
+        } else {
+          mediaUrl = json.result || json.url || json.link || (json.data && json.data.url) || (json.data && json.data.downloadUrl);
+          title = json.title || json.caption || (json.data && json.data.title);
+        }
+
+        if (!mediaUrl || typeof mediaUrl !== 'string') {
+          if (json.status === false || json.error) throw new Error(json.error || json.message || 'Gagal mengekstrak media dari URL.');
+          throw new Error('Gagal mendapatkan URL media dari respon API.');
+        }
+
+        const isVideo = /\.(mp4|mov|webm)(\?|$)/i.test(mediaUrl) || tool.id === 'ig';
+        const isAudio = !isVideo && (/\.(mp3|wav|m4a)(\?|$)/i.test(mediaUrl) || tool.id === 'spotify');
+
+        let mediaPreview = '';
+        if (isVideo) mediaPreview = `<div class="preview-media-box"><video src="${mediaUrl}" controls playsinline></video></div>`;
+        else if (isAudio) mediaPreview = `<div class="preview-media-box" style="padding:16px;"><audio src="${mediaUrl}" controls style="width:100%;"></audio></div>`;
+        else if (tool.id === 'terabox') mediaPreview = `<div class="dl-format-row" style="cursor:default; margin-bottom:10px;"><div class="dl-format-icon">📦</div><div class="dl-format-info"><div class="dl-format-name">File Terabox</div><div class="dl-format-sub">Siap diunduh</div></div></div>`;
+        else mediaPreview = `<div class="preview-media-box"><img src="${mediaUrl}" alt=""></div>`;
+
+        resContent.innerHTML = `
+          ${mediaPreview}
+          ${title ? `<div class="dl-caption-box"><div class="dl-caption-label">JUDUL / CAPTION</div><div class="dl-caption-text">${title}</div></div>` : ''}
+          <div class="dl-format-row" style="cursor:default;">
+            <div class="dl-format-icon">${isVideo ? '🎬' : isAudio ? '🎵' : '📁'}</div>
+            <div class="dl-format-info"><div class="dl-format-name">${tool.name} Media</div><div class="dl-format-sub">${isVideo ? 'Video / Reels' : isAudio ? 'Audio File' : 'File'}</div></div>
+          </div>
+          <a href="${mediaUrl}" target="_blank" rel="noopener noreferrer" class="btn-submit" style="text-decoration:none; margin-top:2px;">⬇️ Simpan Media</a>
+        `;
+      } catch (err) {
+        resContent.innerHTML = `<div style="color:var(--accent-bright); font-size:12px;">⚠️ Error: ${err.message}</div>`;
+      }
+    }
+
     async function processAction() {
       if (!currentTool) return;
+
+      if (currentTool.type === 'tiktok') return previewTiktok();
+      if (currentTool.type === 'json_url') return previewGenericMedia();
+      if (currentTool.type === 'yt_combo') return fetchYoutubeInfo();
+
       const resBox = document.getElementById('result-container');
       const resContent = document.getElementById('result-content');
       const inputVal = document.getElementById('input-val').value.trim();
@@ -976,21 +1356,7 @@
       resContent.innerHTML = '<div style="color:var(--text-sub); font-size:12px;">⏳ Sedang memproses... Harap tunggu.</div>';
 
       try {
-        if (currentTool.type === 'tiktok') {
-          if (!inputVal) throw new Error('Link TikTok tidak boleh kosong!');
-          const res = await fetch(`https://www.tikwm.com/api/?url=${encodeURIComponent(inputVal)}`);
-          const json = await res.json();
-          if (json.code === 0) {
-            const data = json.data;
-            resContent.innerHTML = `
-              <img src="${data.cover}" class="preview-img">
-              <div style="font-size:12px; font-weight:700; margin-bottom:8px;">${data.title || 'TikTok Media'}</div>
-              <a href="${data.play}" target="_blank" class="action-btn">UNDUH VIDEO (NO WM)</a>
-              <a href="${data.music}" target="_blank" class="action-btn" style="background:#4ade80; color:#000;">UNDUH AUDIO (MP3)</a>
-            `;
-          } else { throw new Error('Video TikTok tidak ditemukan / link invalid.'); }
-        }
-        else if (currentTool.type === 'brat_custom') {
+        if (currentTool.type === 'brat_custom') {
           if (!inputVal) throw new Error('Masukkan teks untuk Brat!');
           const isAnimated = document.getElementById('brat-animated-select').value === 'true';
           const delay = document.getElementById('brat-delay').value || '500';
@@ -1034,41 +1400,6 @@
             <img src="${resultImgUrl}" class="preview-img" alt="Result Remove BG">
             <a href="${resultImgUrl}" download="removebg-result.png" class="action-btn">UNDUH GAMBAR (PNG)</a>
           `;
-        }
-        else if (currentTool.type === 'json_url') {
-          if (!inputVal) throw new Error('URL input wajib diisi!');
-          const targetUrl = `${currentTool.ep}?${currentTool.paramKey}=${encodeURIComponent(inputVal)}`;
-          const res = await fetch(targetUrl);
-          const json = await res.json();
-          const mediaUrl = json.result || json.url || json.link || (json.data && json.data.url);
-          
-          if (mediaUrl) {
-            resContent.innerHTML = `
-              <div style="font-size:12px; margin-bottom:8px;">✅ Berhasil Mengekstrak Link!</div>
-              <a href="${mediaUrl}" target="_blank" class="action-btn">UNDUH MEDIA</a>
-            `;
-          } else {
-            resContent.innerHTML = `<div style="font-size:12px; word-break:break-all;">Hasil JSON:<br><code>${JSON.stringify(json)}</code></div>`;
-          }
-        }
-        else if (currentTool.type === 'yt_combo') {
-          if (!inputVal) throw new Error('Link YouTube wajib diisi!');
-          let ep = 'https://api.nexray.eu.cc/downloader/ytmp3';
-          if (selectedFormatTab === 'video') {
-            ep = `https://api.nexray.eu.cc/downloader/ytmp4?resolusi=${selectedQuality}`;
-          }
-          const res = await fetch(`${ep}&url=${encodeURIComponent(inputVal)}`);
-          const json = await res.json();
-          const downloadUrl = json.result || json.url || json.link;
-
-          if (downloadUrl) {
-            resContent.innerHTML = `
-              <div style="font-size:12px; font-weight:700; margin-bottom:8px;">Output YouTube (${selectedFormatTab.toUpperCase()})</div>
-              <a href="${downloadUrl}" target="_blank" class="action-btn">DOWNLOAD SEKARANG</a>
-            `;
-          } else {
-            resContent.innerHTML = `<div style="font-size:12px;">Pesan API: ${JSON.stringify(json)}</div>`;
-          }
         }
         else if (currentTool.type === 'image_url') {
           if (!inputVal) throw new Error('Input teks wajib diisi!');
